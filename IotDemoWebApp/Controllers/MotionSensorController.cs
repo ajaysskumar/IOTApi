@@ -1,0 +1,231 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
+using IotDemoWebApp.Models;
+using System.Web.Http.Cors;
+using MongoDB.Bson;
+using MongoDB.Driver;
+
+namespace IotDemoWebApp.Controllers
+{
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class MotionSensorController : ApiController
+    {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        protected static IMongoClient _client;
+        protected static IMongoDatabase _database;
+
+        // GET: api/MotionSensor
+        public IQueryable<MotionSensorModel> GetMotionsSensor()
+        {
+            return db.MotionsSensor;
+        }
+
+        [HttpGet]
+        [Route("api/gettop")]
+        public IEnumerable<MotionSensorModel> GetTop(int top)
+        {
+            int timeframe = top * 60 * 60;
+            int numberOfPoints = top*60 / 12;
+
+            DateTime currenteDate = DateTime.UtcNow.AddHours(-top);
+
+            List<MotionSensorModel> data = new List<MotionSensorModel>();
+
+            List<MotionSensorModel> dataPoints = new List<MotionSensorModel>();
+
+            List<List<MotionSensorModel>> dataPointGroups = new List<List<MotionSensorModel>>();
+
+            var queryData = db.MotionsSensor.Where(x => x.Timestamp>=currenteDate).OrderByDescending(x => x.Timestamp);
+
+            foreach (var item in queryData)
+            {
+                data.Add(new MotionSensorModel {
+                    Id = item.Id,
+                    MotionTime = item.MotionTime,
+                    MotionValue = item.MotionValue,
+                    Timestamp = item.Timestamp
+                });
+            }
+
+            var totalDataPoints = data.Count();
+
+            int groupStrength = totalDataPoints / numberOfPoints;
+
+            dataPointGroups = splitList(data, numberOfPoints);
+
+            foreach (var list in dataPointGroups)
+            {
+                int listCount = list.Count;
+                MotionSensorModel model = new MotionSensorModel();
+                model.MotionValue = list.Sum(x => x.MotionValue)/ listCount;
+                model.MotionTime = list.Sum(x => x.MotionTime) / listCount;
+                double numOfElements = list.Count / 2;
+                model.Timestamp = list[Convert.ToInt32(Math.Floor(numOfElements))].Timestamp;
+
+                dataPoints.Add(model);
+            }
+
+            return dataPoints;
+        }
+
+        // GET: api/MotionSensor/5
+        [ResponseType(typeof(MotionSensorModel))]
+        public async Task<IHttpActionResult> GetMotionSensorModel(int id)
+        {
+            MotionSensorModel motionSensorModel = await db.MotionsSensor.FindAsync(id);
+            if (motionSensorModel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(motionSensorModel);
+        }
+
+        // PUT: api/MotionSensor/5
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutMotionSensorModel(int id, MotionSensorModel motionSensorModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != motionSensorModel.Id)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(motionSensorModel).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MotionSensorModelExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // POST: api/MotionSensor
+        [ResponseType(typeof(MotionSensorModel))]
+        public async Task<IHttpActionResult> PostMotionSensorModel([FromUri]MotionSensorModel motionSensorModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Model State not valid MotionValue="+motionSensorModel.MotionValue+" and MotionTime="+motionSensorModel.MotionTime);
+            }
+            //if (motionSensorModel.MotionValue<1)
+            //{
+            //    return BadRequest("Model State not valid MotionValue=" + motionSensorModel.MotionValue + " and MotionTime=" + motionSensorModel.MotionTime);
+            //}
+            //if (motionSensorModel.MotionTime < 1)
+            //{
+            //    return BadRequest("Model State not valid MotionValue=" + motionSensorModel.MotionValue + " and MotionTime=" + motionSensorModel.MotionTime);
+            //}
+            motionSensorModel.Timestamp = DateTime.UtcNow;
+            db.MotionsSensor.Add(motionSensorModel);
+            await db.SaveChangesAsync();
+
+            return CreatedAtRoute("DefaultApi", new { id = motionSensorModel.Id }, motionSensorModel);
+        }
+
+        // DELETE: api/MotionSensor/5
+        [ResponseType(typeof(MotionSensorModel))]
+        public async Task<IHttpActionResult> DeleteMotionSensorModel(int id)
+        {
+            MotionSensorModel motionSensorModel = await db.MotionsSensor.FindAsync(id);
+            if (motionSensorModel == null)
+            {
+                return NotFound();
+            }
+
+            db.MotionsSensor.Remove(motionSensorModel);
+            await db.SaveChangesAsync();
+
+            return Ok(motionSensorModel);
+        }
+
+        // DELETE: api/MotionSensor
+        //[ResponseType(typeof(MotionSensorModel))]
+        [HttpPost]
+        [Route("api/flushdb")]
+        public async Task<IHttpActionResult> FlushDb(int startId,int stopId)
+        {
+            var dbSet = db.MotionsSensor.Where(x => x.Id >= startId && x.Id <= stopId);
+            foreach (var item in dbSet)
+            {
+                db.MotionsSensor.Remove(item);
+            }
+            await db.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool MotionSensorModelExists(int id)
+        {
+            return db.MotionsSensor.Count(e => e.Id == id) > 0;
+        }
+
+        [HttpPost]
+        [Route("api/insertmongo")]
+        public async Task<IHttpActionResult> Insert([FromUri]MotionSensorModel model)
+        {
+            string uri = "mongodb://ajaysskumar:123456@ds042729.mlab.com:42729/iot";
+
+            _client = new MongoClient(uri);
+
+            model.Timestamp = DateTime.UtcNow;
+
+            _database = _client.GetDatabase("iot");
+
+            var document  = model.ToBsonDocument<MotionSensorModel>();
+
+            var collection = _database.GetCollection<BsonDocument>("datapoints");
+            
+            await collection.InsertOneAsync(document);
+
+            return Ok(document);
+        }
+
+        public static List<List<MotionSensorModel>> splitList(List<MotionSensorModel> locations, int nSize = 5)
+        {
+            var list = new List<List<MotionSensorModel>>();
+
+            for (int i = 0; i < locations.Count; i += nSize)
+            {
+                list.Add(locations.GetRange(i, Math.Min(nSize, locations.Count - i)));
+            }
+
+            return list;
+        }
+    }
+}

@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Chart";
+}
+
+<h2>Chart</h2>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="http://www.chartjs.org/assets/Chart.js" type="text/javascript"></script>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <label>Set No. of Datapoints</label>
+    </div>
+    <div class="col-md-4">
+        <input type="number" value="10" class="form-control" id="txtNumber" />
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-primary">Change</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <canvas id="rice" width="1200" height="500"></canvas>
+    </div>
+</div>
+
+
+<script>
+    var rice = document.getElementById('rice').getContext('2d');
+
+    $(document).ready(function () {
+
+        function createChart(){
+            $.ajax({
+                url: '/api/gettop',
+                type: 'GET',
+                data: { top: $('#txtNumber').val() },
+                async: true,
+                success: function (response) {
+
+                    var plotData = [];
+                    var labelsData = [];
+                    $.each(response, function (i, e) {
+                        plotData.push(e.MotionValue);
+
+                        var date = new Date(e.Timestamp);
+                        //date.getTime();
+
+                        labelsData.push(date.toLocaleString());
+                    })
+
+                    var riceData = {
+                        labels: labelsData,
+                        datasets:
+                         [
+                            {
+                                fillColor: "rgba(172,194,132,0.4)",
+                                strokeColor: "#ACC26D",
+                                pointColor: "#fff",
+                                pointStrokeColor: "#9DB86D",
+                                data: plotData
+                            }
+                         ]
+                    }
+                    new Chart(rice).Line(riceData);
+                }
+            });
+        }
+        createChart();
+        setInterval(createChart, 10 * 1000);
+    });
+</script>
+
+
+
+
+
+
+
