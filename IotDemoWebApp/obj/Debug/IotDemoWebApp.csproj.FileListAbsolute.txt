@@ -142,7 +142,5 @@ E:\IOT\IotDemoApi\IotDemoWebApp\bin\Microsoft.Owin.Security.Google.xml
 E:\IOT\IotDemoApi\IotDemoWebApp\bin\Microsoft.Owin.Security.Twitter.xml
 E:\IOT\IotDemoApi\IotDemoWebApp\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 E:\IOT\IotDemoApi\IotDemoWebApp\obj\Debug\IotDemoWebApp.csprojResolveAssemblyReference.cache
-E:\IOT\IotDemoApi\IotDemoWebApp\obj\Debug\IotDemoWebApp.Migrations.InitialCreate.resources
-E:\IOT\IotDemoApi\IotDemoWebApp\obj\Debug\IotDemoWebApp.csproj.GenerateResource.Cache
 E:\IOT\IotDemoApi\IotDemoWebApp\obj\Debug\IotDemoWebApp.dll
 E:\IOT\IotDemoApi\IotDemoWebApp\obj\Debug\IotDemoWebApp.pdb

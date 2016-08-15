@@ -28,7 +28,7 @@ namespace IotDemoWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MotionSensorModel motionSensorModel = await db.MotionsSensor.FindAsync(id);
+            MotionSensor motionSensorModel = await db.MotionsSensor.FindAsync(id);
             if (motionSensorModel == null)
             {
                 return HttpNotFound();
@@ -47,7 +47,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,MotionValue,MotionTime,Timestamp")] MotionSensorModel motionSensorModel)
+        public async Task<ActionResult> Create([Bind(Include = "Id,MotionValue,MotionTime,Timestamp")] MotionSensor motionSensorModel)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace IotDemoWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MotionSensorModel motionSensorModel = await db.MotionsSensor.FindAsync(id);
+            MotionSensor motionSensorModel = await db.MotionsSensor.FindAsync(id);
             if (motionSensorModel == null)
             {
                 return HttpNotFound();
@@ -79,7 +79,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,MotionValue,MotionTime,Timestamp")] MotionSensorModel motionSensorModel)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,MotionValue,MotionTime,Timestamp")] MotionSensor motionSensorModel)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace IotDemoWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MotionSensorModel motionSensorModel = await db.MotionsSensor.FindAsync(id);
+            MotionSensor motionSensorModel = await db.MotionsSensor.FindAsync(id);
             if (motionSensorModel == null)
             {
                 return HttpNotFound();
@@ -110,7 +110,7 @@ namespace IotDemoWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            MotionSensorModel motionSensorModel = await db.MotionsSensor.FindAsync(id);
+            MotionSensor motionSensorModel = await db.MotionsSensor.FindAsync(id);
             db.MotionsSensor.Remove(motionSensorModel);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

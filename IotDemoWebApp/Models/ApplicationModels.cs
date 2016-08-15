@@ -6,7 +6,7 @@ using System.Web;
 
 namespace IotDemoWebApp.Models
 {
-    public class MotionSensorModel
+    public class MotionSensor
     {
         public int Id { get; set; }
 

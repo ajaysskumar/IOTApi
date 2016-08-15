@@ -19,6 +19,17 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-md-4">
+        <label>Set Mode of Datapoints(1 for aggregated 2 for all)</label>
+    </div>
+    <div class="col-md-4">
+        <input type="number" value="2" max="2" min="1" class="form-control" id="txtMode" />
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-primary">Change</button>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-12">
         <canvas id="rice" width="1200" height="500"></canvas>
     </div>
@@ -30,9 +41,18 @@
 
     $(document).ready(function () {
 
-        function createChart(){
+        function createChart() {
+            var url = '';
+
+            switch ($('#txtMode').val()) {
+                case '1': url = '/api/gettop'; break;
+                case '2': url = '/api/gettopdatapoints'; break;
+                default: url = '/api/gettopdatapoints'; break;
+
+            }
+
             $.ajax({
-                url: '/api/gettop',
+                url: url,
                 type: 'GET',
                 data: { top: $('#txtNumber').val() },
                 async: true,

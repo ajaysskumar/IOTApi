@@ -25,31 +25,31 @@ namespace IotDemoWebApp.Controllers
         protected static IMongoDatabase _database;
 
         // GET: api/MotionSensor
-        public IQueryable<MotionSensorModel> GetMotionsSensor()
+        public IQueryable<MotionSensor> GetMotionsSensor()
         {
             return db.MotionsSensor;
         }
 
         [HttpGet]
         [Route("api/gettop")]
-        public IEnumerable<MotionSensorModel> GetTop(int top)
+        public IEnumerable<MotionSensor> GetTop(int top)
         {
             int timeframe = top * 60 * 60;
             int numberOfPoints = top*60 / 12;
 
             DateTime currenteDate = DateTime.UtcNow.AddHours(-top);
 
-            List<MotionSensorModel> data = new List<MotionSensorModel>();
+            List<MotionSensor> data = new List<MotionSensor>();
 
-            List<MotionSensorModel> dataPoints = new List<MotionSensorModel>();
+            List<MotionSensor> dataPoints = new List<MotionSensor>();
 
-            List<List<MotionSensorModel>> dataPointGroups = new List<List<MotionSensorModel>>();
+            List<List<MotionSensor>> dataPointGroups = new List<List<MotionSensor>>();
 
             var queryData = db.MotionsSensor.Where(x => x.Timestamp>=currenteDate).OrderByDescending(x => x.Timestamp);
 
             foreach (var item in queryData)
             {
-                data.Add(new MotionSensorModel {
+                data.Add(new MotionSensor {
                     Id = item.Id,
                     MotionTime = item.MotionTime,
                     MotionValue = item.MotionValue,
@@ -66,7 +66,7 @@ namespace IotDemoWebApp.Controllers
             foreach (var list in dataPointGroups)
             {
                 int listCount = list.Count;
-                MotionSensorModel model = new MotionSensorModel();
+                MotionSensor model = new MotionSensor();
                 model.MotionValue = list.Sum(x => x.MotionValue)/ listCount;
                 model.MotionTime = list.Sum(x => x.MotionTime) / listCount;
                 double numOfElements = list.Count / 2;
@@ -78,11 +78,60 @@ namespace IotDemoWebApp.Controllers
             return dataPoints;
         }
 
+        [HttpGet]
+        [Route("api/gettopdatapoints")]
+        public IEnumerable<MotionSensor> GetTopDatapoints(int top)
+        {
+            int timeframe = top * 60 * 60;
+            int numberOfPoints = top * 60 / 12;
+
+            DateTime currenteDate = DateTime.UtcNow.AddHours(-top);
+
+            List<MotionSensor> data = new List<MotionSensor>();
+
+            List<MotionSensor> dataPoints = new List<MotionSensor>();
+
+            List<List<MotionSensor>> dataPointGroups = new List<List<MotionSensor>>();
+
+            var queryData = db.MotionsSensor.Where(x => x.Timestamp >= currenteDate).OrderByDescending(x => x.Timestamp);
+
+            foreach (var item in queryData)
+            {
+                data.Add(new MotionSensor
+                {
+                    Id = item.Id,
+                    MotionTime = item.MotionTime,
+                    MotionValue = item.MotionValue,
+                    Timestamp = item.Timestamp
+                });
+            }
+
+            //var totalDataPoints = data.Count();
+
+            //int groupStrength = totalDataPoints / numberOfPoints;
+
+            //dataPointGroups = splitList(data, numberOfPoints);
+
+            //foreach (var list in dataPointGroups)
+            //{
+            //    int listCount = list.Count;
+            //    MotionSensorModel model = new MotionSensorModel();
+            //    model.MotionValue = list.Sum(x => x.MotionValue) / listCount;
+            //    model.MotionTime = list.Sum(x => x.MotionTime) / listCount;
+            //    double numOfElements = list.Count / 2;
+            //    model.Timestamp = list[Convert.ToInt32(Math.Floor(numOfElements))].Timestamp;
+
+            //    dataPoints.Add(model);
+            //}
+
+            return data;
+        }
+
         // GET: api/MotionSensor/5
-        [ResponseType(typeof(MotionSensorModel))]
+        [ResponseType(typeof(MotionSensor))]
         public async Task<IHttpActionResult> GetMotionSensorModel(int id)
         {
-            MotionSensorModel motionSensorModel = await db.MotionsSensor.FindAsync(id);
+            MotionSensor motionSensorModel = await db.MotionsSensor.FindAsync(id);
             if (motionSensorModel == null)
             {
                 return NotFound();
@@ -93,7 +142,7 @@ namespace IotDemoWebApp.Controllers
 
         // PUT: api/MotionSensor/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutMotionSensorModel(int id, MotionSensorModel motionSensorModel)
+        public async Task<IHttpActionResult> PutMotionSensorModel(int id, MotionSensor motionSensorModel)
         {
             if (!ModelState.IsValid)
             {
@@ -127,8 +176,8 @@ namespace IotDemoWebApp.Controllers
         }
 
         // POST: api/MotionSensor
-        [ResponseType(typeof(MotionSensorModel))]
-        public async Task<IHttpActionResult> PostMotionSensorModel([FromUri]MotionSensorModel motionSensorModel)
+        [ResponseType(typeof(MotionSensor))]
+        public async Task<IHttpActionResult> PostMotionSensorModel([FromUri]MotionSensor motionSensorModel)
         {
             if (!ModelState.IsValid)
             {
@@ -150,10 +199,10 @@ namespace IotDemoWebApp.Controllers
         }
 
         // DELETE: api/MotionSensor/5
-        [ResponseType(typeof(MotionSensorModel))]
+        [ResponseType(typeof(MotionSensor))]
         public async Task<IHttpActionResult> DeleteMotionSensorModel(int id)
         {
-            MotionSensorModel motionSensorModel = await db.MotionsSensor.FindAsync(id);
+            MotionSensor motionSensorModel = await db.MotionsSensor.FindAsync(id);
             if (motionSensorModel == null)
             {
                 return NotFound();
@@ -197,7 +246,7 @@ namespace IotDemoWebApp.Controllers
 
         [HttpPost]
         [Route("api/insertmongo")]
-        public async Task<IHttpActionResult> Insert([FromUri]MotionSensorModel model)
+        public async Task<IHttpActionResult> Insert([FromUri]MotionSensor model)
         {
             string uri = "mongodb://ajaysskumar:123456@ds042729.mlab.com:42729/iot";
 
@@ -207,7 +256,7 @@ namespace IotDemoWebApp.Controllers
 
             _database = _client.GetDatabase("iot");
 
-            var document  = model.ToBsonDocument<MotionSensorModel>();
+            var document  = model.ToBsonDocument<MotionSensor>();
 
             var collection = _database.GetCollection<BsonDocument>("datapoints");
             
@@ -216,9 +265,9 @@ namespace IotDemoWebApp.Controllers
             return Ok(document);
         }
 
-        public static List<List<MotionSensorModel>> splitList(List<MotionSensorModel> locations, int nSize = 5)
+        public static List<List<MotionSensor>> splitList(List<MotionSensor> locations, int nSize = 5)
         {
-            var list = new List<List<MotionSensorModel>>();
+            var list = new List<List<MotionSensor>>();
 
             for (int i = 0; i < locations.Count; i += nSize)
             {
