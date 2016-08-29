@@ -176,26 +176,19 @@ namespace IotDemoWebApp.Controllers
         }
 
         // POST: api/MotionSensor
-        [ResponseType(typeof(MotionSensor))]
+        //[ResponseType(typeof(MotionSensor))]
         public async Task<IHttpActionResult> PostMotionSensorModel([FromUri]MotionSensor motionSensorModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Model State not valid MotionValue="+motionSensorModel.MotionValue+" and MotionTime="+motionSensorModel.MotionTime);
             }
-            //if (motionSensorModel.MotionValue<1)
-            //{
-            //    return BadRequest("Model State not valid MotionValue=" + motionSensorModel.MotionValue + " and MotionTime=" + motionSensorModel.MotionTime);
-            //}
-            //if (motionSensorModel.MotionTime < 1)
-            //{
-            //    return BadRequest("Model State not valid MotionValue=" + motionSensorModel.MotionValue + " and MotionTime=" + motionSensorModel.MotionTime);
-            //}
+            
             motionSensorModel.Timestamp = DateTime.UtcNow;
             db.MotionsSensor.Add(motionSensorModel);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = motionSensorModel.Id }, motionSensorModel);
+            return Ok(30);
         }
 
         // DELETE: api/MotionSensor/5
