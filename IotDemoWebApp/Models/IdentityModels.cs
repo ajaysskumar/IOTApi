@@ -27,6 +27,8 @@ namespace IotDemoWebApp.Models
 
         public virtual DbSet<MotionSensor> MotionsSensor { get; set; }
 
+        public virtual DbSet<WifiSensor> WifiSensor { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

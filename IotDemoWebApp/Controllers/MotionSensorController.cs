@@ -183,12 +183,15 @@ namespace IotDemoWebApp.Controllers
             {
                 return BadRequest("Model State not valid MotionValue="+motionSensorModel.MotionValue+" and MotionTime="+motionSensorModel.MotionTime);
             }
-            
+
+            //string colons : from mac id
+            motionSensorModel.DeviceId = motionSensorModel.DeviceId.Replace(":", "");
+
             motionSensorModel.Timestamp = DateTime.UtcNow;
             db.MotionsSensor.Add(motionSensorModel);
             await db.SaveChangesAsync();
 
-            return Ok(30);
+            return Ok(db.WifiSensor.Where(x=>x.Id == motionSensorModel.DeviceId).FirstOrDefault().OperationFrequecy);
         }
 
         // DELETE: api/MotionSensor/5

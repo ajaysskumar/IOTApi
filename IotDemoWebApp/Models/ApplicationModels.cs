@@ -15,6 +15,20 @@ namespace IotDemoWebApp.Models
 
         public decimal MotionTime { get; set; }
 
+        public string DeviceId { get; set; }
+
         public DateTime Timestamp { get; set; }
+
+        public virtual WifiSensor Device { get; set; }
+    }
+
+    public class WifiSensor
+    {
+        public string Id { get; set; }
+
+        public string DeviceName { get; set; }
+
+        public int OperationFrequecy { get; set; }
+        
     }
 }

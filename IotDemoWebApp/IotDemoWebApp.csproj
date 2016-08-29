@@ -200,6 +200,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MotionSensorController.cs" />
     <Compile Include="Controllers\MotionSensorModelsController.cs" />
+    <Compile Include="Controllers\WifiSensorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -222,6 +223,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\iotdemo.apexsoftworks.in - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\chart\chart.js" />

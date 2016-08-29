@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=SQL5021.myWindowsHosting.com;Initial Catalog=DB_A0A36A_ajaysskumar;User Id=DB_A0A36A_ajaysskumar_admin;Password=oa0049@123;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="E:\\IOT\\IotDemoApi\\IotDemoWebApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=6e7f98f6-ca3b-421b-b927-a65c00b12b90.sqlserver.sequelizer.com;Initial Catalog=db6e7f98f6ca3b421bb927a65c00b12b90;User Id=rmpcsyazqmfphpig;Password=tpJHMTKCiR2AbByiByrr2esHbVEr7ow85Zo5tso52g7beG4mefiZtcvp5bFYosE3;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\ajayk\\Source\\Repos\\IOTApi\\IotDemoWebApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
   </parameter>
 </parameters>
