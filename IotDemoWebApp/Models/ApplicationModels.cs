@@ -11,9 +11,9 @@ namespace IotDemoWebApp.Models
         public int Id { get; set; }
 
 
-        public decimal MotionValue { get; set; }
+        public string MotionValue { get; set; }
 
-        public decimal MotionTime { get; set; }
+        public string MotionTime { get; set; }
 
         public string DeviceId { get; set; }
 
@@ -30,5 +30,14 @@ namespace IotDemoWebApp.Models
 
         public int OperationFrequecy { get; set; }
         
+    }
+
+    public class Trace {
+
+        public int Id { get; set; }
+        public string Input { get; set; }
+        public string Timestamp { get; set; }
+        public string Error { get; set; }
+        public string MethodName { get; set; }
     }
 }

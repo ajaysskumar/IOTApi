@@ -13,6 +13,8 @@ using IotDemoWebApp.Models;
 using System.Web.Http.Cors;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using OnActuate.Iot.Core.Logging;
+using System.Text.RegularExpressions;
 
 namespace IotDemoWebApp.Controllers
 {
@@ -67,8 +69,8 @@ namespace IotDemoWebApp.Controllers
             {
                 int listCount = list.Count;
                 MotionSensor model = new MotionSensor();
-                model.MotionValue = list.Sum(x => x.MotionValue)/ listCount;
-                model.MotionTime = list.Sum(x => x.MotionTime) / listCount;
+                model.MotionValue =(list.Sum(x => Convert.ToDecimal(x.MotionValue))/ listCount).ToString();
+                model.MotionTime = (list.Sum(x => Convert.ToDecimal(x.MotionTime)) / listCount).ToString();
                 double numOfElements = list.Count / 2;
                 model.Timestamp = list[Convert.ToInt32(Math.Floor(numOfElements))].Timestamp;
 
@@ -179,17 +181,39 @@ namespace IotDemoWebApp.Controllers
         //[ResponseType(typeof(MotionSensor))]
         public async Task<IHttpActionResult> PostMotionSensorModel([FromUri]MotionSensor motionSensorModel)
         {
-            if (!ModelState.IsValid)
+            decimal temperature = 0.00m;
+            decimal humididty = 0.00m;
+
+            if (!decimal.TryParse(motionSensorModel.MotionValue,out temperature) && !decimal.TryParse(motionSensorModel.MotionValue, out humididty))
             {
-                return BadRequest("Model State not valid MotionValue="+motionSensorModel.MotionValue+" and MotionTime="+motionSensorModel.MotionTime);
+                string method = Helper.GetCurrentMethod();
+                string objectString = Helper.ConvertObjectToXML(motionSensorModel);
+
+                db.Trace.Add(new Trace {
+                    Error = "invalid model",
+                    Input = objectString,
+                    MethodName = method,
+                    Timestamp = DateTime.UtcNow.ToString()
+                });
+                await db.SaveChangesAsync();
+
+                return Ok(db.WifiSensor.Where(x => x.Id == motionSensorModel.DeviceId).FirstOrDefault().OperationFrequecy);
             }
 
             //string colons : from mac id
             motionSensorModel.DeviceId = motionSensorModel.DeviceId.Replace(":", "");
 
             motionSensorModel.Timestamp = DateTime.UtcNow;
-            db.MotionsSensor.Add(motionSensorModel);
-            await db.SaveChangesAsync();
+            try
+            {
+                db.MotionsSensor.Add(motionSensorModel);
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                //IotDemoEventSourceManager.Log.Info( Helper.ConvertObjectToXML(motionSensorModel), DateTime.UtcNow.ToString(), ex.Message, Helper.GetCurrentMethod());
+                return Ok(db.WifiSensor.Where(x => x.Id == motionSensorModel.DeviceId).FirstOrDefault().OperationFrequecy);
+            }
 
             return Ok(db.WifiSensor.Where(x=>x.Id == motionSensorModel.DeviceId).FirstOrDefault().OperationFrequecy);
         }

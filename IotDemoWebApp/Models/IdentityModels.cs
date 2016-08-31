@@ -29,6 +29,8 @@ namespace IotDemoWebApp.Models
 
         public virtual DbSet<WifiSensor> WifiSensor { get; set; }
 
+        public virtual DbSet<Trace> Trace { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

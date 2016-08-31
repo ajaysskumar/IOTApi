@@ -7,6 +7,10 @@
 #include "RestClient.h"
 #include "DHT.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+
 #define DHTPIN 13     // what pin we're connected to
 #define DHTTYPE DHT22   // DHT 22  (AM2302)
 //#define fan 4
@@ -28,7 +32,7 @@ int sleepTimeHotspotUnavailable = 60;
 int maxTryCountToConnectWifi = 60;
 int wifiConnectingCountStart = 20;
 // Host
-const char* host = "ajaysskumar-001-site1.etempurl.com";
+const char* host = "iotdemo.apexsoftworks.in";
 
 int redLed = 12;                // the pin that the LED is atteched to
 int greenLed = 14;                // the pin that the LED is atteched to
@@ -46,7 +50,7 @@ float temperature;
 float humidity;
 String deviceMac;
 
-RestClient restClient =RestClient("iotdemo.apexsoftworks.in");
+RestClient restClient =RestClient(host);
 
 void setup()
 {
@@ -65,6 +69,25 @@ void setup()
   Serial.print("Entering sleep mode... ");
   //ESP.deepSleep(5 * 1000000, RF_DEFAULT);
 
+//  Serial.print("==== this should be 0"+String(checkNumber("Responsesabdjkbbasjbdjbasjbdjbjasj"))+"====");
+//  Serial.print("\n");
+//  Serial.print("==== this should be 1"+String(checkNumber("3000")+"===="));
+//  ESP.deepSleep(5 * 1000000, RF_DEFAULT);
+}
+
+int checkNumber(String s)
+{   
+  for ( int i = 0 ; i < s.length(); i++)
+  {
+    //int num = i.toInt();
+         if(!isdigit(i))
+         {
+          return 0;
+          
+         }         
+  }
+
+  return 1;
 }
 
 void postData(RestClient restClient) {
@@ -73,7 +96,14 @@ void postData(RestClient restClient) {
   response = "";
   int statusCode = restClient.post(url.c_str(), "", &response);
 
-  dataPostFrequency = response.toInt();
+  if(checkNumber(response)==0)
+     {
+      dataPostFrequency = 60;
+      }else{
+        dataPostFrequency = response.toInt();
+      }
+
+  
   
   Serial.print("Status code from server: ");
   Serial.println(statusCode);
@@ -219,6 +249,7 @@ void loop()
     digitalWrite(redLed, LOW);
     digitalWrite(greenLed, LOW);
      Serial.println("going to sleep");
+     
      ESP.deepSleep(dataPostFrequency * 1000000, RF_DEFAULT);
       //delay(dataPostFrequency*1000);
     // Read all the lines of the reply from server and print them to Serial
