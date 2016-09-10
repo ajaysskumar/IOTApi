@@ -218,3 +218,15 @@ C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Owin.Security.Mic
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\obj\Release\IotDemoWebApp.csprojResolveAssemblyReference.cache
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\obj\Release\IotDemoWebApp.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\obj\Release\IotDemoWebApp.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Database.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Database.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.xml

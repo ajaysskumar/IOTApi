@@ -34,7 +34,7 @@ namespace IotDemoWebApp.Controllers
 
         [HttpGet]
         [Route("api/gettop")]
-        public IEnumerable<MotionSensor> GetTop(int top)
+        public IEnumerable<MotionSensor> GetTop(int top,string sensorId)
         {
             int timeframe = top * 60 * 60;
             int numberOfPoints = top*60 / 12;
@@ -47,7 +47,7 @@ namespace IotDemoWebApp.Controllers
 
             List<List<MotionSensor>> dataPointGroups = new List<List<MotionSensor>>();
 
-            var queryData = db.MotionsSensor.Where(x => x.Timestamp>=currenteDate).OrderByDescending(x => x.Timestamp);
+            var queryData = db.MotionsSensor.Where(x => x.Timestamp>=currenteDate && x.DeviceId==sensorId).OrderByDescending(x => x.Timestamp);
 
             foreach (var item in queryData)
             {
@@ -82,7 +82,7 @@ namespace IotDemoWebApp.Controllers
 
         [HttpGet]
         [Route("api/gettopdatapoints")]
-        public IEnumerable<MotionSensor> GetTopDatapoints(int top)
+        public IEnumerable<MotionSensor> GetTopDatapoints(int top,string sensorId)
         {
             int timeframe = top * 60 * 60;
             int numberOfPoints = top * 60 / 12;
@@ -95,7 +95,7 @@ namespace IotDemoWebApp.Controllers
 
             List<List<MotionSensor>> dataPointGroups = new List<List<MotionSensor>>();
 
-            var queryData = db.MotionsSensor.Where(x => x.Timestamp >= currenteDate).OrderByDescending(x => x.Timestamp);
+            var queryData = db.MotionsSensor.Where(x => x.DeviceId==sensorId && x.Timestamp >= currenteDate).OrderByDescending(x => x.Timestamp);
 
             foreach (var item in queryData)
             {

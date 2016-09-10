@@ -8,24 +8,31 @@
 
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <label>Set No. of Datapoints</label>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-2">
         <input type="number" value="2" class="form-control" id="txtNumber" />
     </div>
-    <div class="col-md-4">
+    <div class="col-md-2">
         <button class="btn btn-primary">Change</button>
+    </div>
+    <div class="col-md-2">
+        <label>Select Device</label>
+    </div>
+    <div class="col-md-3">
+        <select class="form-control" id="ddlDevice">
+        </select>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <label>Set Mode of Datapoints(1 for aggregated 2 for all)</label>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-2">
         <input type="number" value="2" max="2" min="1" class="form-control" id="txtMode" />
     </div>
-    <div class="col-md-4">
+    <div class="col-md-2">
         <button class="btn btn-primary">Change</button>
     </div>
 </div>
@@ -38,6 +45,7 @@
 
 <script>
     var rice = $("#rice");
+    var isPageLoaded = false;
 
     $(document).ready(function () {
 
@@ -48,78 +56,171 @@
                 case '1': url = '/api/gettop'; break;
                 case '2': url = '/api/gettopdatapoints'; break;
                 default: url = '/api/gettopdatapoints'; break;
-
             }
 
-            $.ajax({
-                url: url,
-                type: 'GET',
-                data: { top: $('#txtNumber').val() },
-                async: true,
-                success: function (response) {
+            var currentDeviceSelected = $('#ddlDevice :selected').val();
 
-                    var plotData = [];
-                    var labelsData = [];
-                    $.each(response, function (i, e) {
-                        plotData.push(e.MotionValue);
+            if (!isPageLoaded) {
+                $.ajax({
+                    url: '/api/sensors',
+                    type: 'GET',
+                    
+                    async: true,
+                    success: function (response) {
+                        var ddl = $('#ddlDevice');
+                        $.each(response,
+                            function (i, e) {
+                                ddl.append('<option id="' + e.Id + '" >' + e.DeviceName + '</option>');
+                            });
+                        isPageLoaded = true;
+                        $.ajax({
+                            url: url,
+                            type: 'GET',
+                            data: { top: $('#txtNumber').val(), sensorId: $('#ddlDevice :selected').attr('id') },
+                            async: true,
+                            success: function (response) {
 
-                        var date = new Date(e.Timestamp);
-                        //date.getTime();
+                                var plotData = [];
+                                var labelsData = [];
+                                $.each(response,
+                                    function (i, e) {
+                                        plotData.push(e.MotionValue);
 
-                        labelsData.push(date.toLocaleString());
-                    })
+                                        var date = new Date(e.Timestamp);
+                                        //date.getTime();
 
-                    var ctx = $("#rice");
-                    var myChart = new Chart(ctx, {
-                        type: 'line',
-                        data : {
-                            labels: labelsData,
-                            datasets: [
-                                {
-                                    label: "Temperature in  Celcius",
-                                    //fill: false,
-                                    //lineTension: 0.1,
-                                    //backgroundColor: "rgba(75,192,192,0.4)",
-                                    //borderColor: "rgba(75,192,192,1)",
-                                    //borderCapStyle: 'butt',
-                                    //borderDash: [],
-                                    //borderDashOffset: 0.0,
-                                    //borderJoinStyle: 'miter',
-                                    //pointBorderColor: "rgba(75,192,192,1)",
-                                    //pointBackgroundColor: "#fff",
-                                    //pointBorderWidth: 1,
-                                    //pointHoverRadius: 5,
-                                    //pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                                    //pointHoverBorderColor: "rgba(220,220,220,1)",
-                                    //pointHoverBorderWidth: 2,
-                                    //pointRadius: 1,
-                                    //pointHitRadius: 10,
-                                    fillColor: "rgba(172,194,132,0.4)",
-                                    strokeColor: "#ACC26D",
-                                    pointColor: "#fff",
-                                    pointStrokeColor: "#9DB86D",
-                                    data: plotData,
-                                    //spanGaps: false,
-                                }
-                            ]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
+                                        labelsData.push(date.toLocaleString());
+                                    });
+
+                                var ctx = $("#rice");
+                                var myChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: labelsData,
+                                        datasets: [
+                                            {
+                                                label: "Temperature in  Celcius",
+                                                //fill: false,
+                                                //lineTension: 0.1,
+                                                //backgroundColor: "rgba(75,192,192,0.4)",
+                                                //borderColor: "rgba(75,192,192,1)",
+                                                //borderCapStyle: 'butt',
+                                                //borderDash: [],
+                                                //borderDashOffset: 0.0,
+                                                //borderJoinStyle: 'miter',
+                                                //pointBorderColor: "rgba(75,192,192,1)",
+                                                //pointBackgroundColor: "#fff",
+                                                //pointBorderWidth: 1,
+                                                //pointHoverRadius: 5,
+                                                //pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                                //pointHoverBorderColor: "rgba(220,220,220,1)",
+                                                //pointHoverBorderWidth: 2,
+                                                //pointRadius: 1,
+                                                //pointHitRadius: 10,
+                                                fillColor: "rgba(172,194,132,0.4)",
+                                                strokeColor: "#ACC26D",
+                                                pointColor: "#fff",
+                                                pointStrokeColor: "#9DB86D",
+                                                data: plotData,
+                                                //spanGaps: false,
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
                                     }
-                                }]
+                                });
+                                //var myLineChart = new Chart(ctx, {
+                                //    type: 'line',
+                                //    data: data,
+                                //    options: options
+                                //});
                             }
-                        }
-                    });
-                    //var myLineChart = new Chart(ctx, {
-                    //    type: 'line',
-                    //    data: data,
-                    //    options: options
-                    //});
-                }
-            });
+                        });
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    data: { top: $('#txtNumber').val(), sensorId: $('#ddlDevice :selected').attr('id') },
+                    async: true,
+                    success: function (response) {
+
+                        var plotData = [];
+                        var labelsData = [];
+                        $.each(response,
+                            function (i, e) {
+                                plotData.push(e.MotionValue);
+
+                                var date = new Date(e.Timestamp);
+                                //date.getTime();
+
+                                labelsData.push(date.toLocaleString());
+                            });
+
+                        var ctx = $("#rice");
+                        var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labelsData,
+                                datasets: [
+                                    {
+                                        label: "Temperature in  Celcius",
+                                        //fill: false,
+                                        //lineTension: 0.1,
+                                        //backgroundColor: "rgba(75,192,192,0.4)",
+                                        //borderColor: "rgba(75,192,192,1)",
+                                        //borderCapStyle: 'butt',
+                                        //borderDash: [],
+                                        //borderDashOffset: 0.0,
+                                        //borderJoinStyle: 'miter',
+                                        //pointBorderColor: "rgba(75,192,192,1)",
+                                        //pointBackgroundColor: "#fff",
+                                        //pointBorderWidth: 1,
+                                        //pointHoverRadius: 5,
+                                        //pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                        //pointHoverBorderColor: "rgba(220,220,220,1)",
+                                        //pointHoverBorderWidth: 2,
+                                        //pointRadius: 1,
+                                        //pointHitRadius: 10,
+                                        fillColor: "rgba(172,194,132,0.4)",
+                                        strokeColor: "#ACC26D",
+                                        pointColor: "#fff",
+                                        pointStrokeColor: "#9DB86D",
+                                        data: plotData,
+                                        //spanGaps: false,
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                        //var myLineChart = new Chart(ctx, {
+                        //    type: 'line',
+                        //    data: data,
+                        //    options: options
+                        //});
+                    }
+                });
+            }
+
+            
+
+            
         }
         createChart();
         setInterval(createChart, 10 * 1000);

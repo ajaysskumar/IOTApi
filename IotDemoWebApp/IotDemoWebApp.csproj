@@ -224,6 +224,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MotionSensorController.cs" />
     <Compile Include="Controllers\MotionSensorModelsController.cs" />
+    <Compile Include="Controllers\SensorsController.cs" />
     <Compile Include="Controllers\WifiSensorsController.cs" />
     <Compile Include="Controllers\WifiSettingsController.cs" />
     <Compile Include="Global.asax.cs">

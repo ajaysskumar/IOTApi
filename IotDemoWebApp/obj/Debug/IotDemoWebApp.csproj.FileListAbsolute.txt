@@ -297,6 +297,6 @@ C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Owin.Security.OAu
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\obj\Debug\IotDemoWebApp.csprojResolveAssemblyReference.cache
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\obj\Debug\IotDemoWebApp.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\obj\Debug\IotDemoWebApp.pdb
-C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\obj\Debug\IotDemoWebApp.csprojResolveAssemblyReference.cache
