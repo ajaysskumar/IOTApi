@@ -36,8 +36,8 @@ int operationMode = 1;
 // Host
 const char* host = "iotdemo.apexsoftworks.in";
 
-int redLed = 12;                // the pin that the LED is atteched to
-int greenLed = 14;                // the pin that the LED is atteched to
+int redLed = 14;                // the pin that the LED is atteched to
+int greenLed = 12;                // the pin that the LED is atteched to
 int sensorPin = 17;     // the pin that the sensor is atteched to
 int buttonPin = 5;
 int configLedPin = 4;
@@ -63,18 +63,12 @@ void setup()
   pinMode(wifiLedDisconnectPin, OUTPUT);
 
   dht.begin();
+  Log("dht initialized...",1);
 
   deviceMac = WiFi.macAddress();
+  Log("Device MAC "+deviceMac,1);
   // Serial
   Serial.begin(115200);
-
-  Serial.print("Entering sleep mode... ");
-  //ESP.deepSleep(5 * 1000000, RF_DEFAULT);
-
-  //  Serial.print("==== this should be 0"+String(checkNumber("Responsesabdjkbbasjbdjbasjbdjbjasj"))+"====");
-  //  Serial.print("\n");
-  //  Serial.print("==== this should be 1"+String(checkNumber("3000")+"===="));
-  //  ESP.deepSleep(5 * 1000000, RF_DEFAULT);
 }
 
 int checkNumber(String s)
@@ -96,18 +90,18 @@ void postData(RestClient restClient) {
 
   Serial.println("Create START URL to post...");
   String url = "/api/motionsensor?MotionValue=" + String(temperature) + "&MotionTime=" + String(humidity) + "&DeviceId=" + String(deviceMac);
-  Serial.println("Creat FINISH URL to post...\nURL = "+url);
+  Serial.println("Creat FINISH URL to post...\nURL = " + url);
   String response;
   response = "";
   Serial.println("Posting data to service... Waiting for response");
-  
+
   int statusCode = restClient.post(url.c_str(), "", &response);
 
-Serial.println("Status recieved... Going to set frequency...");
-  
+  Serial.println("Status recieved... Going to set frequency...");
+
   if (statusCode == 200 && !isnan(statusCode) )
   {
-    Serial.println("response recieved : "+response +"\n Converting to int type");
+    Serial.println("response recieved : " + response + "\n Converting to int type");
     dataPostFrequency = response.toInt();
   } else
   {
@@ -221,6 +215,7 @@ void loop()
       temperature = dht.readTemperature();
       sensorRetryCount++;
       Serial.println("Sensor Read try " + String(sensorRetryCount));
+      delay(1000);
     }
 
     //  float temp[] ;
@@ -281,5 +276,5 @@ void loop()
 void Log(String message, int executionMode)
 {
   if (executionMode == 1)
-  Serial.println(message);  
+    Serial.println(message);
 }

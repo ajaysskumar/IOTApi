@@ -28,9 +28,11 @@ const char* password = "apex-wifi";
 int sleepTimeS = 60;
 int dataPostFrequency = 6;
 int sleepTimeHotspotUnavailable = 60;
-
+int sensorOutputNotAvailbaleTimeout = 2;
+int maxSensorReadTry = 10;
 int maxTryCountToConnectWifi = 60;
 int wifiConnectingCountStart = 20;
+int operationMode = 1;
 // Host
 const char* host = "iotdemo.apexsoftworks.in";
 
@@ -44,13 +46,13 @@ int state = LOW;             // by default, no motion detected
 int val = 0;
 float analogVal = 0;
 int motion = 0;
-int count =0;
+int count = 0;
 
 float temperature;
 float humidity;
 String deviceMac;
 
-RestClient restClient =RestClient(host);
+RestClient restClient = RestClient(host);
 
 void setup()
 {
@@ -69,101 +71,92 @@ void setup()
   Serial.print("Entering sleep mode... ");
   //ESP.deepSleep(5 * 1000000, RF_DEFAULT);
 
-//  Serial.print("==== this should be 0"+String(checkNumber("Responsesabdjkbbasjbdjbasjbdjbjasj"))+"====");
-//  Serial.print("\n");
-//  Serial.print("==== this should be 1"+String(checkNumber("3000")+"===="));
-//  ESP.deepSleep(5 * 1000000, RF_DEFAULT);
+  //  Serial.print("==== this should be 0"+String(checkNumber("Responsesabdjkbbasjbdjbasjbdjbjasj"))+"====");
+  //  Serial.print("\n");
+  //  Serial.print("==== this should be 1"+String(checkNumber("3000")+"===="));
+  //  ESP.deepSleep(5 * 1000000, RF_DEFAULT);
 }
 
 int checkNumber(String s)
-{   
+{
   for ( int i = 0 ; i < s.length(); i++)
   {
     //int num = i.toInt();
-         if(!isdigit(i))
-         {
-          return 0;
-          
-         }         
+    if (!isdigit(i))
+    {
+      return 0;
+
+    }
   }
 
   return 1;
 }
 
 void postData(RestClient restClient) {
-  String url = "/api/motionsensor?MotionValue=" + String(temperature) + "&MotionTime=" + String(humidity)+"&DeviceId="+String(deviceMac);
+
+  Serial.println("Create START URL to post...");
+  String url = "/api/motionsensor?MotionValue=" + String(temperature) + "&MotionTime=" + String(humidity) + "&DeviceId=" + String(deviceMac);
+  Serial.println("Creat FINISH URL to post...\nURL = "+url);
   String response;
   response = "";
+  Serial.println("Posting data to service... Waiting for response");
+  
   int statusCode = restClient.post(url.c_str(), "", &response);
 
-  if(checkNumber(response)==0)
-     {
-      dataPostFrequency = 60;
-      }else{
-        dataPostFrequency = response.toInt();
-      }
+Serial.println("Status recieved... Going to set frequency...");
+  
+  if (statusCode == 200 && !isnan(statusCode) )
+  {
+    Serial.println("response recieved : "+response +"\n Converting to int type");
+    dataPostFrequency = response.toInt();
+  } else
+  {
+    dataPostFrequency = sensorOutputNotAvailbaleTimeout;
+  }
 
-  
-  
   Serial.print("Status code from server: ");
   Serial.println(statusCode);
   Serial.print("Response body from server: ");
   Serial.println(response);
 }
 
-float getTemperature(int sensorPin)
-{
-  val = analogRead(sensorPin);
-  float mv = ( val / 1024.0) * 3300;
-  float cel = mv / 10;
-  // farh = (cel*9)/5 + 32;
-
-  //float temp = val*0.322265625;
-
-  Serial.print("TEMPRATURE = ");
-  Serial.print(cel);
-  Serial.print("*C");
-  Serial.println();
-  return cel;
-}
-
 void wifiSetup()
 {
   //WiFi.begin(ssid, password);
-    digitalWrite(wifiLedDisconnectPin,HIGH); // indication of esp going into config mode
-    Serial.println("Config button pressed... going to auto connect ");
-    WiFiManager wifiManager;
-    //reset saved settings
-    //wifiManager.resetSettings();
+  digitalWrite(wifiLedDisconnectPin, HIGH); // indication of esp going into config mode
+  Serial.println("Config button pressed... going to auto connect ");
+  WiFiManager wifiManager;
+  //reset saved settings
+  //wifiManager.resetSettings();
 
-    //set custom ip for portal
-    //wifiManager.setAPConfig(IPAddress(10,0,1,1), IPAddress(10,0,1,1), IPAddress(255,255,255,0));
+  //set custom ip for portal
+  //wifiManager.setAPConfig(IPAddress(10,0,1,1), IPAddress(10,0,1,1), IPAddress(255,255,255,0));
 
-    //fetches ssid and pass from eeprom and tries to connect
-    //if it does not connect it starts an access point with the specified name
-    //here  "AutoConnectAP"
-    //and goes into a blocking loop awaiting configuration
-    //wifiManager.autoConnect(String(deviceMac, "123456");
-    //or use this for auto generated name ESP + ChipID
-    wifiManager.autoConnect();
+  //fetches ssid and pass from eeprom and tries to connect
+  //if it does not connect it starts an access point with the specified name
+  //here  "AutoConnectAP"
+  //and goes into a blocking loop awaiting configuration
+  //wifiManager.autoConnect(String(deviceMac, "123456");
+  //or use this for auto generated name ESP + ChipID
+  wifiManager.autoConnect();
 
 
-    //if you get here you have connected to the WiFi
-    Serial.println("connected...yeey :)");
-    digitalWrite(wifiLedDisconnectPin,LOW);
-  
+  //if you get here you have connected to the WiFi
+  Serial.println("connected...yeey :)");
+  digitalWrite(wifiLedDisconnectPin, LOW);
+
 }
 
 void loop()
 {
   Serial.println("Press Config button to go into config mode");
-  if (digitalRead(buttonPin)==LOW) {
+  if (digitalRead(buttonPin) == LOW) {
     wifiSetup();
   }
   else
   {
     Serial.println("ESP8266 in normal mode");
-    
+
     // Connect to WiFi
     while (WiFi.status() != WL_CONNECTED) {
       if (count == maxTryCountToConnectWifi)
@@ -171,24 +164,24 @@ void loop()
         Serial.println("ESP8266 will retry connecting after 60 seconds");
         ESP.deepSleep(sleepTimeHotspotUnavailable * 1000000, RF_DEFAULT);
       }
-      if (digitalRead(wifiLedDisconnectPin)!=HIGH && count>wifiConnectingCountStart) {
+      if (digitalRead(wifiLedDisconnectPin) != HIGH && count > wifiConnectingCountStart) {
         Serial.println("Wifi Disconnect LED should blink");
-        digitalWrite(wifiLedDisconnectPin,HIGH);
+        digitalWrite(wifiLedDisconnectPin, HIGH);
         delay(1000);
       }
-      
+
       count++;
-      if (digitalRead(wifiLedDisconnectPin)==HIGH) {
-        digitalWrite(wifiLedDisconnectPin,LOW); 
-        delay(1000); 
+      if (digitalRead(wifiLedDisconnectPin) == HIGH) {
+        digitalWrite(wifiLedDisconnectPin, LOW);
+        delay(1000);
       }
-      
-      if(digitalRead(buttonPin)==LOW)
+
+      if (digitalRead(buttonPin) == LOW)
       {
         wifiSetup();
       }
-      
-      Serial.print("TRY : "+String(count)+"\n" );
+
+      Serial.print("TRY : " + String(count) + "\n" );
       delay(1000);
     }
     Serial.println("");
@@ -196,7 +189,7 @@ void loop()
 
     // Print the IP address
     Serial.println(WiFi.localIP());
-    digitalWrite(configLedPin,LOW);
+    digitalWrite(configLedPin, LOW);
 
     // Logging data to cloud
     Serial.print("Connecting to ");
@@ -207,9 +200,9 @@ void loop()
     const int httpPort = 80;
     if (!client.connect(host, httpPort)) {
       Serial.println("connection failed");
-      digitalWrite(configLedPin,HIGH);
+      digitalWrite(configLedPin, HIGH);
       delay(2000);
-      digitalWrite(configLedPin,LOW);
+      digitalWrite(configLedPin, LOW);
       Serial.println("ESP8266 will retry connecting to site after 60 seconds");
       ESP.deepSleep(sleepTimeHotspotUnavailable * 1000000, RF_DEFAULT);
 
@@ -218,22 +211,44 @@ void loop()
 
     //temperature = getTemperature(sensorPin);
 
-     humidity = dht.readHumidity();
-  // Read temperature as Celsius
-  temperature = dht.readTemperature();
+    humidity = dht.readHumidity();
+    // Read temperature as Celsius
+    temperature = dht.readTemperature();
+    int sensorRetryCount = 0;
+    while ((isnan(humidity) || isnan(temperature)) && sensorRetryCount < maxSensorReadTry)
+    {
+      humidity = dht.readHumidity();
+      temperature = dht.readTemperature();
+      sensorRetryCount++;
+      Serial.println("Sensor Read try " + String(sensorRetryCount));
+    }
 
-  Serial.print("Humidity: ");
-  Serial.print(humidity);
-  Serial.print(" %\t");
-  Serial.print("Temperature: ");
-  Serial.print(temperature);
-  Serial.println(" *C ");
+    //  float temp[] ;
+    //  float humid[];
+    //
+    //  for(int i=0;i<10;i++)
+    //  {
+    //    h = dht.readHumidity();
+    //    t = dht.readTemperature();
+    //    if(!isnan(h) || !isnan(t)){
+    //      temp[i] = h;
+    //      humid[i] = t;
+    //      delay(500);
+    //     }
+    //  }
 
-  // Check if any reads failed and exit early (to try again).
-  if (isnan(humidity) || isnan(temperature)) {
-    Serial.println("Failed to read from DHT sensor!");
-    //ESP.deepSleep(sleepTimeHotspotUnavailable * 1000000, RF_DEFAULT);
-  }
+    Serial.print("Humidity: ");
+    Serial.print(humidity);
+    Serial.print(" %\t");
+    Serial.print("Temperature: ");
+    Serial.print(temperature);
+    Serial.println(" *C ");
+
+    // Check if any reads failed and exit early (to try again).
+    if (isnan(humidity) || isnan(temperature)) {
+      Serial.println("Failed to read from DHT sensor!... ESP will try reconnecting after 60 seconds");
+      ESP.deepSleep(sensorOutputNotAvailbaleTimeout * 1000000, RF_DEFAULT);
+    }
 
     if (temperature > 33.00)
     {
@@ -248,10 +263,10 @@ void loop()
     postData(restClient);
     digitalWrite(redLed, LOW);
     digitalWrite(greenLed, LOW);
-     Serial.println("going to sleep");
-     
-     ESP.deepSleep(dataPostFrequency * 1000000, RF_DEFAULT);
-      //delay(dataPostFrequency*1000);
+    Serial.println("going to sleep");
+
+    ESP.deepSleep(dataPostFrequency * 1000000, RF_DEFAULT);
+    //delay(dataPostFrequency*1000);
     // Read all the lines of the reply from server and print them to Serial
     //  while (client.available()) {
     //    String line = client.readStringUntil('\r');
@@ -260,11 +275,11 @@ void loop()
 
     //Serial.println();
     //Serial.println("closing connection");
-
-    // Sleep
-    //Serial.println("ESP8266 in sleep mode for" + String(sleepTimeS) + " seconds");
-    //ESP.deepSleep(sleepTimeS * 1000000, RF_DEFAULT);
-
-    //Serial.println("Wake up from sleep mode");
   }
+}
+
+void Log(String message, int executionMode)
+{
+  if (executionMode == 1)
+  Serial.println(message);  
 }
