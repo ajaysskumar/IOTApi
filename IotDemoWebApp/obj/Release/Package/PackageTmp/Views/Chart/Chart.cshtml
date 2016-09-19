@@ -25,6 +25,7 @@
         </select>
     </div>
 </div>
+<br/>
 <div class="row">
     <div class="col-md-3">
         <label>Set Mode of Datapoints(1 for aggregated 2 for all)</label>
@@ -36,20 +37,25 @@
         <button class="btn btn-primary">Change</button>
     </div>
 </div>
+<br />
 <div class="row">
-    <div class="col-md-12">
-        <canvas id="rice" width="1200" height="500"></canvas>
+    <div class="col-md-6">
+        <canvas id="temperature" width="1200" height="800"></canvas>
+    </div>
+    <div class="col-md-6">
+        <canvas id="humidity" width="1200" height="800"></canvas>
     </div>
 </div>
 
 
 <script>
-    var rice = $("#rice");
+    var temperature = $("#temperature");
+    var humidity = $("#humidity");
     var isPageLoaded = false;
 
     $(document).ready(function () {
 
-        function createChart() {
+        function createChartTemperature() {
             var url = '';
 
             switch ($('#txtMode').val()) {
@@ -79,7 +85,6 @@
                             data: { top: $('#txtNumber').val(), sensorId: $('#ddlDevice :selected').attr('id') },
                             async: true,
                             success: function (response) {
-
                                 var plotData = [];
                                 var labelsData = [];
                                 $.each(response,
@@ -92,7 +97,7 @@
                                         labelsData.push(date.toLocaleString());
                                     });
 
-                                var ctx = $("#rice");
+                                var ctx = $("#temperature");
                                 var myChart = new Chart(ctx, {
                                     type: 'line',
                                     data: {
@@ -100,20 +105,20 @@
                                         datasets: [
                                             {
                                                 label: "Temperature in  Celcius",
-                                                //fill: false,
+                                                fill: true,
                                                 //lineTension: 0.1,
-                                                //backgroundColor: "rgba(75,192,192,0.4)",
-                                                //borderColor: "rgba(75,192,192,1)",
+                                                backgroundColor: "rgba(249, 1, 1, 0.4)",
+                                                borderColor: "rgba(249, 1, 1, 1)",
                                                 //borderCapStyle: 'butt',
                                                 //borderDash: [],
                                                 //borderDashOffset: 0.0,
-                                                //borderJoinStyle: 'miter',
-                                                //pointBorderColor: "rgba(75,192,192,1)",
-                                                //pointBackgroundColor: "#fff",
+                                                borderJoinStyle: 'miter',
+                                                pointBorderColor: "rgba(249, 1, 1, 1)",
+                                                pointBackgroundColor: "#fff",
                                                 //pointBorderWidth: 1,
                                                 //pointHoverRadius: 5,
-                                                //pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                                                //pointHoverBorderColor: "rgba(220,220,220,1)",
+                                                pointHoverBackgroundColor: "rgba(249, 1, 1, 1)",
+                                                pointHoverBorderColor: "rgba(220,220,220,1)",
                                                 //pointHoverBorderWidth: 2,
                                                 //pointRadius: 1,
                                                 //pointHitRadius: 10,
@@ -136,11 +141,71 @@
                                         }
                                     }
                                 });
-                                //var myLineChart = new Chart(ctx, {
-                                //    type: 'line',
-                                //    data: data,
-                                //    options: options
-                                //});
+                            }
+                        });
+                        $.ajax({
+                            url: url,
+                            type: 'GET',
+                            data: { top: $('#txtNumber').val(), sensorId: $('#ddlDevice :selected').attr('id') },
+                            async: true,
+                            success: function (response) {
+
+                                var plotData = [];
+                                var labelsData = [];
+                                $.each(response,
+                                    function (i, e) {
+                                        plotData.push(e.MotionTime);
+
+                                        var date = new Date(e.Timestamp);
+                                        //date.getTime();
+
+                                        labelsData.push(date.toLocaleString());
+                                    });
+
+                                var ctx = $("#humidity");
+                                var myChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: labelsData,
+                                        datasets: [
+                                            {
+                                                label: "Humidity in percentage",
+                                                fill: true,
+                                                //lineTension: 0.1,
+                                                backgroundColor: "rgba(75,192,192,0.4)",
+                                                borderColor: "rgba(75,192,192,1)",
+                                                //borderCapStyle: 'butt',
+                                                //borderDash: [],
+                                                //borderDashOffset: 0.0,
+                                                borderJoinStyle: 'miter',
+                                                pointBorderColor: "rgba(75,192,192,1)",
+                                                pointBackgroundColor: "#fff",
+                                                //pointBorderWidth: 1,
+                                                //pointHoverRadius: 5,
+                                                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                                pointHoverBorderColor: "rgba(220,220,220,1)",
+                                                //pointHoverBorderWidth: 2,
+                                                //pointRadius: 1,
+                                                //pointHitRadius: 10,
+                                                fillColor: "rgba(172,194,132,0.4)",
+                                                strokeColor: "#ACC26D",
+                                                pointColor: "#fff",
+                                                pointStrokeColor: "#9DB86D",
+                                                data: plotData,
+                                                //spanGaps: false,
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
                             }
                         });
                     }
@@ -165,7 +230,7 @@
                                 labelsData.push(date.toLocaleString());
                             });
 
-                        var ctx = $("#rice");
+                        var ctx = $("#temperature");
                         var myChart = new Chart(ctx, {
                             type: 'line',
                             data: {
@@ -173,20 +238,20 @@
                                 datasets: [
                                     {
                                         label: "Temperature in  Celcius",
-                                        //fill: false,
+                                        fill: true,
                                         //lineTension: 0.1,
-                                        //backgroundColor: "rgba(75,192,192,0.4)",
-                                        //borderColor: "rgba(75,192,192,1)",
+                                        backgroundColor: "rgba(249, 1, 1, 0.4)",
+                                        borderColor: "rgba(249, 1, 1, 1)",
                                         //borderCapStyle: 'butt',
                                         //borderDash: [],
                                         //borderDashOffset: 0.0,
-                                        //borderJoinStyle: 'miter',
-                                        //pointBorderColor: "rgba(75,192,192,1)",
-                                        //pointBackgroundColor: "#fff",
+                                        borderJoinStyle: 'miter',
+                                        pointBorderColor: "rgba(249, 1, 1, 1)",
+                                        pointBackgroundColor: "#fff",
                                         //pointBorderWidth: 1,
                                         //pointHoverRadius: 5,
-                                        //pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                                        //pointHoverBorderColor: "rgba(220,220,220,1)",
+                                        pointHoverBackgroundColor: "rgba(249, 1, 1, 1)",
+                                        pointHoverBorderColor: "rgba(220,220,220,1)",
                                         //pointHoverBorderWidth: 2,
                                         //pointRadius: 1,
                                         //pointHitRadius: 10,
@@ -209,21 +274,79 @@
                                 }
                             }
                         });
-                        //var myLineChart = new Chart(ctx, {
-                        //    type: 'line',
-                        //    data: data,
-                        //    options: options
-                        //});
+                    }
+                });
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    data: { top: $('#txtNumber').val(), sensorId: $('#ddlDevice :selected').attr('id') },
+                    async: true,
+                    success: function (response) {
+
+                        var plotData = [];
+                        var labelsData = [];
+                        $.each(response,
+                            function (i, e) {
+                                plotData.push(e.MotionTime);
+
+                                var date = new Date(e.Timestamp);
+                                //date.getTime();
+
+                                labelsData.push(date.toLocaleString());
+                            });
+
+                        var ctx = $("#humidity");
+                        var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labelsData,
+                                datasets: [
+                                    {
+                                        label: "Humidity in percentage",
+                                        fill: true,
+                                        lineTension: 0.1,
+                                        backgroundColor: "rgba(75,192,192,0.4)",
+                                        borderColor: "rgba(75,192,192,1)",
+                                        //borderCapStyle: 'butt',
+                                        //borderDash: [],
+                                        //borderDashOffset: 0.0,
+                                        borderJoinStyle: 'miter',
+                                        pointBorderColor: "rgba(75,192,192,1)",
+                                        pointBackgroundColor: "#fff",
+                                        //pointBorderWidth: 1,
+                                        //pointHoverRadius: 5,
+                                        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                        pointHoverBorderColor: "rgba(220,220,220,1)",
+                                        //pointHoverBorderWidth: 2,
+                                        //pointRadius: 1,
+                                        //pointHitRadius: 10,
+                                        fillColor: "rgba(172,194,132,0.4)",
+                                        strokeColor: "#ACC26D",
+                                        pointColor: "#fff",
+                                        pointStrokeColor: "#9DB86D",
+                                        data: plotData,
+                                        //spanGaps: false,
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
                     }
                 });
             }
-
-            
-
-            
         }
-        createChart();
-        setInterval(createChart, 10 * 1000);
+
+        createChartTemperature();
+        
+        setInterval(createChartTemperature, 10 * 1000);
     });
 </script>
 

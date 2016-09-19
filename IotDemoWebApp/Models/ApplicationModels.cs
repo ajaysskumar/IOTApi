@@ -40,4 +40,15 @@ namespace IotDemoWebApp.Models
         public string Error { get; set; }
         public string MethodName { get; set; }
     }
+
+    public class Admin
+    {
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public String Mobile { get; set; }
+        public bool ShouldRecieve { get; set; }
+        public decimal Threshold { get; set; }
+        public DateTime LastSmsRecievedTime { get; set; }
+        
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -182,9 +183,9 @@ namespace IotDemoWebApp.Controllers
         public async Task<IHttpActionResult> PostMotionSensorModel([FromUri]MotionSensor motionSensorModel)
         {
             decimal temperature = 0.00m;
-            decimal humididty = 0.00m;
+            decimal humidity = 0.00m;
 
-            if (!decimal.TryParse(motionSensorModel.MotionValue,out temperature) && !decimal.TryParse(motionSensorModel.MotionValue, out humididty))
+            if (!decimal.TryParse(motionSensorModel.MotionValue,out temperature) && !decimal.TryParse(motionSensorModel.MotionValue, out humidity))
             {
                 string method = Helper.GetCurrentMethod();
                 string objectString = Helper.ConvertObjectToXML(motionSensorModel);
@@ -206,6 +207,17 @@ namespace IotDemoWebApp.Controllers
             motionSensorModel.Timestamp = DateTime.UtcNow;
             try
             {
+                //Send SMS
+                var admins = db.Admin.Where(x => x.ShouldRecieve == true);
+
+                foreach (var admin in admins)
+                {
+                    if (temperature>=admin.Threshold && (DateTime.Now-admin.LastSmsRecievedTime).Minutes>=15 )
+                    {
+                        Helper.SendSMS(ConfigurationManager.AppSettings.Get("AccountID"), ConfigurationManager.AppSettings.Get("SmsEmail"), ConfigurationManager.AppSettings.Get("Password"), admin.Mobile, string.Format("Hey there...Your threshold temperature {0} has reached. Please get adjustments in temperature. Current Temperature is{1} ",admin.Threshold,temperature));
+                    }
+                }
+
                 db.MotionsSensor.Add(motionSensorModel);
                 await db.SaveChangesAsync();
             }

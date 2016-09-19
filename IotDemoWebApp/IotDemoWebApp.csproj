@@ -219,12 +219,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MotionSensorController.cs" />
     <Compile Include="Controllers\MotionSensorModelsController.cs" />
     <Compile Include="Controllers\SensorsController.cs" />
+    <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="Controllers\WifiSensorsController.cs" />
     <Compile Include="Controllers\WifiSettingsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -253,6 +255,7 @@
     <Content Include="Arduino\Wifi_DHT22_DeepSleep_Without_Battery\Wifi_DHT22_DeepSleep_Without_Battery.ino" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\iotdemo.apexsoftworks.in - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\publishLocal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\chart\chart.js" />
@@ -353,6 +356,11 @@
     <Content Include="Views\WifiSettings\Details.cshtml" />
     <Content Include="Views\WifiSettings\Edit.cshtml" />
     <Content Include="Views\WifiSettings\Index.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\Admin\Details.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

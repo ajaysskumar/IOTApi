@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Web;
 using System.Xml;
 using System.Xml.Serialization;
@@ -44,6 +46,28 @@ namespace IotDemoWebApp
                 xmlDoc.Load(xmlStream);
                 return xmlDoc.InnerXml;
             }
+        }
+
+        public static int SendSMS(String AccountID, String Email, String Password, String Recipient, String Message)
+        {
+            WebClient Client = new WebClient();
+            String RequestURL, RequestData;
+
+            RequestURL = "https://redoxygen.net/sms.dll?Action=SendSMS";
+
+            RequestData = "AccountId=" + AccountID
+                + "&Email=" + System.Web.HttpUtility.UrlEncode(Email)
+                + "&Password=" + System.Web.HttpUtility.UrlEncode(Password)
+                + "&Recipient=" + System.Web.HttpUtility.UrlEncode(Recipient)
+                + "&Message=" + System.Web.HttpUtility.UrlEncode(Message);
+
+            byte[] PostData = Encoding.ASCII.GetBytes(RequestData);
+            byte[] Response = Client.UploadData(RequestURL, PostData);
+
+            String Result = Encoding.ASCII.GetString(Response);
+            int ResultCode = System.Convert.ToInt32(Result.Substring(0, 4));
+
+            return ResultCode;
         }
     }
 }
