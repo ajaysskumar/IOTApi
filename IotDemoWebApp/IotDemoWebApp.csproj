@@ -253,6 +253,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Arduino\Wifi_DHT22_DeepSleep_Without_Battery\Wifi_DHT22_DeepSleep_Without_Battery.ino" />
+    <Content Include="Arduino\Wifi_DHT22_DeepSleep_Without_Battery\RestClient.cpp" />
+    <Content Include="Arduino\Wifi_DHT22_DeepSleep_Without_Battery\RestClient.h" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\iotdemo.apexsoftworks.in - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\publishLocal.pubxml" />

@@ -1,0 +1,13 @@
+ESP-12E Connections
+
+ESP		TTL
+TX		RX
+RX		TX
+GPIO0	GND(EXT),GND(TTL)
+GPIO2	3.3V(EXT) with pullup 4.7K to 10K
+GPIO15	GND(EXT),GND(TTL)
+GND		GND(EXT),GND(TTL)
+VCC		3.3V(EXT)
+CH_PD	3.3V(EXT) with pull up 4.7K to 10K
+
+whenever we want to program, pull down REST (connect and disconnect). Best option will be to use a Reset button here.

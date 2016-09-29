@@ -208,15 +208,25 @@ namespace IotDemoWebApp.Controllers
             try
             {
                 //Send SMS
-                var admins = db.Admin.Where(x => x.ShouldRecieve == true);
+                //var admins = db.Admin.Where(x => x.ShouldRecieve == true);
+                //if (motionSensorModel.DeviceId == "5CCF7F8821F3" && temperature < 36)
+                //{
+                //    //while (true)
+                //    //{
+                //    //    await Task.Delay(100000000);
+                //    //}
 
-                foreach (var admin in admins)
-                {
-                    if (temperature>=admin.Threshold && (DateTime.Now-admin.LastSmsRecievedTime).Minutes>=15 )
-                    {
-                        Helper.SendSMS(ConfigurationManager.AppSettings.Get("AccountID"), ConfigurationManager.AppSettings.Get("SmsEmail"), ConfigurationManager.AppSettings.Get("Password"), admin.Mobile, string.Format("Hey there...Your threshold temperature {0} has reached. Please get adjustments in temperature. Current Temperature is{1} ",admin.Threshold,temperature));
-                    }
-                }
+                //    await Task.Delay(1000 * 120);
+                //}
+
+
+                //foreach (var admin in admins)
+                //{
+                //    if (temperature>=admin.Threshold && (DateTime.Now-admin.LastSmsRecievedTime).Minutes>=15 )
+                //    {
+                //        Helper.SendSMS(ConfigurationManager.AppSettings.Get("AccountID"), ConfigurationManager.AppSettings.Get("SmsEmail"), ConfigurationManager.AppSettings.Get("Password"), admin.Mobile, string.Format("Hey there...Your threshold temperature {0} has reached. Please get adjustments in temperature. Current Temperature is{1} ",admin.Threshold,temperature));
+                //    }
+                //}
 
                 db.MotionsSensor.Add(motionSensorModel);
                 await db.SaveChangesAsync();
