@@ -19,5 +19,11 @@ namespace IotDemoWebApp.Controllers
         {
             return View();
         }
+
+        [Route("chartcon")]
+        public ActionResult ChartCon()
+        {
+            return View();
+        }
     }
 }

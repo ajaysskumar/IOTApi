@@ -38,7 +38,6 @@ const char* host = "iotdemo.apexsoftworks.in";
 
 int redLed = 14;                // the pin that the LED is atteched to
 int greenLed = 12;                // the pin that the LED is atteched to
-int sensorPin = 17;     // the pin that the sensor is atteched to
 int buttonPin = 5;
 int configLedPin = 4;
 int wifiLedDisconnectPin = 15;
@@ -88,6 +87,8 @@ int checkNumber(String s)
 
 void postData(RestClient restClient) {
 
+  restClient.setConnectionTimeout(20);
+  
   Serial.println("Create START URL to post...");
   String url = "/api/motionsensor?MotionValue=" + String(temperature) + "&MotionTime=" + String(humidity) + "&DeviceId=" + String(deviceMac);
   Serial.println("Creat FINISH URL to post...\nURL = " + url);

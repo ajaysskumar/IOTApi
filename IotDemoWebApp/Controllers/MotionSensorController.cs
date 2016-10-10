@@ -130,6 +130,55 @@ namespace IotDemoWebApp.Controllers
             return data;
         }
 
+        [HttpGet]
+        [Route("api/getdatapointspartial")]
+        public IEnumerable<MotionSensor> GetTopDatapoints(int top,int lastRecord, string sensorId)
+        {
+            int timeframe = top * 60 * 60;
+            int numberOfPoints = top * 60 / 12;
+
+            DateTime currenteDate = DateTime.UtcNow.AddHours(-top);
+
+            List<MotionSensor> data = new List<MotionSensor>();
+
+            List<MotionSensor> dataPoints = new List<MotionSensor>();
+
+            List<List<MotionSensor>> dataPointGroups = new List<List<MotionSensor>>();
+
+            var queryData = db.MotionsSensor.Where(x => x.DeviceId == sensorId && x.Timestamp >= currenteDate && x.Id>lastRecord).OrderBy(x => x.Timestamp);
+
+            foreach (var item in queryData)
+            {
+                data.Add(new MotionSensor
+                {
+                    Id = item.Id,
+                    MotionTime = item.MotionTime,
+                    MotionValue = item.MotionValue,
+                    Timestamp = item.Timestamp
+                });
+            }
+
+            //var totalDataPoints = data.Count();
+
+            //int groupStrength = totalDataPoints / numberOfPoints;
+
+            //dataPointGroups = splitList(data, numberOfPoints);
+
+            //foreach (var list in dataPointGroups)
+            //{
+            //    int listCount = list.Count;
+            //    MotionSensorModel model = new MotionSensorModel();
+            //    model.MotionValue = list.Sum(x => x.MotionValue) / listCount;
+            //    model.MotionTime = list.Sum(x => x.MotionTime) / listCount;
+            //    double numOfElements = list.Count / 2;
+            //    model.Timestamp = list[Convert.ToInt32(Math.Floor(numOfElements))].Timestamp;
+
+            //    dataPoints.Add(model);
+            //}
+
+            return data;
+        }
+
         // GET: api/MotionSensor/5
         [ResponseType(typeof(MotionSensor))]
         public async Task<IHttpActionResult> GetMotionSensorModel(int id)

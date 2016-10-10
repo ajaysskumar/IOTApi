@@ -85,11 +85,13 @@
                             data: { top: $('#txtNumber').val(), sensorId: $('#ddlDevice :selected').attr('id') },
                             async: true,
                             success: function (response) {
-                                var plotData = [];
+                                var temperatureData = [];
+                                var humidityData = [];
                                 var labelsData = [];
                                 $.each(response,
                                     function (i, e) {
-                                        plotData.push(e.MotionValue);
+                                        temperatureData.push(e.MotionValue);
+                                        humidityData.push(e.MotionTime);
 
                                         var date = new Date(e.Timestamp);
                                         //date.getTime();
@@ -97,8 +99,8 @@
                                         labelsData.push(date.toLocaleString());
                                     });
 
-                                var ctx = $("#temperature");
-                                var myChart = new Chart(ctx, {
+                                var ctxTemp = $("#temperature");
+                                var myChartTemp = new Chart(ctxTemp, {
                                     type: 'line',
                                     data: {
                                         labels: labelsData,
@@ -126,7 +128,7 @@
                                                 strokeColor: "#ACC26D",
                                                 pointColor: "#fff",
                                                 pointStrokeColor: "#9DB86D",
-                                                data: plotData,
+                                                data: temperatureData
                                                 //spanGaps: false,
                                             }
                                         ]
@@ -141,29 +143,9 @@
                                         }
                                     }
                                 });
-                            }
-                        });
-                        $.ajax({
-                            url: url,
-                            type: 'GET',
-                            data: { top: $('#txtNumber').val(), sensorId: $('#ddlDevice :selected').attr('id') },
-                            async: true,
-                            success: function (response) {
 
-                                var plotData = [];
-                                var labelsData = [];
-                                $.each(response,
-                                    function (i, e) {
-                                        plotData.push(e.MotionTime);
-
-                                        var date = new Date(e.Timestamp);
-                                        //date.getTime();
-
-                                        labelsData.push(date.toLocaleString());
-                                    });
-
-                                var ctx = $("#humidity");
-                                var myChart = new Chart(ctx, {
+                                var ctxHumid = $("#humidity");
+                                var myChartHumid = new Chart(ctxHumid, {
                                     type: 'line',
                                     data: {
                                         labels: labelsData,
@@ -191,7 +173,7 @@
                                                 strokeColor: "#ACC26D",
                                                 pointColor: "#fff",
                                                 pointStrokeColor: "#9DB86D",
-                                                data: plotData,
+                                                data: humidityData
                                                 //spanGaps: false,
                                             }
                                         ]
@@ -218,20 +200,21 @@
                     async: true,
                     success: function (response) {
 
-                        var plotData = [];
+                        var temperatureData = [];
+                        var humidityData = [];
                         var labelsData = [];
                         $.each(response,
                             function (i, e) {
-                                plotData.push(e.MotionValue);
-
+                                temperatureData.push(e.MotionValue);
+                                humidityData.push(e.MotionTime);
                                 var date = new Date(e.Timestamp);
                                 //date.getTime();
 
                                 labelsData.push(date.toLocaleString());
                             });
 
-                        var ctx = $("#temperature");
-                        var myChart = new Chart(ctx, {
+                        var ctxTemp = $("#temperature");
+                        var myChartTemp = new Chart(ctxTemp, {
                             type: 'line',
                             data: {
                                 labels: labelsData,
@@ -259,7 +242,7 @@
                                         strokeColor: "#ACC26D",
                                         pointColor: "#fff",
                                         pointStrokeColor: "#9DB86D",
-                                        data: plotData,
+                                        data: temperatureData
                                         //spanGaps: false,
                                     }
                                 ]
@@ -274,29 +257,8 @@
                                 }
                             }
                         });
-                    }
-                });
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    data: { top: $('#txtNumber').val(), sensorId: $('#ddlDevice :selected').attr('id') },
-                    async: true,
-                    success: function (response) {
-
-                        var plotData = [];
-                        var labelsData = [];
-                        $.each(response,
-                            function (i, e) {
-                                plotData.push(e.MotionTime);
-
-                                var date = new Date(e.Timestamp);
-                                //date.getTime();
-
-                                labelsData.push(date.toLocaleString());
-                            });
-
-                        var ctx = $("#humidity");
-                        var myChart = new Chart(ctx, {
+                        var ctxHumid = $("#humidity");
+                        var myChartHumid = new Chart(ctxHumid, {
                             type: 'line',
                             data: {
                                 labels: labelsData,
@@ -324,7 +286,7 @@
                                         strokeColor: "#ACC26D",
                                         pointColor: "#fff",
                                         pointStrokeColor: "#9DB86D",
-                                        data: plotData,
+                                        data: humidityData
                                         //spanGaps: false,
                                     }
                                 ]
