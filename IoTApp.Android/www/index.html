@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -41,50 +41,7 @@
     });
   </script>
 
-  <style>
-    .profile-wrapper {
-      padding: 16px 10px 0 10px;
-    }
-
-    .profile-name {
-      font-size: 18px;
-      padding: 8px 0 2px 0;
-    }
-
-    .profile-email {
-      font-size: 15px;
-      opacity: 0.4;
-    }
-
-    .settings-header {
-      font-weight: 500;
-      font-size: 14px;
-      opacity: 0.4;
-      padding: 10px 0 0px 10px;
-      margin-bottom: -4px;
-    }
-
-    .settings-list {
-      margin-top: 10px;
-    }
-
-    .picture {
-      background-color: #ccc;
-      width: 50px;
-      height: 50px;
-    }
-
-    #main-list .right {
-      display: inline;
-    }
-
-    .label {
-      font-size: 12px;
-      color: #999;
-      float: right;
-      padding-top: 10px;
-    }
-  </style>
+  <link href="css/myStyles.css" rel="stylesheet" />
 
 </head>
 
@@ -114,20 +71,52 @@
       </ons-toolbar>
 
       <!-- This list will be filled on page initialization -->
-      <ons-list id="main-list">
-        <ons-list-item tappable onclick="alertMessage()">
-          <div class="left">
-            <div class="list__item__thumbnail picture"></div>
-          </div>
-          <div class="center">
-            <div class="list__item__title">Lorem Ipsum</div>
-            <div class="list__item__subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-          </div>
-          <div class="right">
-            <span class="label">5h</span>
-          </div>
-        </ons-list-item>
-      </ons-list>
+        <ons-row class="profile-wrapper">
+            <ons-col width="60px">
+                <div class="list__item__thumbnail picture"></div>
+            </ons-col>
+            <ons-col>
+                <div class="profile-name">Ajay's Home</div>
+                <div class="profile-email">SNL11000345</div>
+            </ons-col>
+        </ons-row>
+
+        <div class="settings-header">Home Switches</div>
+        <ons-list modifier="inset" class="settings-list">
+            <ons-list-item modifier="longdivider">
+                <label class="center" for="bulb-switch">
+                    Bulb
+                </label>
+                <div class="right">
+                    <ons-switch modifier="list-item" input-id="bulb-switch"></ons-switch>
+                </div>
+            </ons-list-item>
+
+            <ons-list-item modifier="longdivider">
+                <label class="center" for="fan-switch">
+                    Fan
+                </label>
+                <div class="right">
+                    <ons-switch modifier="list-item" input-id="fan-switch" checked></ons-switch>
+                </div>
+            </ons-list-item>
+            <ons-list-item modifier="longdivider">
+                <label class="center" for="ext1-switch">
+                    Extention 1
+                </label>
+                <div class="right">
+                    <ons-switch modifier="list-item" input-id="ext1-switch" checked></ons-switch>
+                </div>
+            </ons-list-item>
+            <ons-list-item modifier="longdivider">
+                <label class="center" for="ext2-switch">
+                    Extention 2
+                </label>
+                <div class="right">
+                    <ons-switch modifier="list-item" input-id="ext2-switch" checked></ons-switch>
+                </div>
+            </ons-list-item>
+        </ons-list>
     </ons-page>
   </ons-template>
 

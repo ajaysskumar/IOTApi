@@ -9,15 +9,17 @@ using Android.OS;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using System.Net.Http;
 
 namespace IoTDemoApp.Droid
 {
-	[Activity (Label = "IoTDemoApp.Droid", MainLauncher = true, Icon = "@drawable/icon")]
+	[Activity (Label = "OnActuate IoT", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
-		int count = 1;
+		//int count = 1;
+        HttpClient client;
 
-		protected override void OnCreate (Bundle bundle)
+        protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
@@ -28,7 +30,11 @@ namespace IoTDemoApp.Droid
 			// and attach an event to it
 			Button button = FindViewById<Button> (Resource.Id.btnSocketBulb);
 
+            button.Text = "Bulb ON";
+
             TextView textStatus = FindViewById<TextView>(Resource.Id.textViewStatus);
+
+            client = new HttpClient();
 
             button.Click += delegate {
                 try
@@ -61,34 +67,21 @@ namespace IoTDemoApp.Droid
 
         private bool FetchWeather(string url)
         {
-            HttpWebResponse response = null;
-
             try
             {
-                HttpWebRequest request =(HttpWebRequest)HttpWebRequest.Create(url); 
-                request.Method = "GET";
-
-                response = (HttpWebResponse)request.GetResponse();
-
-                response.Close();
-
-                //StreamReader sr = new StreamReader(response.GetResponseStream());
-                //Console.Write(sr.ReadToEnd());
-                if (response.StatusCode!=HttpStatusCode.OK )
+                var response = client.GetAsync(url).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    return false;
+                    return true;
+                    //Items = JsonConvert.DeserializeObject<List<TodoItem>>(content);
                 }
-                return true;
+
+                return false;
             }
-            catch (WebException e)
+            catch (Exception ex)
             {
-                if (e.Status == WebExceptionStatus.ProtocolError)
-                {
-                    response = (HttpWebResponse)e.Response;
-                    
-                    //Console.Write("Errorcode: {0}", (int)response.StatusCode);
-                }
-                throw e;
+
+                throw ex;
             }
         }
     }
