@@ -1,0 +1,8 @@
+C:\Users\ajayk\Source\Repos\IOTApi\ConsoleClient\obj\Debug\ConsoleClient.csprojResolveAssemblyReference.cache
+C:\Users\ajayk\Source\Repos\IOTApi\ConsoleClient\bin\Debug\ConsoleClient.exe.config
+C:\Users\ajayk\Source\Repos\IOTApi\ConsoleClient\bin\Debug\ConsoleClient.exe
+C:\Users\ajayk\Source\Repos\IOTApi\ConsoleClient\bin\Debug\ConsoleClient.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\ConsoleClient\bin\Debug\IoTOperations.dll
+C:\Users\ajayk\Source\Repos\IOTApi\ConsoleClient\bin\Debug\IoTOperations.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\ConsoleClient\obj\Debug\ConsoleClient.exe
+C:\Users\ajayk\Source\Repos\IOTApi\ConsoleClient\obj\Debug\ConsoleClient.pdb
