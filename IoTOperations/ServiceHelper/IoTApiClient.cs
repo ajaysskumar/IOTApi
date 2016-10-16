@@ -7,6 +7,7 @@ using System.Net.Http;
 using IoTOperations.Sensors;
 using System.Xml.Serialization;
 using System.IO;
+using IoT.Common.Model.Utility;
 
 namespace IoTOperations.ServiceHelper
 {
@@ -21,7 +22,7 @@ namespace IoTOperations.ServiceHelper
             baseUrl = baseUri;
         }
 
-        public async Task<List<Relay>> GetRelayStatus(int relayGroupId=0,string relativeUrl="/")
+        public async Task<List<Sensors.Relay>> GetRelayStatus(int relayGroupId=0,string relativeUrl="/")
         {
             var parameters = new Dictionary<string, string>();
             //parameters["text"] = text;
@@ -43,9 +44,9 @@ namespace IoTOperations.ServiceHelper
         public async void ToggleSwitch(int relayGroupId = 0, string SwtichId="Socket")
         {
 
-            List<Relay> relayList = GetRelayStatus().Result;
+            List<Sensors.Relay> relayList = GetRelayStatus().Result;
 
-            Relay relay = relayList.Where(x => x.RelayName == "Relay1").FirstOrDefault();
+            Sensors.Relay relay = relayList.Where(x => x.RelayName == "Relay1").FirstOrDefault();
 
             if (relay.RelayStatus == "CKT_OPEN")
             {
@@ -57,20 +58,28 @@ namespace IoTOperations.ServiceHelper
             }
 
             var parameters = new Dictionary<string, string>();
-            //parameters["text"] = text;
+            
             var response = await httpClient.PostAsync(string.Format("{0}/{1}",baseUrl,SwtichId), new FormUrlEncodedContent(parameters));
-            //var contents = await response.Content.ReadAsStringAsync();
+           
+        }
 
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    XmlSerializer serializer = new XmlSerializer(typeof(Relays));
-            //    MemoryStream memStream = new MemoryStream(Encoding.UTF8.GetBytes(contents));
-            //    Relays resultingMessage = (Relays)serializer.Deserialize(memStream);
-            //    return resultingMessage.Relay;
-            //    //Items = JsonConvert.DeserializeObject<List<TodoItem>>(content);
-            //}
+        public async Task<RequestLog> GetRequestToProcess(string url)
+        {
+            var parameters = new Dictionary<string, string>();
+            //parameters["text"] = text;
+            var response = await httpClient.PostAsync(url, new FormUrlEncodedContent(parameters));
+            var contents = await response.Content.ReadAsStringAsync();
 
-            //else throw new Exception("Request Failed");
+            if (response.IsSuccessStatusCode)
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<RequestLog>));
+                MemoryStream memStream = new MemoryStream(Encoding.UTF8.GetBytes(contents));
+                List<RequestLog> resultingMessage = (List<RequestLog>)serializer.Deserialize(memStream);
+                return resultingMessage.OrderBy(x=>x.RequestStartTime).FirstOrDefault();
+                //Items = JsonConvert.DeserializeObject<List<TodoItem>>(content);
+            }
+
+            else throw new Exception("Request Failed");
         }
 
     }

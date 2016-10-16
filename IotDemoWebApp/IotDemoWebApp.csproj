@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IotDemoWebApp</RootNamespace>
     <AssemblyName>IotDemoWebApp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,6 +88,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
@@ -96,15 +98,12 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -146,6 +145,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -225,6 +225,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MotionSensorController.cs" />
     <Compile Include="Controllers\MotionSensorModelsController.cs" />
+    <Compile Include="Controllers\RelayController.cs" />
+    <Compile Include="Controllers\RelayGroupController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\SensorsController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="Controllers\WifiSensorsController.cs" />
@@ -244,6 +247,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Arduino\Device_Version1\RestClient.cpp" />
+    <Content Include="Arduino\Device_Version1\RestClient.h" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -255,6 +260,8 @@
     <Content Include="Arduino\Wifi_DHT22_DeepSleep_Without_Battery\Wifi_DHT22_DeepSleep_Without_Battery.ino" />
     <Content Include="Arduino\Wifi_DHT22_DeepSleep_Without_Battery\RestClient.cpp" />
     <Content Include="Arduino\Wifi_DHT22_DeepSleep_Without_Battery\RestClient.h" />
+    <Content Include="Arduino\Device_Version1\Device_Version1.ino" />
+    <Content Include="Arduino\NodeMCUWebServer\NodeMCUWebServer.ino" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\iotdemo.apexsoftworks.in - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\publishLocal.pubxml" />
@@ -364,6 +371,16 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Chart\ChartCon.cshtml" />
+    <Content Include="Views\RelayGroup\Create.cshtml" />
+    <Content Include="Views\RelayGroup\Delete.cshtml" />
+    <Content Include="Views\RelayGroup\Details.cshtml" />
+    <Content Include="Views\RelayGroup\Edit.cshtml" />
+    <Content Include="Views\RelayGroup\Index.cshtml" />
+    <Content Include="Views\Relay\Create.cshtml" />
+    <Content Include="Views\Relay\Delete.cshtml" />
+    <Content Include="Views\Relay\Details.cshtml" />
+    <Content Include="Views\Relay\Edit.cshtml" />
+    <Content Include="Views\Relay\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -374,6 +391,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IoT.Common.Model\IoT.Common.Model.csproj">
+      <Project>{c93b4edf-6472-4473-b437-02d4ec957633}</Project>
+      <Name>IoT.Common.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

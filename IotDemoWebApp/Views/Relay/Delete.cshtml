@@ -1,0 +1,56 @@
+﻿@model IotDemoWebApp.Models.Relay
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Relay</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RelayGroup.RelayGroupIpAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelayGroup.RelayGroupIpAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelayName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelayDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelayDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelayState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelayState)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

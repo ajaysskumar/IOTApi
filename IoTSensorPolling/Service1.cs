@@ -1,4 +1,5 @@
-﻿using IoTOperations.Sensors;
+﻿using IoT.Common.Model.Utility;
+using IoTOperations.Sensors;
 using IoTOperations.ServiceHelper;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace IoTSensorPolling
 
         protected override void OnStart(string[] args)
         {
-            client = new IoTApiClient("http://192.168.100.186");
+            
 
             // Create a timer with a ten second interval.
             aTimer = new System.Timers.Timer(10000);
@@ -54,7 +55,13 @@ namespace IoTSensorPolling
 
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            List<Relay> relays = client.GetRelayStatus().Result;
+            client = new IoTApiClient("http://iotdemo.apexsoftworks.in");
+
+            RequestLog request = client.GetRequestToProcess("/api/requestapi").Result;
+
+            client = new IoTApiClient();
+
+            List<IoTOperations.Sensors.Relay> relays = client.GetRelayStatus().Result;
             client.ToggleSwitch();
         }
     }

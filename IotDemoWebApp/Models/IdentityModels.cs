@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using IoT.Common.Model.Utility;
 
 namespace IotDemoWebApp.Models
 {
@@ -31,6 +32,9 @@ namespace IotDemoWebApp.Models
 
         public virtual DbSet<Trace> Trace { get; set; }
         public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<RelayGroup> RelayGroup { get; set; }
+        public virtual DbSet<Relay> Relay { get; set; }
+        public virtual DbSet<RequestLog> RequestLog { get; set; }
 
         public static ApplicationDbContext Create()
         {
