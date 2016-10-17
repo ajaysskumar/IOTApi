@@ -20,7 +20,7 @@ namespace IoTSensorPolling
 
         //string url = "http://192.168.100.186";
 
-        private static IoTApiClient client = new IoTApiClient("http://192.168.100.186");
+        private static IoTApiClient client;
         public Service1()
         {
             InitializeComponent();
@@ -57,11 +57,11 @@ namespace IoTSensorPolling
         {
             client = new IoTApiClient("http://iotdemo.apexsoftworks.in");
 
-            RequestLog request = client.GetRequestToProcess("/api/requestapi").Result;
+            RequestModel request = client.GetRequestToProcess("/api/requestToProcess").Result;
 
-            client = new IoTApiClient();
+            client = new IoTApiClient("http://192.168.100.186");
 
-            List<IoTOperations.Sensors.Relay> relays = client.GetRelayStatus().Result;
+            //List<IoTOperations.Sensors.Relay> relays = client.GetRelayStatus().Result;
             client.ToggleSwitch();
         }
     }

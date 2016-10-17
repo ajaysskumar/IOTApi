@@ -8,6 +8,7 @@ using IoTOperations.Sensors;
 using System.Xml.Serialization;
 using System.IO;
 using IoT.Common.Model.Utility;
+using Newtonsoft.Json;
 
 namespace IoTOperations.ServiceHelper
 {
@@ -63,19 +64,22 @@ namespace IoTOperations.ServiceHelper
            
         }
 
-        public async Task<RequestLog> GetRequestToProcess(string url)
+        public async Task<RequestModel> GetRequestToProcess(string url)
         {
             var parameters = new Dictionary<string, string>();
             //parameters["text"] = text;
-            var response = await httpClient.PostAsync(url, new FormUrlEncodedContent(parameters));
+            var response = await httpClient.GetAsync(string.Format("{0}{1}",baseUrl,url));
             var contents = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<RequestLog>));
-                MemoryStream memStream = new MemoryStream(Encoding.UTF8.GetBytes(contents));
-                List<RequestLog> resultingMessage = (List<RequestLog>)serializer.Deserialize(memStream);
-                return resultingMessage.OrderBy(x=>x.RequestStartTime).FirstOrDefault();
+                //XmlSerializer serializer = new XmlSerializer(typeof(RequestModel));
+                //MemoryStream memStream = new MemoryStream(Encoding.UTF8.GetBytes(contents));
+                //RequestModel resultingMessage = (RequestModel)serializer.Deserialize(memStream);
+
+                var resultingMessage = JsonConvert.DeserializeObject<RequestModel>(contents);
+                
+                return resultingMessage;
                 //Items = JsonConvert.DeserializeObject<List<TodoItem>>(content);
             }
 

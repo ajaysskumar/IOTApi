@@ -230,3 +230,5 @@ C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.Enterpr
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Database.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Common.Model.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Common.Model.pdb

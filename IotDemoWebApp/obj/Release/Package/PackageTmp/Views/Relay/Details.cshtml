@@ -1,0 +1,50 @@
+﻿@model IotDemoWebApp.Models.Relay
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Relay</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RelayGroup.RelayGroupIpAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelayGroup.RelayGroupIpAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelayName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelayDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelayDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelayState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelayState)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

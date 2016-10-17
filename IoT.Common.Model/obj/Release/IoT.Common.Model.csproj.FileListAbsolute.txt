@@ -1,0 +1,4 @@
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\IoT.Common.Model.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\IoT.Common.Model.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.pdb
