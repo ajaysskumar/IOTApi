@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using IotDemoWebApp.Models;
-using OnActuate.Iot.Core.Logging;
+//using OnActuate.Iot.Core.Logging;
 
 namespace IotDemoWebApp
 {
@@ -16,7 +16,7 @@ namespace IotDemoWebApp
         public void ConfigureAuth(IAppBuilder app)
         {
             //Initialize logging
-            LoggingManager.InitializeLogger("IotDemo",System.Diagnostics.Tracing.EventLevel.LogAlways);
+            IoT.Common.Logging.LoggingManager.InitializeLogger("IoTEventSource", System.Diagnostics.Tracing.EventLevel.LogAlways);
 
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);

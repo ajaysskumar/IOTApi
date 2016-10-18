@@ -36,10 +36,15 @@ namespace IotDemoWebApp.Models
     public class Trace {
 
         public int Id { get; set; }
-        public string Input { get; set; }
-        public string Timestamp { get; set; }
-        public string Error { get; set; }
+        public string InstanceName { get; set; }
+        public DateTime Timestamp { get; set; }
+        public int Level { get; set; }
+        public Guid MsgId { get; set; }
+        public string Message { get; set; }
+        //public string Timestamp { get; set; }
         public string MethodName { get; set; }
+        public string Error { get; set; }
+        public string Input { get; set; }
     }
 
     public class Admin

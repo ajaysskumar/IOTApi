@@ -243,7 +243,7 @@ namespace IotDemoWebApp.Controllers
                     Error = "invalid model",
                     Input = objectString,
                     MethodName = method,
-                    Timestamp = DateTime.UtcNow.ToString()
+                    Timestamp = DateTime.UtcNow
                 });
                 await db.SaveChangesAsync();
 

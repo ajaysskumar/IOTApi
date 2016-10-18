@@ -393,6 +393,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IoT.Common.Logging\IoT.Common.Logging.csproj">
+      <Project>{9635b882-aab3-4ca1-b27e-2480c043988f}</Project>
+      <Name>IoT.Common.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IoT.Common.Model\IoT.Common.Model.csproj">
       <Project>{c93b4edf-6472-4473-b437-02d4ec957633}</Project>
       <Name>IoT.Common.Model</Name>
