@@ -13,6 +13,7 @@ namespace IoT.Common.Model.Utility
         public string RelayGroupIpAddress { get; set; }
         public string RelayGroupDescription { get; set; }
         public string RelayGroupLocation { get; set; }
+        public string RelayGroupMac { get; set; }
 
         public virtual ICollection<Relay> Relays { get; set; }
 
@@ -23,7 +24,7 @@ namespace IoT.Common.Model.Utility
         public int Id { get; set; }
 
         [Required]
-        public string RelayName { get; set; }
+        public int RelayNumber { get; set; }
         public string RelayDescription { get; set; }
 
         public int RelayState { get; set; }
@@ -45,22 +46,20 @@ namespace IoT.Common.Model.Utility
         public string Status { get; set; }
         public int CurrentRelayStatus { get; set; }
 
-        public Relay Relay { get; set; }
+        public virtual Relay Relay { get; set; }
     }
 
     public class RequestLog
     {
         public int Id { get; set; }
         public Guid MsgId { get; set; }
-        //public int UserId { get; set; }
         public int RelayId { get; set; }
+        public string RelayGroupMac { get; set; }
         public string Status { get; set; }
         public int CurrentRelayStatus { get; set; }
         public DateTime RequestStartTime { get; set; }
         public DateTime RequestEndTime { get; set; }
-
-        public Relay Relay { get; set; }
-        //public ApplicationUser User { get; set; }
+        public virtual Relay Relay { get; set; }
 
     }
 
@@ -69,24 +68,8 @@ namespace IoT.Common.Model.Utility
         public int RequestId { get; set; }
         //public Guid MsgId { get; set; }
         //public int UserId { get; set; }
-        public string RelayName { get; set; }
+        public int RelayNumber { get; set; }
         public string RelayGroupIp { get; set; }
 
     }
-
-    //public class Message
-    //{
-
-    //    public Message()
-    //    {
-    //        this.MsgId = Guid.NewGuid();
-    //    }
-
-    //    public Guid MsgId { get; set; }
-    //    public int RelayId { get; set; }
-    //    public string Status { get; set; }
-    //    public int CurrentRelayStatus { get; set; }
-
-    //    public Relay Relay { get; set; }
-    //}
 }

@@ -2,3 +2,8 @@ C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\IoT.Common.Model
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\IoT.Common.Model.pdb
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.pdb
+C:\Users\Ajay\Source\Repos\IoTProject\IoT.Common.Model\bin\Release\IoT.Common.Model.dll
+C:\Users\Ajay\Source\Repos\IoTProject\IoT.Common.Model\bin\Release\IoT.Common.Model.pdb
+C:\Users\Ajay\Source\Repos\IoTProject\IoT.Common.Model\obj\Release\IoT.Common.Model.csprojResolveAssemblyReference.cache
+C:\Users\Ajay\Source\Repos\IoTProject\IoT.Common.Model\obj\Release\IoT.Common.Model.dll
+C:\Users\Ajay\Source\Repos\IoTProject\IoT.Common.Model\obj\Release\IoT.Common.Model.pdb

@@ -39,23 +39,34 @@ namespace IoTDemoApp.Droid
             button.Click += delegate {
                 try
                 {
+                    //ProgressDialog mDialog = new ProgressDialog(this);
+                    //mDialog.SetMessage("Loading data...");
+                    //mDialog.SetCancelable(false);
+                    //mDialog.Show();
+
+                    //Task.Run(() => {
                     if (button.Text == "Bulb ON")
                     {
 
-                        if (FetchWeather("http://192.168.100.186/socket1Off"))
-                        {
-                            button.Text = "Bulb OFF";
+                        if (FetchWeather("http://iotdemo.apexsoftworks.in/api/RequestApi?relayId=2&opCode="+0+"&msgId="+Guid.NewGuid()))
+                            {
+                                button.Text = "Bulb OFF";
+                            }
                         }
-                    }
-                    else
-                    {
-                        if (FetchWeather("http://192.168.100.186/socket1On"))
+                        else
                         {
-                            button.Text = "Bulb ON";
+                            if (FetchWeather("http://iotdemo.apexsoftworks.in/api/RequestApi?relayId=2&opCode=" + 1 + "&msgId=" + Guid.NewGuid()))
+                            {
+                                button.Text = "Bulb ON";
+                            }
+
+
                         }
-                        
-                        
-                    }
+                    //    //Your Logic Here.
+                    //    mDialog.Dismiss();
+                    //});
+
+                    
                 }
                 catch (Exception ex)
                 {
@@ -69,7 +80,8 @@ namespace IoTDemoApp.Droid
         {
             try
             {
-                var response = client.GetAsync(url).Result;
+                
+                var response = client.PostAsync(url, new StringContent("")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return true;

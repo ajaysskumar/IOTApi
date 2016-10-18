@@ -249,6 +249,8 @@
   <ItemGroup>
     <Content Include="Arduino\Device_Version1\RestClient.cpp" />
     <Content Include="Arduino\Device_Version1\RestClient.h" />
+    <Content Include="Arduino\NodeMCUPolling\RestClient.cpp" />
+    <Content Include="Arduino\NodeMCUPolling\RestClient.h" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -262,6 +264,7 @@
     <Content Include="Arduino\Wifi_DHT22_DeepSleep_Without_Battery\RestClient.h" />
     <Content Include="Arduino\Device_Version1\Device_Version1.ino" />
     <Content Include="Arduino\NodeMCUWebServer\NodeMCUWebServer.ino" />
+    <Content Include="Arduino\NodeMCUPolling\NodeMCUPolling.ino" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\iotdemo.apexsoftworks.in - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\publishLocal.pubxml" />

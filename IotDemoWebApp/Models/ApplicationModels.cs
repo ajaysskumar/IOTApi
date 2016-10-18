@@ -73,7 +73,7 @@ namespace IotDemoWebApp.Models
     //    public int Id { get; set; }
 
     //    [Required]
-    //    public string RelayName { get; set; }
+    //    public string RelayNumber { get; set; }
     //    public string RelayDescription { get; set; }
         
     //    public int RelayState { get; set; }

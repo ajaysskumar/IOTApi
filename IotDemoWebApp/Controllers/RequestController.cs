@@ -40,11 +40,31 @@ namespace IotDemoWebApp.Controllers
             RequestModel requestModel = new RequestModel {
                 RequestId = request.Id,
                 RelayGroupIp = request.Relay.RelayGroup.RelayGroupIpAddress,
-                RelayName = request.Relay.RelayName
+                RelayNumber = request.Relay.RelayNumber
             };
             //request.RelayGroup.Relays = null;
 
             return Ok(requestModel);
+        }
+
+        // GET: api/Request
+        [Route("api/getrelaygrouprequest")]
+        public IHttpActionResult GetRelayGroupRequest(string relayGroupMac)
+        {
+            RequestLog request = db.RequestLog.OrderBy(x => x.RequestStartTime).Where(x => x.Status == "Initiated" && x.RelayGroupMac==relayGroupMac).FirstOrDefault();
+
+            if (request==null)
+            {
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+
+            string requestString = string.Format("{0}-{1}-{2}",request.Relay.RelayNumber,request.CurrentRelayStatus,request.Id);
+
+            request.Status = RequestStatus.PickedUp;
+
+            db.SaveChanges();
+
+            return Ok(requestString);
         }
 
 
@@ -64,17 +84,12 @@ namespace IotDemoWebApp.Controllers
 
         // PUT: api/Request/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutRequestLog(int id, IoT.Common.Model.Utility.RequestLog requestLog)
+        public async Task<IHttpActionResult> PutRequestLog([FromUri]int id,int currentStatus)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            RequestLog requestLog = await db.RequestLog.FindAsync(id);
 
-            if (id != requestLog.Id)
-            {
-                return BadRequest();
-            }
+            requestLog.Status = RequestStatus.Completed;
+            requestLog.CurrentRelayStatus = currentStatus;
 
             db.Entry(requestLog).State = EntityState.Modified;
 
@@ -98,25 +113,25 @@ namespace IotDemoWebApp.Controllers
         }
 
         // POST: api/Request
-        [ResponseType(typeof(RequestLog))]
-        public async Task<IHttpActionResult> PostRequestLog([FromBody]Message message)
+        //[ResponseType(typeof(RequestLog))]
+        public async Task<IHttpActionResult> PostRequestLog([FromUri]int relayId,int opCode, string msgId)
         {
-            RequestLog requestLog = new RequestLog();
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var relay = db.Relay.Where(x => x.Id == relayId).FirstOrDefault();
 
-            requestLog.MsgId = message.MsgId;
-            requestLog.RelayId = 1;
-            requestLog.RequestStartTime = DateTime.UtcNow;
-            requestLog.RequestEndTime = DateTime.UtcNow;
-            requestLog.Status = "Initiated";
+            RequestLog requestLog = new RequestLog {
+                CurrentRelayStatus = opCode,
+                MsgId = Guid.Parse(msgId),
+                RelayId = relayId,
+                RelayGroupMac = relay.RelayGroup.RelayGroupMac,
+                RequestStartTime = DateTime.UtcNow,
+                RequestEndTime = DateTime.UtcNow,
+                Status = RequestStatus.Initiated
+            };
 
             db.RequestLog.Add(requestLog);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = requestLog.Id }, requestLog);
+            return Ok(requestLog.Id);
         }
 
         // DELETE: api/Request/5
@@ -148,5 +163,10 @@ namespace IotDemoWebApp.Controllers
         {
             return db.RequestLog.Count(e => e.Id == id) > 0;
         }
+
+        //private string returnResultString(IEnumerable<RequestLog> requests, int numberOfRelays)
+        //{
+
+        //}
     }
 }

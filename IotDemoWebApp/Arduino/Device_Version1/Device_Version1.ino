@@ -144,6 +144,8 @@ void wifiSetup()
 
 void loop()
 {
+  deviceMac = WiFi.macAddress();
+  Log("Device MAC "+deviceMac,1);
   Serial.println("Press Config button to go into config mode");
   if (digitalRead(buttonPin) == LOW) {
     wifiSetup();

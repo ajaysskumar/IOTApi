@@ -51,7 +51,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,RelayName,RelayDescription,RelayState,RelayGroupId")] Relay relay)
+        public async Task<ActionResult> Create([Bind(Include = "Id,RelayNumber,RelayDescription,RelayState,RelayGroupId")] Relay relay)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,RelayName,RelayDescription,RelayState,RelayGroupId")] Relay relay)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,RelayNumber,RelayDescription,RelayState,RelayGroupId")] Relay relay)
         {
             if (ModelState.IsValid)
             {

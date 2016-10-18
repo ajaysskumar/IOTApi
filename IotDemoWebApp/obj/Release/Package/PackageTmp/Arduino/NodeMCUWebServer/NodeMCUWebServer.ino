@@ -108,9 +108,9 @@ String Status(int relays[])
     //Serial.println(arrSize);
     
     if(digitalRead(relays[i])==LOW)
-    xmlString =String(xmlString) +String("<Relay><RelayName>Relay"+String(i+1)+"</RelayName><RelayStatus>CKT_CLOSE</RelayStatus></Relay>");
+    xmlString =String(xmlString) +String("<Relay><RelayNumber>Relay"+String(i+1)+"</RelayNumber><RelayStatus>CKT_CLOSE</RelayStatus></Relay>");
     else
-    xmlString =String(xmlString) +String("<Relay><RelayName>Relay"+String(i+1)+"</RelayName><RelayStatus>CKT_OPEN</RelayStatus></Relay>");
+    xmlString =String(xmlString) +String("<Relay><RelayNumber>Relay"+String(i+1)+"</RelayNumber><RelayStatus>CKT_OPEN</RelayStatus></Relay>");
   }
     return "<Relays>"+xmlString+"</Relays>";
 }

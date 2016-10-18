@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IotDemoWebApp.Models.RelayGroup>
+﻿@model IEnumerable<IoT.Common.Model.Utility.RelayGroup>
 
 @{
     ViewBag.Title = "Index";
@@ -20,6 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.RelayGroupLocation)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RelayGroupMac)
+        </th>
         <th></th>
     </tr>
 
@@ -33,6 +36,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.RelayGroupLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RelayGroupMac)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
