@@ -48,6 +48,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MqttClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -70,6 +71,10 @@
       <Project>{8714bc76-4234-4406-aecf-4d28dff98a1f}</Project>
       <Name>MqttLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logic\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="..\IoTDemoApp\IoTDemoApp.projitems" Label="Shared" Condition="Exists('..\IoTDemoApp\IoTDemoApp.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

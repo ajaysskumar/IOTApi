@@ -1,0 +1,4 @@
+IoTDemoApp.Droid.MainActivity, IoTDemoApp.Droid;md582638af4bd284d2f84aeff03fdef3466.MainActivity
+IoTDemoApp.Droid.MainActivity, IoTDemoApp.Droid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md582638af4bd284d2f84aeff03fdef3466.MainActivity
+IoTDemoApp.Droid.MainActivity;md582638af4bd284d2f84aeff03fdef3466.MainActivity
+iotdemoapp.droid.MainActivity;md582638af4bd284d2f84aeff03fdef3466.MainActivity
