@@ -65,6 +65,12 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MqttLib\MqttLib.csproj">
+      <Project>{8714bc76-4234-4406-aecf-4d28dff98a1f}</Project>
+      <Name>MqttLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\IoTDemoApp\IoTDemoApp.projitems" Label="Shared" Condition="Exists('..\IoTDemoApp\IoTDemoApp.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
 </Project>
