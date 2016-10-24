@@ -69,7 +69,7 @@ namespace IoTDemoApp.Droid
 
                         if (_mqttClient.ClientConnected)
                         {
-                            _mqttClient.PublishSomething("1", "1",msgId);
+                            _mqttClient.PublishSomething("1", flag==false?"1":"0",msgId);
                         }
 
                         while (_mqttClient.ClientConnected && _mqttClient.SubscriptionMessage != msgId)
