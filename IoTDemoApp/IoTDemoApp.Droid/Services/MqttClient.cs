@@ -1,5 +1,6 @@
 ﻿using MqttLib;
 using System;
+using IoTDemoApp;
 
 public class MqttClient
 {
@@ -35,6 +36,11 @@ public class MqttClient
         prog.Stop();
     }
 
+    public string SubscriptionMessage { get; set; }
+
+    public bool ClientConnected { get; set; }
+    //public bool ConnectionLost { get; set; }
+
     IMqtt _client;
 
     public MqttClient(string connectionString, string clientId, string username, string password)
@@ -49,53 +55,46 @@ public class MqttClient
         _client.PublishArrived += new PublishArrivedDelegate(client_PublishArrived);
     }
 
-    void Start()
+    public void Start()
     {
-        // Connect to broker in 'CleanStart' mode
-        //Console.WriteLine("Client connecting\n");
         _client.Connect(true);
     }
 
-    void Stop()
+    public void Stop()
     {
         if (_client.IsConnected)
         {
-            //Console.WriteLine("Client disconnecting\n");
             _client.Disconnect();
-            //Console.WriteLine("Client disconnected\n");
         }
     }
 
-    void client_Connected(object sender, EventArgs e)
+    public void client_Connected(object sender, EventArgs e)
     {
-        //Console.WriteLine("Client connected\n");
-        RegisterOurSubscriptions();
-        PublishSomething("1","1",Guid.NewGuid().ToString());
+        //RegisterOurSubscriptions();
+        RegisterOurSubscriptions("relayActionConfirmation");
+        //PublishSomething("1","1",Guid.NewGuid().ToString());
+        ClientConnected = true;
     }
 
-    void _client_ConnectionLost(object sender, EventArgs e)
+    public void _client_ConnectionLost(object sender, EventArgs e)
     {
-        //Console.WriteLine("Client connection lost\n");
+        ClientConnected = false;
+        throw new Exception(Helper.ClientDisconnected);
     }
 
-    void RegisterOurSubscriptions()
+    public void RegisterOurSubscriptions(string subscriptionTopic)
     {
-        //Console.WriteLine("Subscribing to mqttdotnet/subtest/#\n");
-        _client.Subscribe("mqttdotnet/subtest", QoS.BestEfforts);
+        _client.Subscribe(subscriptionTopic, QoS.BestEfforts);
     }
 
-    void PublishSomething(string relayIdString,string currentStatus, string msgId)
+    public void PublishSomething(string relayIdString,string currentStatus, string msgId,string publishTopic = "relayActionRequest")
     {
-        //Console.WriteLine("Publishing on mqttdotnet/pubtest\n");
-        _client.Publish("mqttdotnet/pubtest",string.Format("{0}=={1}=={2}",relayIdString,currentStatus,msgId), QoS.BestEfforts, false);
+        _client.Publish(publishTopic,string.Format("{0}={1}={2}",relayIdString,currentStatus,msgId), QoS.BestEfforts, false);
     }
 
-    bool client_PublishArrived(object sender, PublishArrivedArgs e)
+    public bool client_PublishArrived(object sender, PublishArrivedArgs e)
     {
-        //Console.WriteLine("Received Message");
-        //Console.WriteLine("Topic: " + e.Topic);
-        //Console.WriteLine("Payload: " + e.Payload);
-        //Console.WriteLine();
+        SubscriptionMessage = e.Payload.ToString();
         return true;
     }
 }

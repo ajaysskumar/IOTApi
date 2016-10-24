@@ -32,23 +32,27 @@ namespace IoTDemoApp.Droid
 
             button.Text = "Bulb ON";
 
-            TextView textStatus = FindViewById<TextView>(Resource.Id.textViewStatus);
+            TextView textStatus = FindViewById<TextView>(Resource.Id.txtSubMessage);
 
             client = new HttpClient();
 
             bool flag = false;
 
-            //MqttClient _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");           
+            string subscriptionMessage = "";
+
+            MqttClient _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");
+            _mqttClient.Start();
 
             button.Click += delegate
             {
-
                 if (flag)
                 {
                     button.Text = "Bulb ON";
+                    textStatus.Text = subscriptionMessage;
                 }
                 else
                 {
+                    textStatus.Text = subscriptionMessage;
                     button.Text = "Bulb OFF";
                 }
 
@@ -61,25 +65,25 @@ namespace IoTDemoApp.Droid
 
                     Task.Run(() =>
                     {
+                        string msgId = Guid.NewGuid().ToString();
+
+                        if (_mqttClient.ClientConnected)
+                        {
+                            _mqttClient.PublishSomething("1", "1",msgId);
+                        }
+
+                        while (_mqttClient.ClientConnected && _mqttClient.SubscriptionMessage != msgId)
+                        {
+                            subscriptionMessage = _mqttClient.SubscriptionMessage;
+                        }
+                        
                         if (button.Text == "Bulb ON")
                         {
-
-                            if (FetchWeather("http://iotdemo.apexsoftworks.in/api/RequestApi?relayId=2&opCode=" + 0 + "&msgId=" + Guid.NewGuid()))
-                            {
-                                //button.Text = "Bulb OFF";
-
-                                flag = false;
-                            }
+                            flag = false;
                         }
                         else
                         {
-                            if (FetchWeather("http://iotdemo.apexsoftworks.in/api/RequestApi?relayId=2&opCode=" + 1 + "&msgId=" + Guid.NewGuid()))
-                            {
-                                flag = true;
-                                //button.Text = "Bulb ON";
-                            }
-
-
+                            flag = true;
                         }
                         //Your Logic Here.
                         mDialog.Dismiss();

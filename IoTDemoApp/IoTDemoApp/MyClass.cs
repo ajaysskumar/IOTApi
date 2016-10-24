@@ -2,11 +2,9 @@
 
 namespace IoTDemoApp
 {
-	public class MyClass
+	public static class Helper
 	{
-		public MyClass ()
-		{
-		}
-	}
+        public static string ClientDisconnected = "Client Disconnected";
+    }
 }
 
