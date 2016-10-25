@@ -70,9 +70,7 @@ public class MqttClient
 
     public void client_Connected(object sender, EventArgs e)
     {
-        //RegisterOurSubscriptions();
-        RegisterOurSubscriptions("relayActionConfirmation");
-        //PublishSomething("1","1",Guid.NewGuid().ToString());
+        RegisterOurSubscriptions("relayActionConfirmation/18:FE:34:D4:7F:85");
         ClientConnected = true;
     }
 
@@ -87,7 +85,7 @@ public class MqttClient
         _client.Subscribe(subscriptionTopic, QoS.BestEfforts);
     }
 
-    public void PublishSomething(string relayIdString,string currentStatus, string msgId,string publishTopic = "relayActionRequest")
+    public void PublishSomething(string relayIdString,string currentStatus, string msgId,string publishTopic= "relayActionRequest/18:FE:34:D4:7F:85")
     {
         _client.Publish(publishTopic,string.Format("{0}={1}={2}",relayIdString,currentStatus,msgId), QoS.BestEfforts, false);
     }
