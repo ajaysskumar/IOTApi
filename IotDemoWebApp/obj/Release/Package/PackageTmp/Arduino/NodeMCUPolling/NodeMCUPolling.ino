@@ -102,7 +102,9 @@ void postData(RestClient restClient) {
     digitalWrite(Relay1, HIGH);
     Serial.println("Relay 1 Circuit Open");
     
-    url = "/api/RequestApi?id=" + String(thirdVal);
+    int changedStatus = secondVal==1?0:1; 
+    
+    url = "/api/RequestApi?id=" + String(thirdVal)+"&currentStatus="+String(changedStatus);
     Serial.println("Creat FINISH URL to post...\nURL = " + url);
     Serial.println("Posting data to service... Waiting for response");
 

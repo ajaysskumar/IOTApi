@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IoT.Common.Model.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,10 @@ namespace IotDemoWebApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapper.Mapper.Initialize(cfg=> {
+                cfg.CreateMap<Relay, RelayView>().ReverseMap();
+                cfg.CreateMap<RelayGroup, RelayGroupView>().ReverseMap();
+            });
         }
     }
 }

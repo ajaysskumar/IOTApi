@@ -7,3 +7,12 @@ C:\Users\Ajay\Source\Repos\IoTProject\IoT.Common.Model\bin\Release\IoT.Common.Mo
 C:\Users\Ajay\Source\Repos\IoTProject\IoT.Common.Model\obj\Release\IoT.Common.Model.csprojResolveAssemblyReference.cache
 C:\Users\Ajay\Source\Repos\IoTProject\IoT.Common.Model\obj\Release\IoT.Common.Model.dll
 C:\Users\Ajay\Source\Repos\IoTProject\IoT.Common.Model\obj\Release\IoT.Common.Model.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\IoT.Common.Model.dll.config
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\DelegateDecompiler.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\DelegateDecompiler.EntityFramework.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\EntityFramework.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\Mono.Reflection.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\EntityFramework.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.csprojResolveAssemblyReference.cache
