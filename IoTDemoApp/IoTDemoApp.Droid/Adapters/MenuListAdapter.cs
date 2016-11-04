@@ -15,7 +15,7 @@ using IoTDemoApp.Droid.Utility;
 
 namespace IoTDemoApp.Droid.Adapters
 {
-    public class MenuListAdapter : BaseAdapter
+    public class MenuListAdapter : BaseAdapter<RelayGroupModel>
     {
         private Activity _context;
         private List<RelayGroupModel> _relayGroups;
@@ -24,6 +24,15 @@ namespace IoTDemoApp.Droid.Adapters
             this._context = context;
             this._relayGroups = relayGroups;
         }
+
+        public override RelayGroupModel this[int position]
+        {
+            get
+            {
+                return _relayGroups[position];
+            }
+        }
+
         public override int Count
         {
             get
@@ -37,10 +46,10 @@ namespace IoTDemoApp.Droid.Adapters
             return _relayGroups[position];
         }
 
-        public override Java.Lang.Object GetItem(int position)
-        {
-            return null;
-        }
+        //public override Java.Lang.Object GetItem(int position)
+        //{
+        //    return null;
+        //}
 
         public override long GetItemId(int position)
         {
@@ -51,7 +60,7 @@ namespace IoTDemoApp.Droid.Adapters
         {
             var relayGroup = _relayGroups[position];
 
-            var imageBitmap = ImageHelper.GetImageBitmapFromUrl("http://www.yourenergyblog.com/wp-content/uploads/2013/01/incandescent-bulb1.png");
+            //var imageBitmap = ImageHelper.GetImageBitmapFromUrl("http://www.yourenergyblog.com/wp-content/uploads/2013/01/incandescent-bulb1.png");
 
             if (convertView == null)
             {
@@ -61,7 +70,7 @@ namespace IoTDemoApp.Droid.Adapters
             convertView.FindViewById<TextView>(Resource.Id.relayNameTextView).Text = relayGroup.RelayGroupDescription;
             convertView.FindViewById<TextView>(Resource.Id.shortDescriptionTextView).Text = relayGroup.RelayGroupMac;
             convertView.FindViewById<TextView>(Resource.Id.priceTextView).Text = relayGroup.RelayGroupLocation;
-            convertView.FindViewById<ImageView>(Resource.Id.relayImageView).SetImageBitmap(imageBitmap);
+            //convertView.FindViewById<ImageView>(Resource.Id.relayImageView).SetImageBitmap(imageBitmap);
 
             return convertView;
         }

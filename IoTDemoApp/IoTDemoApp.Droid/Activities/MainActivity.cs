@@ -46,7 +46,7 @@ namespace IoTDemoApp.Droid
             MqttClient _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");
             _mqttClient.Start();
 
-
+            
 
             swtich1.Click += delegate
             {

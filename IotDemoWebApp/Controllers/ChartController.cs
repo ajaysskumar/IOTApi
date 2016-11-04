@@ -20,6 +20,12 @@ namespace IotDemoWebApp.Controllers
             return View();
         }
 
+        [Route("gchart")]
+        public ActionResult GoogleChart()
+        {
+            return View("GChart");
+        }
+
         [Route("chartcon")]
         public ActionResult ChartCon()
         {

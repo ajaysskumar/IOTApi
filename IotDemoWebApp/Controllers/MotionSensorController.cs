@@ -108,25 +108,6 @@ namespace IotDemoWebApp.Controllers
                     Timestamp = item.Timestamp
                 });
             }
-
-            //var totalDataPoints = data.Count();
-
-            //int groupStrength = totalDataPoints / numberOfPoints;
-
-            //dataPointGroups = splitList(data, numberOfPoints);
-
-            //foreach (var list in dataPointGroups)
-            //{
-            //    int listCount = list.Count;
-            //    MotionSensorModel model = new MotionSensorModel();
-            //    model.MotionValue = list.Sum(x => x.MotionValue) / listCount;
-            //    model.MotionTime = list.Sum(x => x.MotionTime) / listCount;
-            //    double numOfElements = list.Count / 2;
-            //    model.Timestamp = list[Convert.ToInt32(Math.Floor(numOfElements))].Timestamp;
-
-            //    dataPoints.Add(model);
-            //}
-
             return data;
         }
 
@@ -157,24 +138,6 @@ namespace IotDemoWebApp.Controllers
                     Timestamp = item.Timestamp
                 });
             }
-
-            //var totalDataPoints = data.Count();
-
-            //int groupStrength = totalDataPoints / numberOfPoints;
-
-            //dataPointGroups = splitList(data, numberOfPoints);
-
-            //foreach (var list in dataPointGroups)
-            //{
-            //    int listCount = list.Count;
-            //    MotionSensorModel model = new MotionSensorModel();
-            //    model.MotionValue = list.Sum(x => x.MotionValue) / listCount;
-            //    model.MotionTime = list.Sum(x => x.MotionTime) / listCount;
-            //    double numOfElements = list.Count / 2;
-            //    model.Timestamp = list[Convert.ToInt32(Math.Floor(numOfElements))].Timestamp;
-
-            //    dataPoints.Add(model);
-            //}
 
             return data;
         }

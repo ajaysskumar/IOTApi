@@ -128,7 +128,8 @@ void reconnect() {
     if (client.connect(clientId.c_str(),"cbaeasea","KiYFQP0Q1gbe")) {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      client.publish("heartBeatCheck", "hello world");
+      
+      client.publish("heartBeatCheck", "Connected");
       // ... and resubscribe
       client.subscribe(subscriptionTopic.c_str());
     } else {
@@ -158,6 +159,9 @@ void loop() {
   if (!client.connected()) {
     reconnect();
   }
+  Serial.println("Publishing status...");
+  String statusXML = "<Relays><Relay><RelayNumber>1</RelayNumber>"+String(digitalRead(switch1))+"<RelayStatus></RelayStatus></Relay></Relays>";
+  client.publish("currentStatusCheck", statusXML.c_str());
   client.loop();
 }
 

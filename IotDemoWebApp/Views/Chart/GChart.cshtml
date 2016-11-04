@@ -1,0 +1,99 @@
+﻿
+@*@{
+    ViewBag.Title = "GChart";
+}
+
+<h2>GChart</h2>
+
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+
+      function load_page_data() {
+          $.ajax({
+              url: 'get_data.php',
+              data: { 'startdate': startdate, 'enddate': enddate },
+              async: false,
+              success: function (data) {
+                  if (data) {
+                      chart_data = $.parseJSON(data);
+                      google.load("visualization", "1", { packages: ["corechart"] });
+                      google.setOnLoadCallback(function () { drawChart(chart_data, "My Chart", "Data") })
+                  }
+              },
+          });
+      }
+    </script>
+</head>
+<body>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+</body>
+</html>*@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chart.js Redraw Example</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    @*<script type="text/javascript" charset="utf-8" src="chart.min.js"></script>*@
+    <script src="~/Scripts/chart/chart.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+      window.chartOptions = {
+        segmentShowStroke: false,
+        percentageInnerCutout: 75,
+        animation: false
+      };
+
+      var chartUpdate = function(value) {
+        console.log("Updating Chart: ", value);
+
+        // Replace the chart canvas element
+        $('#chart').replaceWith('<canvas id="chart" width="300" height="300"></canvas>');
+
+        // Draw the chart
+        var ctx = $('#chart').get(0).getContext("2d");
+        new Chart(ctx).Doughnut([
+          { value: value,
+            color: '#4FD134' },
+          { value: 100-value,
+            color: '#DDDDDD' }],
+          window.chartOptions);
+
+        // Schedule next chart update tick
+        setTimeout (function() { chartUpdate(value - 1); }, 1000);
+      }
+
+      $(document).ready(function() {
+        setTimeout (function() { chartUpdate(99); }, 1000);
+      })
+
+    </script>
+</head>
+<body>
+    <canvas id="chart" width="300" height="300"></canvas>
+</body>
+</html>

@@ -13,9 +13,6 @@ namespace IoTDemoApp.Model
         public string RelayGroupLocation { get; set; }
         public string RelayGroupMac { get; set; }
 
-        public static explicit operator RelayGroupModel(Java.Lang.Object v)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

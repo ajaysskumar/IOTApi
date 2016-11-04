@@ -35,7 +35,7 @@ public class MqttClient
 
     public void client_Connected(object sender, EventArgs e)
     {
-        RegisterOurSubscriptions("relayActionConfirmation/18:FE:34:D4:7F:85");
+        //RegisterOurSubscriptions("relayActionConfirmation/18:FE:34:D4:7F:85");
         ClientConnected = true;
     }
 

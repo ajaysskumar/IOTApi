@@ -49,15 +49,16 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\RelayListActivity.cs" />
+    <Compile Include="Activities\SwitchListActivity.cs" />
     <Compile Include="Adapters\MenuListAdapter.cs" />
-    <Compile Include="Activities\IoTMenuActivity.cs" />
+    <Compile Include="Activities\SwitchBoardActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Adapters\RelayListAdapter.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IoTServiceClient.cs" />
     <Compile Include="Services\MqttClient.cs" />
+    <Compile Include="Utility\Extentions.cs" />
     <Compile Include="Utility\ImageHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +91,10 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\IoT.Core.AppManager\IoT.Core.AppManager.csproj">
+      <Project>{a475454e-651b-4f5a-8ca3-cd0718ece8a7}</Project>
+      <Name>IoT.Core.AppManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MqttLib\MqttLib.csproj">
       <Project>{8714bc76-4234-4406-aecf-4d28dff98a1f}</Project>
       <Name>MqttLib</Name>

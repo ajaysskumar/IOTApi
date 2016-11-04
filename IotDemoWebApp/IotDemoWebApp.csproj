@@ -410,6 +410,7 @@
     <Content Include="Views\Relay\Details.cshtml" />
     <Content Include="Views\Relay\Edit.cshtml" />
     <Content Include="Views\Relay\Index.cshtml" />
+    <Content Include="Views\Chart\GChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
