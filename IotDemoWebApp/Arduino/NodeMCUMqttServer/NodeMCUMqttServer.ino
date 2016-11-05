@@ -33,13 +33,14 @@ const char* password = "apex-wifi";
 const char* mqtt_server = "m13.cloudmqtt.com";
 String publishTopic;
 String subscriptionTopic;
+String relayGroupStatusTopic;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 long lastMsg = 0;
 //char msg[50];
 int value = 0;
-int switch1 = 2;
+int switch1 = LED_BUILTIN;
 
 String clientId;
 
@@ -149,6 +150,7 @@ void setup() {
   
   publishTopic = "relayActionConfirmation/"+clientId;
   subscriptionTopic = "relayActionRequest/"+clientId;
+  relayGroupStatusTopic = "currentStatusCheck/"+clientId;
   setup_wifi();
   client.setServer(mqtt_server, 19334);
   client.setCallback(callback);
@@ -162,6 +164,8 @@ void loop() {
   Serial.println("Publishing status...");
   String statusXML = "<Relays><Relay><RelayNumber>1</RelayNumber>"+String(digitalRead(switch1))+"<RelayStatus></RelayStatus></Relay></Relays>";
   client.publish("currentStatusCheck", statusXML.c_str());
+  Serial.println("Published : "+relayGroupStatusTopic+String(statusXML));
+  //delay(200);
   client.loop();
 }
 

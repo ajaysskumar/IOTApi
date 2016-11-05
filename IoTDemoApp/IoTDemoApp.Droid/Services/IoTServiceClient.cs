@@ -17,9 +17,7 @@ namespace IoTDemoApp.Droid.Services
     {
         public IoTServiceClient()
         {
-
+            
         }
-
-        
     }
 }

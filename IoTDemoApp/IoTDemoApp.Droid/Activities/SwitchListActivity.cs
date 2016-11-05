@@ -13,6 +13,7 @@ using System.Net.Http;
 using IoTDemoApp.Model;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace IoTDemoApp.Droid.Activities
 {
@@ -31,8 +32,6 @@ namespace IoTDemoApp.Droid.Activities
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-
-            MqttClient _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");
 
             SetContentView(Resource.Layout.RelayMenu);
 
@@ -69,13 +68,18 @@ namespace IoTDemoApp.Droid.Activities
             var relay = _relays[e.Position];
 
             bool flag = false;
-            string switchStatus = "1";
+            string switchStatus;
 
-            string subscriptionMessage = "";
-            
+        string subscriptionMessage = "";
+
+            if (_mqttClient ==null)
+            {
+                _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");
+            }
             _mqttClient.Start();
 
             _mqttClient.RegisterOurSubscriptions("relayActionConfirmation/" +relayGroupMac);
+            _mqttClient.RegisterOurSubscriptions("relayActionConfirmation/" + relayGroupMac);
 
             try
                 {
@@ -90,6 +94,9 @@ namespace IoTDemoApp.Droid.Activities
                     mDialog.SetCancelable(false);
                     mDialog.Show();
 
+                int ackWaitTime = 0;
+                bool ackRecived = false;
+
                     await Task.Run(() =>
                     {
                         string msgId = Guid.NewGuid().ToString();
@@ -99,9 +106,20 @@ namespace IoTDemoApp.Droid.Activities
                             _mqttClient.PublishSomething(relay.RelayNumber.ToString(), switchStatus, msgId,string.Format("relayActionRequest/{0}",relayGroupMac));
                         }
 
-                        while (_mqttClient.ClientConnected && _mqttClient.SubscriptionMessage != msgId)
+                        while (_mqttClient.ClientConnected && _mqttClient.SubscriptionMessage != msgId &&ackWaitTime<10)
                         {
+                            ackWaitTime++;
+                            Thread.Sleep(1000);
                             subscriptionMessage = _mqttClient.SubscriptionMessage;
+                            if (_mqttClient.SubscriptionMessage == msgId)
+                            {
+                                ackRecived = true;
+                            }
+                        }
+
+                        if (true)
+                        {
+
                         }
                         //Your Logic Here.
                         mDialog.Dismiss();
@@ -114,6 +132,14 @@ namespace IoTDemoApp.Droid.Activities
                     //textStatus.Text = ex.Message;
                 }
 
+        }
+
+        private string getStatus(bool status)
+        {
+                if (status == true)
+                    return "1";
+                else
+                    return "0";
         }
     }
 }

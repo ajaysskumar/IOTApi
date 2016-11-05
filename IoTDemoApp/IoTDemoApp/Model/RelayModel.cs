@@ -9,7 +9,7 @@ namespace IoTDemoApp.Model
         public int Id { get; set; }
         public int RelayNumber { get; set; }
         public string RelayDescription { get; set; }
-        public int RelayState { get; set; }
+        public bool RelayState { get; set; }
         public int RelayGroupId { get; set; }
     }
 }

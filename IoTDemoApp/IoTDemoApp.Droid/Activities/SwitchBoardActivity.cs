@@ -76,7 +76,7 @@ namespace IoTDemoApp.Droid
             
             relayViewIntent.PutExtra("relayGroupId",relayGroup.Id);
 
-            relayViewIntent.PutExtra("relayGroupMac", Convert.ToInt32(relayGroup.RelayGroupMac));
+            relayViewIntent.PutExtra("relayGroupMac", relayGroup.RelayGroupMac);
 
             StartActivity(relayViewIntent);
         }
