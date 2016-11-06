@@ -24,6 +24,7 @@ namespace IoTDemoApp.Droid.Adapters
             this._context = context;
             this._relays = relays;
         }
+       
         public override int Count
         {
             get
@@ -51,8 +52,6 @@ namespace IoTDemoApp.Droid.Adapters
         {
             var relay = _relays[position];
 
-            var imageBitmap = ImageHelper.GetImageBitmapFromUrl("http://www.yourenergyblog.com/wp-content/uploads/2013/01/incandescent-bulb1.png");
-
             if (convertView == null)
             {
                 convertView = _context.LayoutInflater.Inflate(Resource.Layout.RelayListView, null);
@@ -60,8 +59,10 @@ namespace IoTDemoApp.Droid.Adapters
 
             convertView.FindViewById<TextView>(Resource.Id.shortDescriptionTextView).Text = relay.RelayDescription;
             convertView.FindViewById<TextView>(Resource.Id.relayNumberTextView).Text = relay.RelayNumber.ToString();
-            convertView.FindViewById<TextView>(Resource.Id.relayStatus).Text = relay.RelayState.ToString();
-            convertView.FindViewById<ImageView>(Resource.Id.relayImageView).SetImageBitmap(imageBitmap);
+            //convertView.FindViewById<TextView>(Resource.Id.relayStatus).Text = relay.RelayState.ToString();
+            //convertView.FindViewById<ImageView>(Resource.Id.relayImageView).SetImageBitmap(imageBitmap);
+            convertView.FindViewById<Switch>(Resource.Id.switchRelayStatus).Activated = !relay.RelayState;
+            convertView.FindViewById<Switch>(Resource.Id.switchRelayStatus).Toggle();
 
             return convertView;
         }

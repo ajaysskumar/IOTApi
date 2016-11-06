@@ -14,6 +14,9 @@ using IoTDemoApp.Model;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Threading;
+using IoT.Core.AppManager.Helpers;
+using Android.Database;
+using IoTDemoApp.Droid.Adapters;
 
 namespace IoTDemoApp.Droid.Activities
 {
@@ -26,6 +29,8 @@ namespace IoTDemoApp.Droid.Activities
         string relayGroupMac;
         HttpClient client;
         MqttClient _mqttClient;
+        ProgressBar relayListProgressBar;
+        RelayListAdapter adapter;
 
         protected async override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,7 +42,7 @@ namespace IoTDemoApp.Droid.Activities
 
             _relayListView = FindViewById<ListView>(Resource.Id.relayListView);
 
-            ProgressBar relayListProgressBar = FindViewById<ProgressBar>(Resource.Id.relayListProgressBar);
+            relayListProgressBar = FindViewById<ProgressBar>(Resource.Id.relayListProgressBar);
 
             relayListProgressBar.Visibility = ViewStates.Visible;
 
@@ -48,98 +53,110 @@ namespace IoTDemoApp.Droid.Activities
 
             client = new HttpClient();
 
-            var response = await client.GetAsync(new Uri("http://iotdemodev.apexsoftworks.in/api/RelayApi/"+ relayGroupId));
-            if (response.IsSuccessStatusCode)
+            RunOnUiThread(async () =>
             {
-                var content = await response.Content.ReadAsStringAsync();
-                _relays = JsonConvert.DeserializeObject<List<RelayModel>>(content);
-
-                _relayListView.Adapter = new Adapters.RelayListAdapter(this, _relays);
-
-                _relayListView.ItemClick += Item_OnClick;
-               
-            }
-            
-            relayListProgressBar.Visibility = ViewStates.Gone;
-        }
-
-        private async void Item_OnClick(object sender, AdapterView.ItemClickEventArgs e)
-        {
-            var relay = _relays[e.Position];
-
-            bool flag = false;
-            string switchStatus;
-
-        string subscriptionMessage = "";
-
-            if (_mqttClient ==null)
-            {
-                _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");
-            }
-            _mqttClient.Start();
-
-            _mqttClient.RegisterOurSubscriptions("relayActionConfirmation/" +relayGroupMac);
-            _mqttClient.RegisterOurSubscriptions("relayActionConfirmation/" + relayGroupMac);
-
-            try
+                try
                 {
-                    //flag = !swtich1.Checked;
-                    if (flag == true)
-                        switchStatus = "1";
-                    else
-                        switchStatus = "0";
-
-                    ProgressDialog mDialog = new ProgressDialog(this);
-                    mDialog.SetMessage("Loading data...");
-                    mDialog.SetCancelable(false);
-                    mDialog.Show();
-
-                int ackWaitTime = 0;
-                bool ackRecived = false;
-
-                    await Task.Run(() =>
+                    var response = await client.GetAsync(new Uri("http://iotdemodev.apexsoftworks.in/api/RelayApi/" + relayGroupId));
+                    if (response.IsSuccessStatusCode)
                     {
-                        string msgId = Guid.NewGuid().ToString();
+                        var content = await response.Content.ReadAsStringAsync();
+                        _relays = JsonConvert.DeserializeObject<List<RelayModel>>(content);
 
-                        if (_mqttClient.ClientConnected)
-                        {
-                            _mqttClient.PublishSomething(relay.RelayNumber.ToString(), switchStatus, msgId,string.Format("relayActionRequest/{0}",relayGroupMac));
-                        }
+                        adapter = new RelayListAdapter(this,_relays);
 
-                        while (_mqttClient.ClientConnected && _mqttClient.SubscriptionMessage != msgId &&ackWaitTime<10)
-                        {
-                            ackWaitTime++;
-                            Thread.Sleep(1000);
-                            subscriptionMessage = _mqttClient.SubscriptionMessage;
-                            if (_mqttClient.SubscriptionMessage == msgId)
-                            {
-                                ackRecived = true;
-                            }
-                        }
+                        adapter.RegisterDataSetObserver(new MyDatasetObserver());
 
-                        if (true)
-                        {
+                        _relayListView.Adapter = adapter;
 
-                        }
-                        //Your Logic Here.
-                        mDialog.Dismiss();
-                    });
+                        _relayListView.ItemClick += Item_OnClick;
 
+                    }
 
+                    relayListProgressBar.Visibility = ViewStates.Gone;
                 }
                 catch (Exception ex)
                 {
-                    //textStatus.Text = ex.Message;
+                    relayListProgressBar.Visibility = ViewStates.Gone;
+                    Toast.MakeText(this, String.Format("Error Occured : {0}", ex.Message), ToastLength.Short).Show();
                 }
 
+            });
+
+            
         }
 
-        private string getStatus(bool status)
+        private void Item_OnClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-                if (status == true)
-                    return "1";
-                else
-                    return "0";
+            relayListProgressBar.Visibility = ViewStates.Visible;
+            var relay = _relays[e.Position];
+
+            string subscriptionMessage = "";
+
+            if (_mqttClient == null)
+            {
+                _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");
+                _mqttClient.Start();
+            }
+            //_mqttClient.Start();
+            //if (!_mqttClient.ClientConnected)
+            //{
+                
+            //}
+
+            _mqttClient.RegisterOurSubscriptions("relayActionConfirmation/" + relayGroupMac);
+
+            try
+            {
+                string switchStatus = AppHelper.GetStatus(relay.RelayState);
+                int ackWaitTime = 0;
+                bool ackRecived = false;
+
+                string msgId = Guid.NewGuid().ToString();
+
+                if (_mqttClient.ClientConnected)
+                {
+                    _mqttClient.PublishSomething(relay.RelayNumber.ToString(), switchStatus, msgId, string.Format("relayActionRequest/{0}", relayGroupMac));
+
+                    while (_mqttClient.ClientConnected && _mqttClient.SubscriptionMessage != msgId && ackWaitTime < 50)
+                    {
+                        ackWaitTime++;
+                        Thread.Sleep(1000);
+                        subscriptionMessage = _mqttClient.SubscriptionMessage;
+                        if (subscriptionMessage == msgId)
+                        {
+                            ackRecived = true;
+                            _relays.Where(x=>x.Id == relay.Id).FirstOrDefault().RelayState = !relay.RelayState;
+                            relayListProgressBar.Visibility = ViewStates.Gone;
+                            adapter.NotifyDataSetChanged();
+                        }
+                    }
+                }
+
+                if (!ackRecived)
+                {
+                    relayListProgressBar.Visibility = ViewStates.Gone;
+                    Toast.MakeText(this,"Something went wrong. Please refresh cannot perform operation.",ToastLength.Short).Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                relayListProgressBar.Visibility = ViewStates.Gone;
+                Toast.MakeText(this, String.Format("Error Occured : {0}", ex.Message), ToastLength.Short).Show();
+            }
+        }
+    }
+
+    public class MyDatasetObserver: DataSetObserver
+    {
+        public MyDatasetObserver()
+        {
+              
+        }
+
+        public override void OnChanged()
+        {
+            base.OnChanged();
         }
     }
 }

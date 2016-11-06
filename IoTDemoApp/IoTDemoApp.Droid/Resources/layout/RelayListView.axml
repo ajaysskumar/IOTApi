@@ -4,48 +4,56 @@
     android:layout_height="wrap_content"
     android:padding="8dp"
     android:background="#f1e5c1"
-    android:orientation="horizontal">
-    <ImageView
-        android:id="@+id/relayImageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="5dp" />
-    <LinearLayout
-        android:orientation="vertical"
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants">
+  <ImageView
+      android:id="@+id/relayImageView"
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:padding="5dp" />
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingLeft="10dip">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dip">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dip">
-            <TextView
-                android:id="@+id/relayNumberTextView"
-                android:layout_width="200dp"
-                android:textSize="16dp"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:layout_alignParentLeft="true"
-                android:textStyle="bold"
-                android:gravity="left" />
-            <TextView
-                android:id="@+id/shortDescriptionTextView"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:gravity="left"
-                android:textSize="12dp"
-                android:textColor="@android:color/black"
-                android:layout_below="@+id/relayNumberTextView" />
-            <TextView
-                android:id="@+id/relayStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@android:color/black"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                android:gravity="right" />
-        </RelativeLayout>
-    </LinearLayout>
+      <TextView
+          android:id="@+id/relayNumberTextView"
+          android:layout_width="200dp"
+          android:textSize="16dp"
+          android:layout_height="wrap_content"
+          android:textColor="@android:color/black"
+          android:layout_alignParentLeft="true"
+          android:textStyle="bold"
+          android:gravity="left" />
+      <TextView
+          android:id="@+id/shortDescriptionTextView"
+          android:layout_width="200dp"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:gravity="left"
+          android:textSize="12dp"
+          android:textColor="@android:color/black"
+          android:layout_below="@+id/relayNumberTextView" />
+      <TextView
+          android:id="@+id/relayStatus"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:textColor="@android:color/black"
+          android:textSize="16dp"
+          android:textStyle="bold"
+          android:gravity="right" />
+      <Switch
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_alignParentRight="true"
+          android:id="@+id/switchRelayStatus" 
+          android:gravity="right"/>
+    </RelativeLayout>
+  </LinearLayout>
+
 </LinearLayout>

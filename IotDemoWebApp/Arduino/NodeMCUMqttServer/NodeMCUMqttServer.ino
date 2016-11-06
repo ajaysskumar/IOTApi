@@ -161,11 +161,11 @@ void loop() {
   if (!client.connected()) {
     reconnect();
   }
-  Serial.println("Publishing status...");
-  String statusXML = "<Relays><Relay><RelayNumber>1</RelayNumber>"+String(digitalRead(switch1))+"<RelayStatus></RelayStatus></Relay></Relays>";
-  client.publish("currentStatusCheck", statusXML.c_str());
-  Serial.println("Published : "+relayGroupStatusTopic+String(statusXML));
-  //delay(200);
+//  Serial.println("Publishing status...");
+//  String statusXML = "<Relays><Relay><RelayNumber>1</RelayNumber>"+String(digitalRead(switch1))+"<RelayStatus></RelayStatus></Relay></Relays>";
+//  client.publish("currentStatusCheck", statusXML.c_str());
+//  Serial.println("Published : "+relayGroupStatusTopic+String(statusXML));
+//  //delay(200);
   client.loop();
 }
 

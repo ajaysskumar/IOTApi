@@ -22,6 +22,7 @@ namespace IoTDemoApp.Droid
     {
         private ListView _menuListView;
         private List<RelayGroupModel> _relayGroups;
+        ProgressBar progressBar;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -29,7 +30,7 @@ namespace IoTDemoApp.Droid
             SetContentView(Resource.Layout.IoTMenuView);
 
             _menuListView = FindViewById<ListView>(Resource.Id.relayGroupListView);
-            ProgressBar progressBar = FindViewById<ProgressBar>(Resource.Id.mainMenuProgressBar);
+            progressBar = FindViewById<ProgressBar>(Resource.Id.mainMenuProgressBar);
 
             progressBar.Visibility = ViewStates.Visible;
             progressBar.Progress = 20;
@@ -60,8 +61,8 @@ namespace IoTDemoApp.Droid
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                progressBar.Visibility = ViewStates.Gone;
+                Toast.MakeText(this, String.Format("Error Occured : {0}", ex.Message), ToastLength.Short).Show();
             }
 
             
