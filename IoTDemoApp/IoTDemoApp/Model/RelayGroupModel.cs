@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Java.Lang;
+//using Java.Lang;
 
 namespace IoTDemoApp.Model
 {

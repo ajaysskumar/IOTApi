@@ -291,6 +291,8 @@
     <Content Include="Arduino\NodeMCUMqttServer\NodeMCUMqttServer.ino" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\iotdemo.apexsoftworks.in - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\iotdemodev - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\iotdemodev - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\IoTdemoDev.apexsoftworks.in - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Local-publish-profile.pubxml" />
     <None Include="Properties\PublishProfiles\publishLocal.pubxml" />

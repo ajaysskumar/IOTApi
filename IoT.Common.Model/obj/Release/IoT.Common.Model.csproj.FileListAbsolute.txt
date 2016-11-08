@@ -16,3 +16,7 @@ C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\Mono.Reflection.
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\EntityFramework.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\EntityFramework.SqlServer.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.csprojResolveAssemblyReference.cache
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\Microsoft.AspNet.Identity.Core.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\Microsoft.AspNet.Identity.Core.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\Microsoft.AspNet.Identity.EntityFramework.xml

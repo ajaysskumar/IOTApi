@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using IotDemoWebApp.Models;
+using IoT.Common.Model.Models;
 
 namespace IotDemoWebApp.Controllers
 {

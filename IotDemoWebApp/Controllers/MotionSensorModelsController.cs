@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IotDemoWebApp.Models;
+using IoT.Common.Model.Models;
 
 namespace IotDemoWebApp.Controllers
 {

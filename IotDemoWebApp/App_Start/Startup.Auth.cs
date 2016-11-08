@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using IotDemoWebApp.Models;
+using IoT.Common.Model.Models;
 //using OnActuate.Iot.Core.Logging;
 
 namespace IotDemoWebApp

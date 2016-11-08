@@ -16,6 +16,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using OnActuate.Iot.Core.Logging;
 using System.Text.RegularExpressions;
+using IoT.Common.Model.Models;
 
 namespace IotDemoWebApp.Controllers
 {

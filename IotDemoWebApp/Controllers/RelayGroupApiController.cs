@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using IoT.Common.Model.Utility;
 using IotDemoWebApp.Models;
 using AutoMapper;
+using IoT.Common.Model.Models;
 
 namespace IotDemoWebApp.Controllers
 {

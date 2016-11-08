@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IotDemoWebApp.Models;
+using IoT.Common.Model.Models;
 
 namespace IotDemoWebApp.Controllers
 {
