@@ -1,4 +1,5 @@
-﻿using IoT.Common.Model.Utility;
+﻿using IoT.Common.Model.Models;
+using IoT.Common.Model.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;

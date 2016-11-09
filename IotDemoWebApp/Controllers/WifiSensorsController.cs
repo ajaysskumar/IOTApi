@@ -21,7 +21,7 @@ namespace IotDemoWebApp.Controllers
         // GET: api/WifiSensors
         public IQueryable<WifiSensor> GetWifiSensors()
         {
-            return db.WifiSensor;
+            return db.WifiSensor.Where(x=>x.IsActive);
         }
 
         // GET: api/WifiSensors/5

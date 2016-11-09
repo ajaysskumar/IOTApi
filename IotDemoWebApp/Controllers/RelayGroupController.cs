@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using IotDemoWebApp.Models;
-using IoT.Common.Model.Utility;
 using IoT.Common.Model.Models;
 
 namespace IotDemoWebApp.Controllers
@@ -49,7 +47,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,RelayGroupIpAddress,RelayGroupDescription,RelayGroupLocation,RelayGroupMac")] RelayGroup relayGroup)
+        public async Task<ActionResult> Create([Bind(Include = "Id,RelayGroupIpAddress,RelayGroupDescription,RelayGroupLocation,RelayGroupMac,IsActive")] RelayGroup relayGroup)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +79,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,RelayGroupIpAddress,RelayGroupDescription,RelayGroupLocation,RelayGroupMac")] RelayGroup relayGroup)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,RelayGroupIpAddress,RelayGroupDescription,RelayGroupLocation,RelayGroupMac,IsActive")] RelayGroup relayGroup)
         {
             if (ModelState.IsValid)
             {

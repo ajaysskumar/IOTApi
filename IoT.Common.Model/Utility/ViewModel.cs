@@ -25,7 +25,7 @@ namespace IoT.Common.Model.Utility
         public bool RelayState { get; set; }
         public int RelayGroupId { get; set; }
 
-        private Relay _relay;
+        //private Relay _relay;
         
     }
 }

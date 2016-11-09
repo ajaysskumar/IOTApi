@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using IotDemoWebApp.Models;
 using IoT.Common.Model.Models;
 
 namespace IotDemoWebApp.Controllers
@@ -48,7 +47,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,DeviceName,OperationFrequecy")] WifiSensor wifiSensor)
+        public async Task<ActionResult> Create([Bind(Include = "Id,DeviceName,OperationFrequecy,IsActive")] WifiSensor wifiSensor)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +79,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,DeviceName,OperationFrequecy")] WifiSensor wifiSensor)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,DeviceName,OperationFrequecy,IsActive")] WifiSensor wifiSensor)
         {
             if (ModelState.IsValid)
             {
