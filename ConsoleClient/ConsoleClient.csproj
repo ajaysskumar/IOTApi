@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,8 +52,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IoT.Common.Model\IoT.Common.Model.csproj">
+      <Project>{C93B4EDF-6472-4473-B437-02D4EC957633}</Project>
+      <Name>IoT.Common.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IoT.Core.Email\IoT.Core.Email.csproj">
+      <Project>{0f84cc1f-bf4d-424c-9b20-3ad948e69fda}</Project>
+      <Name>IoT.Core.Email</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IoTOperations\IoTOperations.csproj">
       <Project>{c2ad95bf-c1ed-47fb-af8b-1cdd3cd9d267}</Project>
       <Name>IoTOperations</Name>

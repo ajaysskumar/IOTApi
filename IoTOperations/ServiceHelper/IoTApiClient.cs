@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using System.IO;
 using IoT.Common.Model.Utility;
 using Newtonsoft.Json;
+using IoT.Common.Model.Models;
 
 namespace IoTOperations.ServiceHelper
 {
@@ -84,6 +85,24 @@ namespace IoTOperations.ServiceHelper
             }
 
             else throw new Exception("Request Failed");
+        }
+
+        public async Task< List<MotionSensor>> GetTemperaturePoints(int timespan)
+        {
+            List<MotionSensor> resultingMessage = new List<MotionSensor>();
+            var response = await httpClient.GetAsync(string.Format("http://iotdemo.apexsoftworks.in/api/gettopdatapoints?top={0}&sensorId={1}",timespan, "18FE34D47A8F"));
+            var contents = response.Content.ReadAsStringAsync().Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+
+                resultingMessage = JsonConvert.DeserializeObject<List<MotionSensor>>(contents);
+                //return resultingMessage;
+
+            }
+            else throw new Exception("Request Failed");
+
+            return resultingMessage;
         }
 
     }

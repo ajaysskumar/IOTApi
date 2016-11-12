@@ -41,7 +41,7 @@ namespace IoTDemoApp.Droid
 
             try
             {
-                var response = await client.GetAsync(new Uri("http://iotdemodev.apexsoftworks.in/api/RelayGroupApi"));
+                var response = await client.GetAsync(new Uri("http://iotdemo.apexsoftworks.in/api/RelayGroupApi"));
 
                 progressBar.Progress = 50;
                 if (response.IsSuccessStatusCode)

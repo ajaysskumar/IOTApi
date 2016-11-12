@@ -1,4 +1,6 @@
-﻿using IoT.Common.Model.Utility;
+﻿using IoT.Common.Model.Models;
+using IoT.Common.Model.Utility;
+using IoT.Core.Email;
 using IoTOperations.Sensors;
 using IoTOperations.ServiceHelper;
 using System;
@@ -57,12 +59,17 @@ namespace IoTSensorPolling
         {
             client = new IoTApiClient("http://iotdemo.apexsoftworks.in");
 
-            RequestModel request = client.GetRequestToProcess("/api/requestToProcess").Result;
+            List<MotionSensor> temperatureData = client.GetTemperaturePoints(1).Result;
 
-            client = new IoTApiClient("http://192.168.100.186");
+            decimal currentTemperature = temperatureData.Take(10).Select(x => x.MotionValue).Sum(x => decimal.Parse(x))/10;
 
-            //List<IoTOperations.Sensors.Relay> relays = client.GetRelayStatus().Result;
-            client.ToggleSwitch();
+            if (currentTemperature < 28)
+            {
+                EmailClient client = new EmailClient();
+                client.SendEmail(currentTemperature);
+            }
+
+            //client.ToggleSwitch();
         }
     }
 }

@@ -1,0 +1,13 @@
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\bin\Debug\IoT.Core.AppManager.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\bin\Debug\IoT.Core.AppManager.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\obj\Debug\IoT.Core.AppManager.csprojResolveAssemblyReference.cache
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\obj\Debug\IoT.Core.AppManager.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\obj\Debug\IoT.Core.AppManager.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\obj\Debug\IoT.Core.AppManager.dll.mdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\bin\Debug\IoT.Core.AppManager.dll.mdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\obj\Debug\IoT.Core.AppManager.dll.mdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\bin\Debug\IoT.Core.AppManager.dll.mdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\obj\Debug\IoT.Core.AppManager.dll.mdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\bin\Debug\IoT.Core.AppManager.dll.mdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\obj\Debug\IoT.Core.AppManager.dll.mdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\bin\Debug\IoT.Core.AppManager.dll.mdb

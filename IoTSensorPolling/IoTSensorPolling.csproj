@@ -79,6 +79,10 @@
       <Project>{c93b4edf-6472-4473-b437-02d4ec957633}</Project>
       <Name>IoT.Common.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IoT.Core.Email\IoT.Core.Email.csproj">
+      <Project>{0F84CC1F-BF4D-424C-9B20-3AD948E69FDA}</Project>
+      <Name>IoT.Core.Email</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IoTOperations\IoTOperations.csproj">
       <Project>{c2ad95bf-c1ed-47fb-af8b-1cdd3cd9d267}</Project>
       <Name>IoTOperations</Name>
