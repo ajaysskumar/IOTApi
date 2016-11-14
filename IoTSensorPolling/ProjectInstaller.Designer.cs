@@ -41,7 +41,7 @@
             // 
             this.serviceInstaller1.Description = "IoTPolling";
             this.serviceInstaller1.DisplayName = "IoTPollingService";
-            this.serviceInstaller1.ServiceName = "Service1";
+            this.serviceInstaller1.ServiceName = "IoTPollService";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller

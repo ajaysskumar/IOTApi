@@ -256,6 +256,7 @@
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\SensorsController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
+    <Compile Include="Controllers\SysConfigController.cs" />
     <Compile Include="Controllers\WifiSensorsController.cs" />
     <Compile Include="Controllers\WifiSettingsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -394,11 +395,6 @@
     <Content Include="Views\MotionSensorModels\Index.cshtml" />
     <Content Include="Views\Chart\Chart.cshtml" />
     <Content Include="Views\Chart\Index.cshtml" />
-    <Content Include="Views\Admin\Create.cshtml" />
-    <Content Include="Views\Admin\Delete.cshtml" />
-    <Content Include="Views\Admin\Details.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Chart\ChartCon.cshtml" />
     <Content Include="Views\Relay\Create.cshtml" />
     <Content Include="Views\Relay\Delete.cshtml" />
@@ -416,6 +412,16 @@
     <Content Include="Views\WifiSettings\Details.cshtml" />
     <Content Include="Views\WifiSettings\Edit.cshtml" />
     <Content Include="Views\WifiSettings\Index.cshtml" />
+    <Content Include="Views\SysConfig\Create.cshtml" />
+    <Content Include="Views\SysConfig\Delete.cshtml" />
+    <Content Include="Views\SysConfig\Details.cshtml" />
+    <Content Include="Views\SysConfig\Edit.cshtml" />
+    <Content Include="Views\SysConfig\Index.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\Admin\Details.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

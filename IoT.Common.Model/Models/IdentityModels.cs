@@ -43,5 +43,7 @@ namespace IoT.Common.Model.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<IoT.Common.Model.Models.SystemConfiguration> SystemConfiguration { get; set; }
     }
 }

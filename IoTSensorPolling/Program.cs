@@ -17,7 +17,7 @@ namespace IoTSensorPolling
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new IoTPollService()
             };
             ServiceBase.Run(ServicesToRun);
         }

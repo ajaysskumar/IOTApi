@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using IotDemoWebApp.Models;
 using IoT.Common.Model.Models;
 
 namespace IotDemoWebApp.Controllers
@@ -19,7 +18,8 @@ namespace IotDemoWebApp.Controllers
         // GET: Admin
         public async Task<ActionResult> Index()
         {
-            return View(await db.Admin.ToListAsync());
+            var admin = db.Admin.Include(a => a.Sensor);
+            return View(await admin.ToListAsync());
         }
 
         // GET: Admin/Details/5
@@ -40,6 +40,7 @@ namespace IotDemoWebApp.Controllers
         // GET: Admin/Create
         public ActionResult Create()
         {
+            ViewBag.SensorId = new SelectList(db.WifiSensor, "Id", "DeviceName");
             return View();
         }
 
@@ -48,7 +49,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Mobile,ShouldRecieve,Threshold")] Admin admin)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Mobile,Email,ShouldRecieve,Threshold,SensorId")] Admin admin)
         {
             if (ModelState.IsValid)
             {
@@ -57,6 +58,7 @@ namespace IotDemoWebApp.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.SensorId = new SelectList(db.WifiSensor, "Id", "DeviceName", admin.SensorId);
             return View(admin);
         }
 
@@ -72,6 +74,7 @@ namespace IotDemoWebApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.SensorId = new SelectList(db.WifiSensor, "Id", "DeviceName", admin.SensorId);
             return View(admin);
         }
 
@@ -80,7 +83,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Mobile,ShouldRecieve,Threshold")] Admin admin)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Mobile,Email,ShouldRecieve,Threshold,SensorId")] Admin admin)
         {
             if (ModelState.IsValid)
             {
@@ -88,6 +91,7 @@ namespace IotDemoWebApp.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.SensorId = new SelectList(db.WifiSensor, "Id", "DeviceName", admin.SensorId);
             return View(admin);
         }
 

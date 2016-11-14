@@ -56,9 +56,15 @@ namespace IoT.Common.Model.Models
         public int Id { get; set; }
         public String Name { get; set; }
         public String Mobile { get; set; }
+
+        [EmailAddress]
+        public string Email { get; set; }
         public bool ShouldRecieve { get; set; }
         public decimal Threshold { get; set; }
-        public DateTime LastSmsRecievedTime { get; set; }
+        public String SensorId { get; set; }
+        //public DateTime LastSmsRecievedTime { get; set; }
+
+        public virtual WifiSensor Sensor { get; set; }
 
     }
 
@@ -129,5 +135,15 @@ namespace IoT.Common.Model.Models
         public int RelayNumber { get; set; }
         public string RelayGroupIp { get; set; }
 
+    }
+
+    public class SystemConfiguration
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string Key { get; set; }
+        [Required]
+        public string Value { get; set; }
     }
 }

@@ -12,15 +12,15 @@ namespace IoT.Core.Email
 {
     public class EmailClient
     {
-        public void SendEmail(decimal currentTemperature)
+        public void SendEmail(decimal currentTemperature, decimal currentHumidity, int timeInMinutes,string emailAddress,string Name)
         {
 
 
             var fromAddress = new MailAddress("ajay.a338@gmail.com", "Ajay kumar");
-            var toAddress = new MailAddress("kingajay007@gmail.com", "Ajay kumar");
+            var toAddress = new MailAddress(emailAddress, Name);
             string fromPassword = Encoding.UTF8.GetString(Convert.FromBase64String("Z2l2ZSBtZSAkIGFnYWlu")); ;
-            string subject = "Test email";
-            string body = String.Format("Current teperature is {0}",currentTemperature) ;
+            string subject = "Temperature Alert";
+            string body = String.Format("Hello {0}, \nCurrent teperature is {1} degree celcius and current humidity is {2} percent \nData recorded for last {3} minutes",Name,currentTemperature,currentHumidity,timeInMinutes) ;
 
             var smtp = new SmtpClient
             {

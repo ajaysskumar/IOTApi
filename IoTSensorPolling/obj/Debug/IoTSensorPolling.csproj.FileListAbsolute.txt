@@ -1,0 +1,7 @@
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\EntityFramework.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoT.Common.Model.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoT.Core.Email.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll

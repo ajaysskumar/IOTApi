@@ -33,11 +33,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -50,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PollModel\EmailMappingModel.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -83,9 +101,25 @@
       <Project>{0F84CC1F-BF4D-424C-9B20-3AD948E69FDA}</Project>
       <Name>IoT.Core.Email</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IoT.Core.Sms\IoT.Core.Sms.csproj">
+      <Project>{6549c097-3316-424b-a639-533ae8ffb668}</Project>
+      <Name>IoT.Core.Sms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IoTOperations\IoTOperations.csproj">
       <Project>{c2ad95bf-c1ed-47fb-af8b-1cdd3cd9d267}</Project>
       <Name>IoTOperations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MqttClient\MqttClient.csproj">
+      <Project>{b29b56fc-1588-4cfd-8152-87aedcb68ae5}</Project>
+      <Name>MqttClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MqttLib\MqttLib.csproj">
+      <Project>{8714bc76-4234-4406-aecf-4d28dff98a1f}</Project>
+      <Name>MqttLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MqttPublisher\MqttPublisher.csproj">
+      <Project>{26f354df-f3cb-4a5e-9eb1-73d1195ec997}</Project>
+      <Name>MqttPublisher</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

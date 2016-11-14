@@ -41,7 +41,7 @@ namespace IotDemoWebApp.Controllers
             int timeframe = top * 60 * 60;
             int numberOfPoints = top*60 / 12;
 
-            DateTime currenteDate = DateTime.UtcNow.AddHours(-top);
+            DateTime currenteDate = DateTime.UtcNow.AddSeconds(-top);
 
             List<MotionSensor> data = new List<MotionSensor>();
 

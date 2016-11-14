@@ -70,21 +70,6 @@ void setup()
   Serial.begin(115200);
 }
 
-int checkNumber(String s)
-{
-  for ( int i = 0 ; i < s.length(); i++)
-  {
-    //int num = i.toInt();
-    if (!isdigit(i))
-    {
-      return 0;
-
-    }
-  }
-
-  return 1;
-}
-
 void postData(RestClient restClient) {
 
   restClient.setConnectionTimeout(20);
@@ -157,7 +142,8 @@ void loop()
       if (count == maxTryCountToConnectWifi)
       {
         Serial.println("ESP8266 will retry connecting after 60 seconds");
-        ESP.deepSleep(sleepTimeHotspotUnavailable * 1000000, RF_DEFAULT);
+        //ESP.deepSleep(sleepTimeHotspotUnavailable * 1000000, RF_DEFAULT);
+        delay(5* 1000);
       }
       if (digitalRead(wifiLedDisconnectPin) != HIGH && count > wifiConnectingCountStart) {
         Serial.println("Wifi Disconnect LED should blink");
@@ -199,9 +185,9 @@ void loop()
       delay(2000);
       digitalWrite(configLedPin, LOW);
       Serial.println("ESP8266 will retry connecting to site after 60 seconds");
-      ESP.deepSleep(sleepTimeHotspotUnavailable * 1000000, RF_DEFAULT);
-
-      return;
+      //ESP.deepSleep(sleepTimeHotspotUnavailable * 1000000, RF_DEFAULT);
+      delay(2000);
+      //return;
     }
 
     //temperature = getTemperature(sensorPin);
@@ -219,20 +205,6 @@ void loop()
       delay(1000);
     }
 
-    //  float temp[] ;
-    //  float humid[];
-    //
-    //  for(int i=0;i<10;i++)
-    //  {
-    //    h = dht.readHumidity();
-    //    t = dht.readTemperature();
-    //    if(!isnan(h) || !isnan(t)){
-    //      temp[i] = h;
-    //      humid[i] = t;
-    //      delay(500);
-    //     }
-    //  }
-
     Serial.print("Humidity: ");
     Serial.print(humidity);
     Serial.print(" %\t");
@@ -243,7 +215,8 @@ void loop()
     // Check if any reads failed and exit early (to try again).
     if (isnan(humidity) || isnan(temperature)) {
       Serial.println("Failed to read from DHT sensor!... ESP will try reconnecting after 60 seconds");
-      ESP.deepSleep(sensorOutputNotAvailbaleTimeout * 1000000, RF_DEFAULT);
+      //ESP.deepSleep(sensorOutputNotAvailbaleTimeout * 1000000, RF_DEFAULT);
+      delay(2000);
     }
 
     if (temperature > 33.00)
@@ -261,7 +234,8 @@ void loop()
     digitalWrite(greenLed, LOW);
     Serial.println("going to sleep");
 
-    ESP.deepSleep(dataPostFrequency * 1000000, RF_DEFAULT);
+    //ESP.deepSleep(dataPostFrequency * 1000000, RF_DEFAULT);
+    delay(1000 *dataPostFrequency);
     //delay(dataPostFrequency*1000);
     // Read all the lines of the reply from server and print them to Serial
     //  while (client.available()) {
