@@ -16,25 +16,29 @@ namespace IoT.Core.Email
         {
 
 
-            var fromAddress = new MailAddress("ajay.a338@gmail.com", "Ajay kumar");
+            //var fromAddress = new MailAddress("ajay.a338@gmail.com", "Ajay kumar");
+            var fromAddress = new MailAddress("iotdemo@apexsoftworks.in", "Ajay kumar");
             var toAddress = new MailAddress(emailAddress, Name);
-            string fromPassword = Encoding.UTF8.GetString(Convert.FromBase64String("Z2l2ZSBtZSAkIGFnYWlu")); ;
+            //string fromPassword = Encoding.UTF8.GetString(Convert.FromBase64String("Z2l2ZSBtZSAkIGFnYWlu"));
+            //string fromPassword = "Kingajay007@gmail.com";
             string subject = "Temperature Alert";
-            string body = String.Format("Hello {0}, \nCurrent teperature is {1} degree celcius and current humidity is {2} percent \nData recorded for last {3} minutes",Name,currentTemperature,currentHumidity,timeInMinutes) ;
+            string body = String.Format("Hello {0}, \nCurrent teperature is {1} degree celcius and current humidity is {2} percent \nData recorded for last {3} minutes",Name,currentTemperature,currentHumidity,timeInMinutes/60) ;
 
             var smtp = new SmtpClient
             {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                //Host = "smtpout.asia.secureserver.net",
+                Host = "relay-hosting.secureserver.net",
+                //Host = "smtp.gmail.com",
+                Port = 25,
+                //EnableSsl = false,
+                //DeliveryMethod = SmtpDeliveryMethod.Network,
+                //UseDefaultCredentials = false,
+                //Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
             };
 
-            ServicePointManager.ServerCertificateValidationCallback =
-    delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-    { return true; };
+    //        ServicePointManager.ServerCertificateValidationCallback =
+    //delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+    //{ return true; };
 
             using (var message = new MailMessage(fromAddress, toAddress)
             {

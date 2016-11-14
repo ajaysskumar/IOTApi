@@ -249,6 +249,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MotionSensorController.cs" />
     <Compile Include="Controllers\MotionSensorModelsController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\RelayApiController.cs" />
     <Compile Include="Controllers\RelayController.cs" />
     <Compile Include="Controllers\RelayGroupApiController.cs" />
@@ -441,6 +442,10 @@
     <ProjectReference Include="..\IoT.Common.Model\IoT.Common.Model.csproj">
       <Project>{c93b4edf-6472-4473-b437-02d4ec957633}</Project>
       <Name>IoT.Common.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IoT.Core.Email\IoT.Core.Email.csproj">
+      <Project>{0F84CC1F-BF4D-424C-9B20-3AD948E69FDA}</Project>
+      <Name>IoT.Core.Email</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

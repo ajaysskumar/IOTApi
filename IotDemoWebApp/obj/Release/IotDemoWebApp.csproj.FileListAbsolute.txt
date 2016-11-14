@@ -330,3 +330,13 @@ C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Common.Logging.pdb
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\AutoMapper.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\AutoMapper.EF6.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Windows.winmd
+C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\AutoMapper.dll
+C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\AutoMapper.EF6.dll
+C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\DelegateDecompiler.dll
+C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\DelegateDecompiler.EntityFramework.dll
+C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\IoT.Core.Email.dll
+C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\Mono.Reflection.dll
+C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\Windows.winmd
+C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\IoT.Core.Email.pdb
+C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\AutoMapper.xml
+C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\AutoMapper.EF6.xml
