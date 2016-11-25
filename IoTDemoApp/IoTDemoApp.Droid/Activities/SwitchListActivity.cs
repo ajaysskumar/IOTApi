@@ -116,7 +116,7 @@ namespace IoTDemoApp.Droid.Activities
 
                 if (_mqttClient.ClientConnected)
                 {
-                    _mqttClient.PublishSomething(relay.RelayNumber.ToString(), switchStatus, msgId, string.Format("relayActionRequest/{0}", relayGroupMac));
+                    _mqttClient.PublishSomething(AppHelper.GetNodeMCUPin( relay.RelayNumber).ToString(), switchStatus, msgId, string.Format("relayActionRequest/{0}", relayGroupMac));
 
                     while (_mqttClient.ClientConnected && _mqttClient.SubscriptionMessage != msgId && ackWaitTime < 50)
                     {

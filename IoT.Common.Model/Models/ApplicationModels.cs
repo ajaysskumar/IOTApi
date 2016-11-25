@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,10 +44,12 @@ namespace IoT.Common.Model.Models
         public string InstanceName { get; set; }
         public DateTime Timestamp { get; set; }
         public int Level { get; set; }
-        public Guid MsgId { get; set; }
+        //[NotMapped]
+        public string MsgId { get; set; }
         public string Message { get; set; }
         //public string Timestamp { get; set; }
         public string MethodName { get; set; }
+        public string MyProperty { get; set; }
         public string Error { get; set; }
         public string Input { get; set; }
     }

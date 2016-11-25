@@ -19,15 +19,11 @@ C:\Users\Ajay\Source\Repos\IoTProject\IoT.Common.Logging\obj\Release\IoT.Common.
 C:\Users\Ajay\Source\Repos\IoTProject\IoT.Common.Logging\obj\Release\IoT.Common.Logging.pdb
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\IoT.Common.Logging.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\IoT.Common.Logging.pdb
-C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
-C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Database.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Newtonsoft.Json.dll
-C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.xml
-C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Database.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.xml
@@ -36,3 +32,11 @@ C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Newtonsoft.Jso
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\obj\Release\IoT.Common.Logging.csprojResolveAssemblyReference.cache
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\obj\Release\IoT.Common.Logging.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\obj\Release\IoT.Common.Logging.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\IoT.Common.Model.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.AspNet.Identity.Core.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\EntityFramework.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\IoT.Common.Model.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\Microsoft.AspNet.Identity.Core.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Logging\bin\Release\EntityFramework.xml

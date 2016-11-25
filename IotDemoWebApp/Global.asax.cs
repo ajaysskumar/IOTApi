@@ -1,4 +1,5 @@
-﻿using IoT.Common.Model.Models;
+﻿using IoT.Common.Logging;
+using IoT.Common.Model.Models;
 using IoT.Common.Model.Utility;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,15 @@ namespace IotDemoWebApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AutoMapper.Mapper.Initialize(cfg=> {
+            //Initialize logging
+            LoggingManager.InitializeLogger("IoTEventSource", System.Diagnostics.Tracing.EventLevel.LogAlways);
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
                 cfg.CreateMap<Relay, RelayView>().ReverseMap();
                 cfg.CreateMap<RelayGroup, RelayGroupView>().ReverseMap();
             });
+
+            IotAppEventSource.Log.Info(Guid.NewGuid().ToString(), "Application Started");
         }
     }
 }

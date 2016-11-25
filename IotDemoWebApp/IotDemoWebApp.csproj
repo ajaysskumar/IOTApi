@@ -300,6 +300,8 @@
     <None Include="Properties\PublishProfiles\iotdemodev - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\IoTdemoDev.apexsoftworks.in - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Local-publish-profile.pubxml" />
+    <None Include="Properties\PublishProfiles\onactuateiot - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\onactuateiot - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\publishLocal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />

@@ -13,13 +13,13 @@ namespace IoT.Common.Logging
     {
         public static object ConfigurationManager { get; private set; }
 
-        public static void InitializeLogger(string instanceName, System.Diagnostics.Tracing.EventLevel logEventLevel)
+        public static void InitializeLogger(string instanceName, EventLevel logEventLevel)
         {
             var logListener = new ObservableEventListener();
-            logListener.EnableEvents(IotAppEventSource.Log, logEventLevel, EventKeywords.None);
+            logListener.EnableEvents(IotAppEventSource.Log, logEventLevel,Keywords.All);
 
             logListener.LogToSqlDatabase(instanceName,
-                "Data Source=6e7f98f6-ca3b-421b-b927-a65c00b12b90.sqlserver.sequelizer.com;Initial Catalog=db6e7f98f6ca3b421bb927a65c00b12b90;User Id=rmpcsyazqmfphpig;Password=tpJHMTKCiR2AbByiByrr2esHbVEr7ow85Zo5tso52g7beG4mefiZtcvp5bFYosE3;MultipleActiveResultSets=True;",
+                System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString,
                 "Traces",
                 Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Utility.Buffering.DefaultBufferingInterval,
                 1,

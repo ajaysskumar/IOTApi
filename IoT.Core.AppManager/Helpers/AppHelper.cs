@@ -15,5 +15,19 @@ namespace IoT.Core.AppManager.Helpers
             else
                 return "0";
         }
+
+        public static int GetNodeMCUPin(int pinNumber)
+        {
+            switch (pinNumber)
+            {
+                case 1: return 16;
+                case 2: return 4;
+                case 3: return 5;
+                case 4: return 12;
+                case 5: return 13;
+                case 6: return 14;
+                default: return 0;
+            }
+        }
     }
 }

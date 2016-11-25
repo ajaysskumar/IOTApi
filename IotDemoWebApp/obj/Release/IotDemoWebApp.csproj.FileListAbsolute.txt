@@ -340,3 +340,5 @@ C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\Windows.winmd
 C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\IoT.Core.Email.pdb
 C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\AutoMapper.xml
 C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\AutoMapper.EF6.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Core.Email.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Core.Email.pdb

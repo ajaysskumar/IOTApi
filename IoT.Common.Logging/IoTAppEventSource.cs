@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IoT.Common.Logging
 {
-    [EventSource(Name = "IoTEventSource")]
+    [EventSource(Name = "IotAppEventSource")]
     public class IotAppEventSource : EventSource
     {
         public class Keywords
@@ -24,22 +24,26 @@ namespace IoT.Common.Logging
             public const EventTask DBQuery = (EventTask)2;
         }
 
-        private static IotAppEventSource _log = new IotAppEventSource();
-        private IotAppEventSource() { }
-        public static IotAppEventSource Log { get { return _log; } }
+        private static Lazy<IotAppEventSource> Instance = new Lazy<IotAppEventSource>(() => new IotAppEventSource());
 
-        [Event(1, Message = "Error: {0}",
+        public static IotAppEventSource Log { get { return Instance.Value; } }
+
+        private IotAppEventSource() { }
+
+        [Event(5, Message = "Error: {0}",
         Level = EventLevel.Critical, Keywords = Keywords.Diagnostic)]
         public void Error(String msgId, string message)
         {
-            this.WriteEvent(1, msgId, message, DateTime.UtcNow);
+            this.WriteEvent(5, msgId, message, DateTime.UtcNow);
         }
 
-        [Event(2, Message = "Info: {0}", Keywords = Keywords.Perf,
-        Level = EventLevel.Informational)]
-        public void Info(String msgId, string message)
+        [Event(1, Message = "Info: {0}",
+        Level = EventLevel.Informational, 
+        Task = Tasks.Page, Opcode = EventOpcode.Start)]
+        public void Info(String msgId="", string message="", string methodName="", string Error="", string input="")
         {
-            this.WriteEvent(2, msgId, message, DateTime.UtcNow);
+            if (this.IsEnabled())
+                this.WriteEvent(1, msgId, message, methodName,Error,input);
         }
 
         [Event(3, Message = "Warning: {0}",
@@ -66,7 +70,7 @@ namespace IoT.Common.Logging
         Level = EventLevel.Verbose)]
         public void Verbose(String msgId, string message)
         {
-            if (this.IsEnabled()) this.WriteEvent(5, msgId, message, DateTime.UtcNow);
+            if (this.IsEnabled()) this.WriteEvent(5, msgId, DateTime.UtcNow, message );
         }
 
         [Event(0, Message = "Debug: {0}",

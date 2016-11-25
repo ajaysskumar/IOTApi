@@ -25,6 +25,7 @@
 
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
+#include <EEPROM.h>
 
 // Update these with values suitable for your network.
 
@@ -110,10 +111,22 @@ void callback(char* topic, byte* payload, unsigned int length) {
   // Switch on the LED if an 1 was received as first character
   if (currentRelayState == 0) {
     digitalWrite(switch1, LOW);   // Turn the LED on (Note that LOW is the voltage level
+     EEPROM.write(switch1, currentRelayState);
+     EEPROM.commit();
+     
+     int value =(int)EEPROM.read(switch1);
+
+     Serial.println("Written in disk value : "+String(value));
     // but actually the LED is on; this is because
     // it is acive low on the ESP-01)
   } else {
     digitalWrite(switch1, HIGH);  // Turn the LED off by making the voltage HIGH
+    EEPROM.write(switch1, currentRelayState);
+     EEPROM.commit();
+     
+     int value =(int)EEPROM.read(switch1);
+
+     Serial.println("Written in disk value : "+String(value));
   }
   Serial.print("Sending Ack:"+msg);
   sendAck(msg);
@@ -146,6 +159,8 @@ void reconnect() {
 void setup() {
   pinMode(switch1, OUTPUT);     // Initialize the switch1 pin as an output
   Serial.begin(115200);
+  EEPROM.begin(512);
+  restoreSwitchState();
   clientId = WiFi.macAddress();
   
   publishTopic = "relayActionConfirmation/"+clientId;
@@ -174,5 +189,20 @@ void sendAck(String msg)
     Serial.print("Publish message: ");
     Serial.println(msg.c_str());
     client.publish(publishTopic.c_str(), msg.c_str());
+}
+
+void restoreSwitchState()
+{
+  int value =(int)EEPROM.read(switch1);
+
+   if (value == 0) {
+    digitalWrite(switch1, LOW);   // Turn the LED on (Note that LOW is the voltage level
+     
+    // but actually the LED is on; this is because
+    // it is acive low on the ESP-01)
+  } else {
+    digitalWrite(switch1, HIGH);  // Turn the LED off by making the voltage HIGH
+  
+  }
 }
 

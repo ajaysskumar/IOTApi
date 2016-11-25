@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Location.cs" />
+    <Compile Include="MqttClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -59,6 +61,10 @@
       <Project>{C93B4EDF-6472-4473-B437-02D4EC957633}</Project>
       <Name>IoT.Common.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IoT.Common.SemanticLogging\IoT.Common.SemanticLogging.csproj">
+      <Project>{b28464b2-2238-4bf9-ac10-b89ed57b0b96}</Project>
+      <Name>IoT.Common.SemanticLogging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IoT.Core.Email\IoT.Core.Email.csproj">
       <Project>{0f84cc1f-bf4d-424c-9b20-3ad948e69fda}</Project>
       <Name>IoT.Core.Email</Name>
@@ -66,6 +72,10 @@
     <ProjectReference Include="..\IoTOperations\IoTOperations.csproj">
       <Project>{c2ad95bf-c1ed-47fb-af8b-1cdd3cd9d267}</Project>
       <Name>IoTOperations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MqttLib\MqttLib.csproj">
+      <Project>{8714bc76-4234-4406-aecf-4d28dff98a1f}</Project>
+      <Name>MqttLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
