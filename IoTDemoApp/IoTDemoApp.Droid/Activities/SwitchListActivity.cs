@@ -50,9 +50,18 @@ namespace IoTDemoApp.Droid.Activities
             // Create your application here
 
             relayGroupId = Intent.GetIntExtra("relayGroupId", 0);
+
             relayGroupMac = Intent.GetStringExtra("relayGroupMac");
 
             client = new HttpClient();
+
+            //----MQTT Initialize section---//
+            _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");
+
+            _mqttClient.Start();
+
+            _mqttClient.RegisterOurSubscriptions("relayActionConfirmation/" + relayGroupMac);
+            //----MQTT Initialize section---//
 
             RunOnUiThread(async () =>
             {
@@ -62,7 +71,15 @@ namespace IoTDemoApp.Droid.Activities
                     if (response.IsSuccessStatusCode)
                     {
                         var content = await response.Content.ReadAsStringAsync();
+
                         _relays = JsonConvert.DeserializeObject<List<RelayModel>>(content);
+
+                        Status status = _mqttClient.GetRelayGroupStatus(relayGroupMac);
+
+                        foreach (var rel in _relays)
+                        {
+                            rel.RelayState = status.Relays.Relay.FirstOrDefault(x => x.RelayName == rel.RelayNumber.ToString()).RelayStatus == "1" ? false : true;
+                        }
 
                         adapter = new RelayListAdapter(this,_relays);
 
@@ -94,24 +111,20 @@ namespace IoTDemoApp.Droid.Activities
 
             string subscriptionMessage = "";
 
-            if (_mqttClient == null)
-            {
-                _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");
-                _mqttClient.Start();
-            }
-            //_mqttClient.Start();
-            //if (!_mqttClient.ClientConnected)
+            //if (_mqttClient == null)
             //{
-                
+            //    _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");
+            //    _mqttClient.Start();
             //}
 
-            _mqttClient.RegisterOurSubscriptions("relayActionConfirmation/" + relayGroupMac);
+            
 
             try
             {
                 string switchStatus = AppHelper.GetStatus(relay.RelayState);
                 int ackWaitTime = 0;
                 bool ackRecived = false;
+                Status status = null;
 
                 string msgId = Guid.NewGuid().ToString();
 
@@ -119,22 +132,35 @@ namespace IoTDemoApp.Droid.Activities
                 {
                     _mqttClient.PublishSomething(AppHelper.GetNodeMCUPin( relay.RelayNumber).ToString(), switchStatus, msgId, string.Format("relayActionRequest/{0}", relayGroupMac));
 
-                    while (_mqttClient.ClientConnected && _mqttClient.SubscriptionMessage != msgId && ackWaitTime < 10 && !ackRecived)
+                    while (_mqttClient.ClientConnected && 
+                           ackWaitTime < 20 && 
+                           !ackRecived
+                           )
                     {
                         ackWaitTime++;
                         //Thread.Sleep(1000);
                         if (_mqttClient.SubscriptionMessage!=null)
                         {
-                            var obj = XmlHelper<Status>.ConvertToXML(_mqttClient.SubscriptionMessage);
-                            subscriptionMessage = obj.MsgId;
+                            status = XmlHelper<Status>.ConvertToObject(_mqttClient.SubscriptionMessage);
+                            subscriptionMessage = status.MsgId;
                         }
-                        
+
                         if (subscriptionMessage == msgId)
                         {
                             ackRecived = true;
-                            _relays.Where(x=>x.Id == relay.Id).FirstOrDefault().RelayState = !relay.RelayState;
+                            //_relays.Where(x => x.Id == relay.Id).FirstOrDefault().RelayState = relay.RelayState;
+
+                            foreach (var rel in _relays)
+                            {
+                                rel.RelayState = status.Relays.Relay.FirstOrDefault(x => x.RelayName == rel.RelayNumber.ToString()).RelayStatus == "1" ? false:true ;
+                            }
+
                             relayListProgressBar.Visibility = ViewStates.Gone;
                             adapter.NotifyDataSetChanged();
+                        }
+                        else
+                        {
+                            Thread.Sleep(200);
                         }
                     }
                 }

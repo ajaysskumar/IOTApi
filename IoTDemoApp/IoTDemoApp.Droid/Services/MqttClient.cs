@@ -1,6 +1,7 @@
 ﻿using MqttLib;
 using System;
 using IoTDemoApp;
+using System.Threading;
 
 public class MqttClient
 {
@@ -59,5 +60,33 @@ public class MqttClient
     {
         SubscriptionMessage = e.Payload.ToString();
         return true;
+    }
+
+    public IoT.Core.AppManager.Models.Status GetRelayGroupStatus(string relayGroupId)
+    {
+        var msgId = Guid.NewGuid().ToString();
+        IoT.Core.AppManager.Models.Status status = null;
+
+        _client.Publish(String.Format("relayActionRequest/{0}",relayGroupId), string.Format("{0}={1}={2}", "0", "0", msgId), QoS.OnceAndOnceOnly, false);
+
+        int watchCount = 0;
+        bool ackRecieved = false;
+
+        while (watchCount<20)
+        {
+            if (SubscriptionMessage != null)
+            {
+                status = IoT.Core.AppManager.Helpers.XmlHelper<IoT.Core.AppManager.Models.Status>.ConvertToObject(SubscriptionMessage);
+
+                if (status.MsgId == msgId)
+                {
+                    return status;
+                }
+                watchCount++;
+                Thread.Sleep(200);
+            }
+        }
+
+        throw new Exception("Not able to get the response from the device. Please check the device physically.");
     }
 }

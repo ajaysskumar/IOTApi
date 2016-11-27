@@ -12,6 +12,7 @@ using Android.Widget;
 using Java.Lang;
 using IoTDemoApp.Model;
 using IoTDemoApp.Droid.Utility;
+using Android.Graphics;
 
 namespace IoTDemoApp.Droid.Adapters
 {
@@ -57,12 +58,20 @@ namespace IoTDemoApp.Droid.Adapters
                 convertView = _context.LayoutInflater.Inflate(Resource.Layout.RelayListView, null);
             }
 
+            if (relay.RelayState)
+            {
+                convertView.SetBackgroundColor(Color.Crimson);
+            }else
+            {
+                convertView.SetBackgroundColor(Color.Green);
+            }
+
             convertView.FindViewById<TextView>(Resource.Id.shortDescriptionTextView).Text = relay.RelayDescription;
             convertView.FindViewById<TextView>(Resource.Id.relayNumberTextView).Text = relay.RelayNumber.ToString();
             //convertView.FindViewById<TextView>(Resource.Id.relayStatus).Text = relay.RelayState.ToString();
             //convertView.FindViewById<ImageView>(Resource.Id.relayImageView).SetImageBitmap(imageBitmap);
-            convertView.FindViewById<Switch>(Resource.Id.switchRelayStatus).Activated = !relay.RelayState;
-            convertView.FindViewById<Switch>(Resource.Id.switchRelayStatus).Toggle();
+            //convertView.FindViewById<Switch>(Resource.Id.switchRelayStatus).Activated = relay.RelayState;
+            //convertView.FindViewById<Switch>(Resource.Id.switchRelayStatus).Toggle();
 
             return convertView;
         }

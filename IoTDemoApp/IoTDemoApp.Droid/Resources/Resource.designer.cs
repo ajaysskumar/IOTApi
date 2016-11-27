@@ -72,11 +72,11 @@ namespace IoTDemoApp.Droid
 			// aapt resource value: 0x7f050005
 			public const int relayImageView = 2131034117;
 			
-			// aapt resource value: 0x7f05000c
-			public const int relayListProgressBar = 2131034124;
+			// aapt resource value: 0x7f05000b
+			public const int relayListProgressBar = 2131034123;
 			
-			// aapt resource value: 0x7f05000d
-			public const int relayListView = 2131034125;
+			// aapt resource value: 0x7f05000c
+			public const int relayListView = 2131034124;
 			
 			// aapt resource value: 0x7f050006
 			public const int relayNameTextView = 2131034118;
@@ -89,9 +89,6 @@ namespace IoTDemoApp.Droid
 			
 			// aapt resource value: 0x7f050007
 			public const int shortDescriptionTextView = 2131034119;
-			
-			// aapt resource value: 0x7f05000b
-			public const int switchRelayStatus = 2131034123;
 			
 			// aapt resource value: 0x7f050002
 			public const int swtich1 = 2131034114;
