@@ -35,6 +35,7 @@ const char* mqtt_server = "m13.cloudmqtt.com";
 String publishTopic;
 String subscriptionTopic;
 String relayGroupStatusTopic;
+String statusXML;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -137,8 +138,10 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
     Serial.println("Written in disk value : " + String(value));
   }
-  Serial.print("Sending Ack:" + msg);
-  sendAck(msg);
+
+  statusXML = "<s><d>"+clientId+"</d><m>"+String(msg)+"</m><rl><r><rn>1</rn><rs>"+String(digitalRead(16))+"</rs></r><r><rn>2</rn><rs>"+String(digitalRead(4))+"</rs></r><r><rn>3</rn><rs>"+String(digitalRead(5))+"</rs></r><r><rn>4</rn><rs>"+String(digitalRead(12))+"</rs></r><r><rn>5</rn><rs>"+String(digitalRead(13))+"</rs></r><r><rn>6</rn><rs>"+String(digitalRead(14))+"</rs></r></rl></s>";
+  Serial.print("Sending Ack:" + statusXML);
+  sendAck(statusXML);
 }
 
 void reconnect() {
@@ -149,7 +152,8 @@ void reconnect() {
 
     // Attempt to connect
     if (client.connect(clientId.c_str(), "cbaeasea", "KiYFQP0Q1gbe")) {
-      Serial.println("connected");
+      Serial.println("connected");   
+    
       // Once connected, publish an announcement...
 
       client.publish("heartBeatCheck", "Connected");
@@ -191,11 +195,13 @@ void loop() {
   if (!client.connected()) {
     reconnect();
   }
-  //  Serial.println("Publishing status...");
-  //  String statusXML = "<Relays><Relay><RelayNumber>1</RelayNumber>"+String(digitalRead(switch1))+"<RelayStatus></RelayStatus></Relay></Relays>";
-  //  client.publish("currentStatusCheck", statusXML.c_str());
-  //  Serial.println("Published : "+relayGroupStatusTopic+String(statusXML));
-  //  //delay(200);
+//    Serial.println("Publishing status...");
+//    
+//    statusXML = "<s><d>"+clientId+"</d><m></m><rl><r><rn>1</rn><rs>"+String(digitalRead(16))+"</rs></r><r><rn>4</rn><rs>"+String(digitalRead(4))+"</rs></r><r><rn>5</rn><rs>"+String(digitalRead(5))+"</rs></r><r><rn>12</rn><rs>"+String(digitalRead(12))+"</rs></r><r><rn>13</rn><rs>"+String(digitalRead(13))+"</rs></r><r><rn>14</rn><rs>"+String(digitalRead(14))+"</rs></r></rl></s>";
+//    
+//    client.publish(publishTopic.c_str(), statusXML.c_str(),256);
+//    Serial.println("Published : "+relayGroupStatusTopic+String(statusXML));
+//    delay(2000);
   client.loop();
 }
 

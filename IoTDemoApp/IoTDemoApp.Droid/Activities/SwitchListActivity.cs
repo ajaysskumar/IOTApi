@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Threading;
 using IoT.Core.AppManager.Helpers;
+using IoT.Core.AppManager.Models;
 using Android.Database;
 using IoTDemoApp.Droid.Adapters;
 
@@ -118,11 +119,16 @@ namespace IoTDemoApp.Droid.Activities
                 {
                     _mqttClient.PublishSomething(AppHelper.GetNodeMCUPin( relay.RelayNumber).ToString(), switchStatus, msgId, string.Format("relayActionRequest/{0}", relayGroupMac));
 
-                    while (_mqttClient.ClientConnected && _mqttClient.SubscriptionMessage != msgId && ackWaitTime < 50)
+                    while (_mqttClient.ClientConnected && _mqttClient.SubscriptionMessage != msgId && ackWaitTime < 10 && !ackRecived)
                     {
                         ackWaitTime++;
-                        Thread.Sleep(1000);
-                        subscriptionMessage = _mqttClient.SubscriptionMessage;
+                        //Thread.Sleep(1000);
+                        if (_mqttClient.SubscriptionMessage!=null)
+                        {
+                            var obj = XmlHelper<Status>.ConvertToXML(_mqttClient.SubscriptionMessage);
+                            subscriptionMessage = obj.MsgId;
+                        }
+                        
                         if (subscriptionMessage == msgId)
                         {
                             ackRecived = true;
