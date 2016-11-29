@@ -203,13 +203,13 @@ namespace IotDemoWebApp.Controllers
                 string method = Helper.GetCurrentMethod();
                 string objectString = Helper.ConvertObjectToXML(motionSensorModel);
 
-                db.Trace.Add(new Trace {
-                    Error = "invalid model",
-                    Input = objectString,
-                    MethodName = method,
-                    Timestamp = DateTime.UtcNow
-                });
-                await db.SaveChangesAsync();
+                //db.Trace.Add(new Trace {
+                //    Error = "invalid model",
+                //    Input = objectString,
+                //    MethodName = method,
+                //    Timestamp = DateTime.UtcNow
+                //});
+                //await db.SaveChangesAsync();
 
                 return Ok(db.WifiSensor.Where(x => x.Id == motionSensorModel.DeviceId).FirstOrDefault().OperationFrequecy);
             }

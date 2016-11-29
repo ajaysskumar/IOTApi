@@ -56,7 +56,11 @@ namespace IoTDemoApp.Droid.Activities
             client = new HttpClient();
 
             //----MQTT Initialize section---//
-            _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");
+            _mqttClient = new MqttClient(
+                SystemConfiguration.MqttServerAddress,
+                System.Environment.MachineName,
+                SystemConfiguration.MqttServerUserName,
+                SystemConfiguration.MqttServerPassword);
 
             _mqttClient.Start();
 
@@ -111,14 +115,6 @@ namespace IoTDemoApp.Droid.Activities
 
             string subscriptionMessage = "";
 
-            //if (_mqttClient == null)
-            //{
-            //    _mqttClient = new MqttClient("TCP://m13.cloudmqtt.com:19334", "SFD-GBL-PER-16102016-11-50-19-153445", "cbaeasea", "KiYFQP0Q1gbe");
-            //    _mqttClient.Start();
-            //}
-
-            
-
             try
             {
                 string switchStatus = AppHelper.GetStatus(relay.RelayState);
@@ -148,7 +144,6 @@ namespace IoTDemoApp.Droid.Activities
                         if (subscriptionMessage == msgId)
                         {
                             ackRecived = true;
-                            //_relays.Where(x => x.Id == relay.Id).FirstOrDefault().RelayState = relay.RelayState;
 
                             foreach (var rel in _relays)
                             {

@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Classes.cs" />
     <Compile Include="Helpers\AppHelper.cs" />
+    <Compile Include="Helpers\SystemConfiguration.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
     <Compile Include="Models\RelayGroupStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,44 @@
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 1,
+  "Keywords": 0,
+  "Level": 0,
+  "Message": "Info: Logger Initialized - Event Source : IoTEventSourceManager, Log Level : LogAlways",
+  "Opcode": 0,
+  "Task": 1,
+  "Version": 0,
+  "Payload": {
+    "message": "Logger Initialized - Event Source : IoTEventSourceManager, Log Level : LogAlways",
+    "msgId": "",
+    "workflowRunId": "",
+    "trackingId": "",
+    "step": "",
+    "module": ""
+  },
+  "EventName": "InfoInfo",
+  "Timestamp": "2016-11-28T12:13:46.0200891Z",
+  "ProcessId": 28936,
+  "ThreadId": 21616
+},
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 4,
+  "Keywords": 0,
+  "Level": 5,
+  "Message": "Debug: askkdnksadnknkas",
+  "Opcode": 0,
+  "Task": 1,
+  "Version": 0,
+  "Payload": {
+    "message": "askkdnksadnknkas",
+    "msgId": "asjdbjksbakjdbkjasbkjd",
+    "workflowRunId": "",
+    "trackingId": "",
+    "step": "",
+    "module": ""
+  },
+  "EventName": "InfoInfo",
+  "Timestamp": "2016-11-28T12:13:57.5179874Z",
+  "ProcessId": 28936,
+  "ThreadId": 21616
+},
