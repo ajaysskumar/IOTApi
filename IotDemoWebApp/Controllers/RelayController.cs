@@ -21,7 +21,7 @@ namespace IotDemoWebApp.Controllers
         public async Task<ActionResult> Index()
         {
             var relay = db.Relay.Include(r => r.RelayGroup);
-            IoT.Common.Logging.IotAppEventSource.Log.Debug("NA","Realy List shown");
+            IoT.Common.Logging.IoTEventSourceManager.Log.Debug("NA");
             return View(await relay.ToListAsync());
         }
 

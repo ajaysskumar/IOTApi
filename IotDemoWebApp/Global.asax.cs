@@ -1,4 +1,4 @@
-﻿using IoT.Common.Logging;
+﻿using IoT.Common.SemanticLogging;
 using IoT.Common.Model.Models;
 using IoT.Common.Model.Utility;
 using System;
@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using IoT.Common.Logging;
 
 namespace IotDemoWebApp
 {
@@ -22,14 +23,14 @@ namespace IotDemoWebApp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //Initialize logging
-            LoggingManager.InitializeLogger("IoTEventSource", System.Diagnostics.Tracing.EventLevel.LogAlways);
+            LoggingManager.InitializeLogger("IoTEventSourceManager", System.Diagnostics.Tracing.EventLevel.LogAlways);
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Relay, RelayView>().ReverseMap();
                 cfg.CreateMap<RelayGroup, RelayGroupView>().ReverseMap();
             });
 
-            IotAppEventSource.Log.Info(Guid.NewGuid().ToString(), "Application Started");
+            IoTEventSourceManager.Log.Info(Guid.NewGuid().ToString(),"Application Started");
         }
     }
 }

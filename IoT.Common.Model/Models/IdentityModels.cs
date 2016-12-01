@@ -33,7 +33,7 @@ namespace IoT.Common.Model.Models
 
         public virtual DbSet<WifiSensor> WifiSensor { get; set; }
 
-        public virtual DbSet<Trace> Trace { get; set; }
+        //public virtual DbSet<Trace> Trace { get; set; }
         public virtual DbSet<Admin> Admin { get; set; }
         public virtual DbSet<RelayGroup> RelayGroup { get; set; }
         public virtual DbSet<Relay> Relay { get; set; }

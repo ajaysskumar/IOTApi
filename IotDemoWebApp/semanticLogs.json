@@ -1,0 +1,172 @@
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 1,
+  "Keywords": 0,
+  "Level": 0,
+  "Message": "Info: Logger Initialized - Event Source : IoTEventSourceManager, Log Level : LogAlways",
+  "Opcode": 0,
+  "Task": 1,
+  "Version": 0,
+  "Payload": {
+    "message": "Logger Initialized - Event Source : IoTEventSourceManager, Log Level : LogAlways"
+  },
+  "EventName": "InfoInfo",
+  "Timestamp": "2016-12-01T05:25:20.1640004Z",
+  "ProcessId": 21532,
+  "ThreadId": 35004
+},
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 1,
+  "Keywords": 0,
+  "Level": 0,
+  "Message": "Info: Application Started",
+  "Opcode": 0,
+  "Task": 1,
+  "Version": 0,
+  "Payload": {
+    "message": "Application Started"
+  },
+  "EventName": "InfoInfo",
+  "Timestamp": "2016-12-01T05:25:35.4625719Z",
+  "ProcessId": 21532,
+  "ThreadId": 35004
+},
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 1,
+  "Keywords": 0,
+  "Level": 0,
+  "Message": "47bd2d18-617c-4911-89aa-e4f9ca6f06f0",
+  "Opcode": 0,
+  "Task": 1,
+  "Version": 0,
+  "Payload": {
+    "message": "47bd2d18-617c-4911-89aa-e4f9ca6f06f0"
+  },
+  "EventName": "InfoInfo",
+  "Timestamp": "2016-12-01T05:36:58.2339778Z",
+  "ProcessId": 35916,
+  "ThreadId": 24108
+},
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 1,
+  "Keywords": 0,
+  "Level": 0,
+  "Message": "28287fcb-a50d-48d5-954b-e357f367b164",
+  "Opcode": 0,
+  "Task": 1,
+  "Version": 0,
+  "Payload": {
+    "message": "28287fcb-a50d-48d5-954b-e357f367b164"
+  },
+  "EventName": "InfoInfo",
+  "Timestamp": "2016-12-01T05:37:03.9074775Z",
+  "ProcessId": 35916,
+  "ThreadId": 24108
+},
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 0,
+  "Keywords": 0,
+  "Level": 0,
+  "Message": null,
+  "Opcode": 0,
+  "Task": 65534,
+  "Version": 0,
+  "Payload": {
+    "message": "Event 1 was called with 2 argument(s) , but it is defined with 1 paramenter(s)."
+  },
+  "EventName": "EventSourceMessageInfo",
+  "Timestamp": "2016-12-01T05:41:58.6591722Z",
+  "ProcessId": 21932,
+  "ThreadId": 34280
+},
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 1,
+  "Keywords": 0,
+  "Level": 0,
+  "Message": "32852636-73eb-4f23-a27c-f16ad2a90598",
+  "Opcode": 0,
+  "Task": 1,
+  "Version": 0,
+  "Payload": {
+    "message": "32852636-73eb-4f23-a27c-f16ad2a90598"
+  },
+  "EventName": "InfoInfo",
+  "Timestamp": "2016-12-01T05:41:58.7576719Z",
+  "ProcessId": 21932,
+  "ThreadId": 34280
+},
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 0,
+  "Keywords": 0,
+  "Level": 0,
+  "Message": null,
+  "Opcode": 0,
+  "Task": 65534,
+  "Version": 0,
+  "Payload": {
+    "message": "Event 1 was called with 2 argument(s) , but it is defined with 1 paramenter(s)."
+  },
+  "EventName": "EventSourceMessageInfo",
+  "Timestamp": "2016-12-01T05:41:59.6051718Z",
+  "ProcessId": 21932,
+  "ThreadId": 34280
+},
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 1,
+  "Keywords": 0,
+  "Level": 0,
+  "Message": "f5e20277-9aa8-4920-9473-0aa2c30da10e",
+  "Opcode": 0,
+  "Task": 1,
+  "Version": 0,
+  "Payload": {
+    "message": "f5e20277-9aa8-4920-9473-0aa2c30da10e"
+  },
+  "EventName": "InfoInfo",
+  "Timestamp": "2016-12-01T05:41:59.6051718Z",
+  "ProcessId": 21932,
+  "ThreadId": 34280
+},
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 1,
+  "Keywords": 0,
+  "Level": 0,
+  "Message": "Logger Initialized - Event Source : IoTEventSourceManager, Log Level : LogAlways",
+  "Opcode": 0,
+  "Task": 1,
+  "Version": 0,
+  "Payload": {
+    "msgId": "Logger Initialized - Event Source : IoTEventSourceManager, Log Level : LogAlways",
+    "message": ""
+  },
+  "EventName": "InfoInfo",
+  "Timestamp": "2016-12-01T05:45:49.2381829Z",
+  "ProcessId": 37544,
+  "ThreadId": 2160
+},
+{
+  "ProviderId": "5040a7ad-f6f2-5cd8-aeef-b177d857f7b9",
+  "EventId": 1,
+  "Keywords": 0,
+  "Level": 0,
+  "Message": "7fefc0dd-bc75-4d74-8dfb-cce4428b7c48",
+  "Opcode": 0,
+  "Task": 1,
+  "Version": 0,
+  "Payload": {
+    "msgId": "7fefc0dd-bc75-4d74-8dfb-cce4428b7c48",
+    "message": "Application Started"
+  },
+  "EventName": "InfoInfo",
+  "Timestamp": "2016-12-01T05:45:50.3721805Z",
+  "ProcessId": 37544,
+  "ThreadId": 2160
+},

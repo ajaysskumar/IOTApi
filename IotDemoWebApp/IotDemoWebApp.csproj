@@ -266,6 +266,10 @@
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Logging\IotDemoEventSourceManager.cs" />
     <Compile Include="Logging\LoggingManager.cs" />
+    <Compile Include="Migrations\201612010331066_SLAB_Db_Setup.cs" />
+    <Compile Include="Migrations\201612010331066_SLAB_Db_Setup.Designer.cs">
+      <DependentUpon>201612010331066_SLAB_Db_Setup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationModels.cs" />
@@ -437,13 +441,13 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IoT.Common.Logging\IoT.Common.Logging.csproj">
-      <Project>{9635b882-aab3-4ca1-b27e-2480c043988f}</Project>
-      <Name>IoT.Common.Logging</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IoT.Common.Model\IoT.Common.Model.csproj">
       <Project>{c93b4edf-6472-4473-b437-02d4ec957633}</Project>
       <Name>IoT.Common.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IoT.Common.SemanticLogging\IoT.Common.SemanticLogging.csproj">
+      <Project>{b28464b2-2238-4bf9-ac10-b89ed57b0b96}</Project>
+      <Name>IoT.Common.SemanticLogging</Name>
     </ProjectReference>
     <ProjectReference Include="..\IoT.Core.AppManager\IoT.Core.AppManager.csproj">
       <Project>{a475454e-651b-4f5a-8ca3-cd0718ece8a7}</Project>
@@ -453,6 +457,11 @@
       <Project>{0F84CC1F-BF4D-424C-9B20-3AD948E69FDA}</Project>
       <Name>IoT.Core.Email</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612010331066_SLAB_Db_Setup.resx">
+      <DependentUpon>201612010331066_SLAB_Db_Setup.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

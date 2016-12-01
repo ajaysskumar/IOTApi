@@ -19,14 +19,14 @@ namespace IoT.Common.Logging
         public static IoTEventSourceManager Log { get { return Instance.Value; } }
 
         [Event(1,
-                Message = "Info: {0}",
+                Message = "{0}",
                 Level = EventLevel.LogAlways,
                 Task = Tasks.EventIoT)]
-        public void Info(string message, string msgId = "", string workflowRunId = "", string trackingId = "", string step = "", string module = "")
+        public void Info(string msgId="",string message="")
         {
             if (this.IsEnabled())
             {
-                WriteEvent(1, message, msgId, workflowRunId, trackingId, step, module);
+                WriteEvent(1,msgId, message);
             }
         }
 

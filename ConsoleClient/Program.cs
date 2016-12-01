@@ -27,7 +27,7 @@ namespace ConsoleClient
             //client.SendEmail();
             LoggingManager.InitializeLogger("IoTEventSourceManager", System.Diagnostics.Tracing.EventLevel.LogAlways);
 
-            IoTEventSourceManager.Log.Debug("askkdnksadnknkas", "asjdbjksbakjdbkjasbkjd");
+            IoTEventSourceManager.Log.Info("askkdnksadnknkas");
 
             ////var response = httpClient.GetAsync("http://iotdemo.apexsoftworks.in/api/getdatapointspartial?top=2&lastRecord=84166&sensorId=18FE34DE278F").Result;
             //var contents = response.Content.ReadAsStringAsync().Result;
