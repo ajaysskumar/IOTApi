@@ -19,50 +19,74 @@ namespace IoT.Common.Logging
         public static IoTEventSourceManager Log { get { return Instance.Value; } }
 
         [Event(1,
-                Message = "{0}",
-                Level = EventLevel.LogAlways,
+                Message = "{1}",
+                Level = EventLevel.Critical,
                 Task = Tasks.EventIoT)]
-        public void Info(string msgId="",string message="")
+        public void Fatal(string message="",string msgId="")
         {
             if (this.IsEnabled())
             {
-                WriteEvent(1,msgId, message);
+                WriteEvent(1,message, msgId);
             }
         }
 
-        [Event(5,
-                Message = "Error: {0}",
+        [Event(2,
+                Message = "{1}",
                 Level = EventLevel.Error,
                 Task = Tasks.EventIoT)]
-        public void Error(string message, string msgId = "", string workflowRunId = "", string trackingId = "", string step = "", string module = "")
+        public void Error(string message = "", string msgId = "")
         {
             if (this.IsEnabled())
             {
-                WriteEvent(5, message, msgId, workflowRunId, trackingId, step, module);
-            }
-        }
-
-        [Event(4,
-                Message = "Debug: {0}",
-                Level = EventLevel.Verbose,
-                Task = Tasks.EventIoT)]
-        public void Debug(string message, string msgId = "", string workflowRunId = "", string trackingId = "", string step = "", string module = "")
-        {
-            if (this.IsEnabled())
-            {
-                WriteEvent(4, message, msgId, workflowRunId, trackingId, step, module);
+                WriteEvent(2, message, msgId);
             }
         }
 
         [Event(3,
-                Message = "Warn: {0}",
+                Message = "{1}",
                 Level = EventLevel.Warning,
                 Task = Tasks.EventIoT)]
-        public void Warn(string message, string msgId = "", string workflowRunId = "", string trackingId = "", string step = "", string module = "")
+        public void Warn(string message = "", string msgId = "")
         {
             if (this.IsEnabled())
             {
-                WriteEvent(3, message, msgId, workflowRunId, trackingId, step, module);
+                WriteEvent(3, message, msgId);
+            }
+        }
+
+        [Event(4,
+                Message = "{1}",
+                Level = EventLevel.Informational,
+                Task = Tasks.EventIoT)]
+        public void Info(string message = "", string msgId = "")
+        {
+            if (this.IsEnabled())
+            {
+                WriteEvent(4, message, msgId);
+            }
+        }
+
+        [Event(5,
+               Message = "{1}",
+               Level = EventLevel.Verbose,
+               Task = Tasks.EventIoT)]
+        public void Debug(string message = "", string msgId = "")
+        {
+            if (this.IsEnabled())
+            {
+                WriteEvent(5, message, msgId);
+            }
+        }
+
+        [Event(6,
+               Message = "{1}",
+               Level = EventLevel.LogAlways,
+               Task = Tasks.EventIoT)]
+        public void Trace(string message = "", string msgId = "")
+        {
+            if (this.IsEnabled())
+            {
+                WriteEvent(6, message, msgId);
             }
         }
     }
