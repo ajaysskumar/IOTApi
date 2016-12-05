@@ -6,3 +6,11 @@ C:\Users\Ajay\Source\Repos\IoTProject\IoT.Core.Email\bin\Release\ServiceStack.Te
 C:\Users\Ajay\Source\Repos\IoTProject\IoT.Core.Email\obj\Release\IoT.Core.Email.csprojResolveAssemblyReference.cache
 C:\Users\Ajay\Source\Repos\IoTProject\IoT.Core.Email\obj\Release\IoT.Core.Email.dll
 C:\Users\Ajay\Source\Repos\IoTProject\IoT.Core.Email\obj\Release\IoT.Core.Email.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Release\IoT.Core.Email.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Release\IoT.Core.Email.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Release\MailChimp.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Release\ServiceStack.Text.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Release\ServiceStack.Text.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.csprojResolveAssemblyReference.cache
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.pdb

@@ -1,0 +1,17 @@
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\IoT.Common.SemanticLogging.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\IoT.Common.SemanticLogging.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Database.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.TextFile.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Newtonsoft.Json.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Database.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.TextFile.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Newtonsoft.Json.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\obj\Release\IoT.Common.SemanticLogging.csprojResolveAssemblyReference.cache
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\obj\Release\IoT.Common.SemanticLogging.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\obj\Release\IoT.Common.SemanticLogging.pdb

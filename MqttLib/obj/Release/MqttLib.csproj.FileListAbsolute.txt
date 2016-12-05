@@ -1,0 +1,1 @@
+C:\Users\ajayk\Source\Repos\IOTApi\MqttLib\obj\Release\MqttLib.csprojResolveAssemblyReference.cache

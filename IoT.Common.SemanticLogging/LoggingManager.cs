@@ -9,9 +9,10 @@ namespace IoT.Common.Logging
 {
     public static class LoggingManager
     {
-        public static void InitializeLogger(string instanceName, System.Diagnostics.Tracing.EventLevel logEventLevel)
+        public static void InitializeLogger(string instanceName, System.Diagnostics.Tracing.EventLevel logEventLevel,string applicationName = "NA")
         {
             var logListener1 = new ObservableEventListener();
+
             logListener1.EnableEvents(IoTEventSourceManager.Log, logEventLevel, EventKeywords.None);
 
             logListener1.LogToSqlDatabase(instanceName,
@@ -22,12 +23,12 @@ namespace IoT.Common.Logging
                 Timeout.InfiniteTimeSpan,
                 500);
 
-            var logListener2 = new ObservableEventListener();
-            logListener2.EnableEvents(IoTEventSourceManager.Log, logEventLevel, EventKeywords.None);
+            //var logListener2 = new ObservableEventListener();
+            //logListener2.EnableEvents(IoTEventSourceManager.Log, logEventLevel, EventKeywords.None);
 
-            logListener2.LogToFlatFile("semanticLogs.json", new JsonEventTextFormatter(EventTextFormatting.Indented), true);
+            //logListener2.LogToFlatFile("semanticLogs.json", new JsonEventTextFormatter(EventTextFormatting.Indented), true);
 
-            IoTEventSourceManager.Log.Info(string.Format("Logger Initialized - Event Source : {0}, Log Level : {1}", instanceName, logEventLevel.ToString()));
+            IoTEventSourceManager.Log.Info(string.Format("Logger Initialized - Event Source : {0}, Log Level : {1}", instanceName, logEventLevel.ToString()),applicationName);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using IoT.Common.Model.Models;
+﻿using IoT.Common.Logging;
+using IoT.Common.Model.Models;
 using IoT.Core.Email;
 using IotDemoWebApp.Models;
 using System;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using static IoT.Core.AppManager.Helpers.SystemConfiguration;
 
 namespace IotDemoWebApp.Controllers
 {
@@ -56,7 +58,8 @@ namespace IotDemoWebApp.Controllers
                                 IntervalTime = MeasureInterval,
                                 AverageHumidity = averageHumid,
                                 AverageTemperature = averageTemp,
-                                Threshold = recipient.Threshold
+                                UpperThreshold = recipient.UpperThreshold,
+                                LowerThreshold = recipient.LowerThreshold
                             };
 
                             emailRecipientList.Add(model);
@@ -64,7 +67,7 @@ namespace IotDemoWebApp.Controllers
                     }
                     foreach (var recipient in emailRecipientList)
                     {
-                        if (recipient.AverageTemperature < recipient.Threshold)
+                        if (recipient.AverageTemperature < recipient.LowerThreshold || recipient.AverageTemperature>recipient.UpperThreshold)
                         {
                             EmailClient client = new EmailClient();
                             client.SendEmail(recipient.AverageTemperature, recipient.AverageHumidity, recipient.IntervalTime, recipient.Email, recipient.AdminName);
@@ -75,7 +78,8 @@ namespace IotDemoWebApp.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);                
+                IoTEventSourceManager.Log.Error(ex.Message, ApplicationConstants.IoTApiName);
+                return BadRequest(ex.Message);
             }
         }
 

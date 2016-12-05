@@ -1,0 +1,5 @@
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\bin\Release\IoT.Core.AppManager.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\bin\Release\IoT.Core.AppManager.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\obj\Release\IoT.Core.AppManager.csprojResolveAssemblyReference.cache
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\obj\Release\IoT.Core.AppManager.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.AppManager\obj\Release\IoT.Core.AppManager.pdb

@@ -15,6 +15,7 @@ namespace IotDemoWebApp.Models
         public string Email { get; set; }
         public decimal AverageTemperature { get; set; }
         public decimal AverageHumidity { get; set; }
-        public decimal Threshold { get; set; }
+        public decimal UpperThreshold { get; set; }
+        public decimal LowerThreshold { get; set; }
     }
 }

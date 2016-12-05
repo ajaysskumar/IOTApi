@@ -1,0 +1,14 @@
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\EntityFramework.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoT.Common.Model.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoT.Common.SemanticLogging.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\MqttLib.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Database.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoT.Core.AppManager.dll

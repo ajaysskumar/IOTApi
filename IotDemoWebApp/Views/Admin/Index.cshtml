@@ -27,7 +27,10 @@
             @Html.DisplayNameFor(model => model.ShouldRecieve)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Threshold)
+            @Html.DisplayNameFor(model => model.UpperThreshold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LowerThreshold)
         </th>
         <th></th>
     </tr>
@@ -50,7 +53,10 @@
             @Html.DisplayFor(modelItem => item.ShouldRecieve)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Threshold)
+            @Html.DisplayFor(modelItem => item.UpperThreshold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LowerThreshold)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

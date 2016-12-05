@@ -324,9 +324,7 @@ C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\AutoMapper.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\AutoMapper.EF6.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\DelegateDecompiler.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\DelegateDecompiler.EntityFramework.dll
-C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Common.Logging.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Mono.Reflection.dll
-C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Common.Logging.pdb
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\AutoMapper.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\AutoMapper.EF6.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Windows.winmd
@@ -342,3 +340,9 @@ C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\AutoMapper.xml
 C:\Users\Ajay\Source\Repos\IoTProject\IotDemoWebApp\bin\AutoMapper.EF6.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Core.Email.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Core.Email.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\obj\Release\IotDemoWebApp.Migrations.SLAB_Db_Setup.resources
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\obj\Release\IotDemoWebApp.csproj.GenerateResource.Cache
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Common.SemanticLogging.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Core.AppManager.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Common.SemanticLogging.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Core.AppManager.pdb

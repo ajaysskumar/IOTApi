@@ -14,10 +14,14 @@ namespace IoTSensorPolling
         /// </summary>
         static void Main()
         {
+            IoT.Common.Logging.LoggingManager.InitializeLogger("IoTEventSourceManager", System.Diagnostics.Tracing.EventLevel.LogAlways,"WindowsServiceLog");
+
+            IoT.Common.Logging.IoTEventSourceManager.Log.Debug("Service in Main", "WindowsServiceLog");
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new IoTPollService()
+                new IoTPollService()//,
+                //new IoTMqttService()
             };
             ServiceBase.Run(ServicesToRun);
         }

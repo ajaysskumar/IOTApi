@@ -35,6 +35,7 @@ const char* mqtt_server = "m13.cloudmqtt.com";
 String publishTopic;
 String subscriptionTopic;
 String relayGroupStatusTopic;
+String statusXML;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -115,30 +116,35 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
   Serial.println();
 
-  // Switch on the LED if an 1 was received as first character
-  if (currentRelayState == 0) {
-    digitalWrite(currentRelay, LOW);   // Turn the LED on (Note that LOW is the voltage level
-    Serial.print(String(currentRelay)+" : LOW");
-    EEPROM.write(currentRelay, currentRelayState);
-    EEPROM.commit();
+  if (currentRelay != 0)
+  {
+    // Switch on the LED if an 1 was received as first character
+    if (currentRelayState == 0) {
+      digitalWrite(currentRelay, LOW);   // Turn the LED on (Note that LOW is the voltage level
+      Serial.print(String(currentRelay) + " : LOW");
+      EEPROM.write(currentRelay, currentRelayState);
+      EEPROM.commit();
 
-    int value = (int)EEPROM.read(currentRelay);
+      int value = (int)EEPROM.read(currentRelay);
 
-    Serial.println("Written in disk value : " + String(value));
-    // but actually the LED is on; this is because
-    // it is acive low on the ESP-01)
-  } else {
-    digitalWrite(currentRelay, HIGH);  // Turn the LED off by making the voltage HIGH
-    Serial.print(String(currentRelay)+" : HIGH");
-    EEPROM.write(currentRelay, currentRelayState);
-    EEPROM.commit();
+      Serial.println("Written in disk value : " + String(value));
+      // but actually the LED is on; this is because
+      // it is acive low on the ESP-01)
+    } else {
+      digitalWrite(currentRelay, HIGH);  // Turn the LED off by making the voltage HIGH
+      Serial.print(String(currentRelay) + " : HIGH");
+      EEPROM.write(currentRelay, currentRelayState);
+      EEPROM.commit();
 
-    int value = (int)EEPROM.read(currentRelay);
+      int value = (int)EEPROM.read(currentRelay);
 
-    Serial.println("Written in disk value : " + String(value));
+      Serial.println("Written in disk value : " + String(value));
+    }
   }
-  Serial.print("Sending Ack:" + msg);
-  sendAck(msg);
+
+  statusXML = "<s><d>" + clientId + "</d><m>" + String(msg) + "</m><rl><r><rn>1</rn><rs>" + String(digitalRead(16)) + "</rs></r><r><rn>2</rn><rs>" + String(digitalRead(4)) + "</rs></r><r><rn>3</rn><rs>" + String(digitalRead(5)) + "</rs></r><r><rn>4</rn><rs>" + String(digitalRead(12)) + "</rs></r><r><rn>5</rn><rs>" + String(digitalRead(13)) + "</rs></r><r><rn>6</rn><rs>" + String(digitalRead(14)) + "</rs></r></rl></s>";
+  Serial.print("Sending Ack:" + statusXML);
+  sendAck(statusXML);
 }
 
 void reconnect() {
@@ -150,6 +156,7 @@ void reconnect() {
     // Attempt to connect
     if (client.connect(clientId.c_str(), "cbaeasea", "KiYFQP0Q1gbe")) {
       Serial.println("connected");
+
       // Once connected, publish an announcement...
 
       client.publish("heartBeatCheck", "Connected");
@@ -167,12 +174,12 @@ void reconnect() {
 
 void setup() {
   //pinMode(switch1, OUTPUT);     // Initialize the switch1 pin as an output
-  
-  for (int i = 0; i < 6;i++)
+
+  for (int i = 0; i < 6; i++)
   {
-   pinMode(switchGroup[i], OUTPUT);
+    pinMode(switchGroup[i], OUTPUT);
   }
-  
+
   Serial.begin(115200);
   EEPROM.begin(512);
   restoreSwitchState();
@@ -191,11 +198,6 @@ void loop() {
   if (!client.connected()) {
     reconnect();
   }
-  //  Serial.println("Publishing status...");
-  //  String statusXML = "<Relays><Relay><RelayNumber>1</RelayNumber>"+String(digitalRead(switch1))+"<RelayStatus></RelayStatus></Relay></Relays>";
-  //  client.publish("currentStatusCheck", statusXML.c_str());
-  //  Serial.println("Published : "+relayGroupStatusTopic+String(statusXML));
-  //  //delay(200);
   client.loop();
 }
 
@@ -208,17 +210,17 @@ void sendAck(String msg)
 
 void restoreSwitchState()
 {
-  for (int i = 0; i < 6;i++)
+  for (int i = 0; i < 6; i++)
   {
     int value = (int)EEPROM.read(switchGroup[i]);
     if (value == 0) {
       digitalWrite(switchGroup[i], LOW);   // Turn the LED on (Note that LOW is the voltage level
-      Serial.print(String(switchGroup[i])+" : LOW");
+      Serial.print(String(switchGroup[i]) + " : LOW");
       // but actually the LED is on; this is because
       // it is acive low on the ESP-01)
     } else {
       digitalWrite(switchGroup[i], HIGH);  // Turn the LED off by making the voltage HIGH
-      Serial.print(String(switchGroup[i])+" : HIGH");
+      Serial.print(String(switchGroup[i]) + " : HIGH");
     }
   }
 }

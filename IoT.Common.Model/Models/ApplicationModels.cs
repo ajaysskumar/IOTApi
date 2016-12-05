@@ -63,7 +63,8 @@ namespace IoT.Common.Model.Models
         [EmailAddress]
         public string Email { get; set; }
         public bool ShouldRecieve { get; set; }
-        public decimal Threshold { get; set; }
+        public decimal UpperThreshold { get; set; }
+        public decimal LowerThreshold { get; set; }
         public String SensorId { get; set; }
         //public DateTime LastSmsRecievedTime { get; set; }
 
