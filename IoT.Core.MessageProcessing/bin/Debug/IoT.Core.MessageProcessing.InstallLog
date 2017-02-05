@@ -1,0 +1,48 @@
+﻿Installing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe
+Installing service QueueReader...
+Creating EventLog source QueueReader in log Application...
+Rolling back assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe
+Restoring event log to previous state for source QueueReader.
+Installing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe
+Installing service QueueReader...
+Service QueueReader has been successfully installed.
+Creating EventLog source QueueReader in log Application...
+Committing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe
+Uninstalling assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe
+Removing EventLog source QueueReader.
+Service QueueReader is being removed from the system...
+Service QueueReader was successfully removed from the system.
+Attempt to stop service QueueReader.
+Installing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe
+Installing service QueueReader...
+Service QueueReader has been successfully installed.
+Creating EventLog source QueueReader in log Application...
+Committing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.MessageProcessing\bin\Debug\IoT.Core.MessageProcessing.exe

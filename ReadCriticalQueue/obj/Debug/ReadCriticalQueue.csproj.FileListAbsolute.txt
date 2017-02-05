@@ -1,0 +1,8 @@
+C:\Users\ajayk\Source\Repos\IOTApi\ReadCriticalQueue\bin\Debug\ReadCriticalQueue.exe.config
+C:\Users\ajayk\Source\Repos\IOTApi\ReadCriticalQueue\bin\Debug\ReadCriticalQueue.exe
+C:\Users\ajayk\Source\Repos\IOTApi\ReadCriticalQueue\bin\Debug\ReadCriticalQueue.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\ReadCriticalQueue\bin\Debug\Microsoft.ServiceBus.dll
+C:\Users\ajayk\Source\Repos\IOTApi\ReadCriticalQueue\bin\Debug\Microsoft.ServiceBus.xml
+C:\Users\ajayk\Source\Repos\IOTApi\ReadCriticalQueue\obj\Debug\ReadCriticalQueue.csprojResolveAssemblyReference.cache
+C:\Users\ajayk\Source\Repos\IOTApi\ReadCriticalQueue\obj\Debug\ReadCriticalQueue.exe
+C:\Users\ajayk\Source\Repos\IOTApi\ReadCriticalQueue\obj\Debug\ReadCriticalQueue.pdb

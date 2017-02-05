@@ -735,3 +735,169 @@ Affected parameters are:
    logtoconsole = 
    logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
    assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Uninstalling assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Removing EventLog source IoTPollService.
+Service IoTPollService is being removed from the system...
+Service IoTPollService was successfully removed from the system.
+Installing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Installing service IoTPollService...
+Service IoTPollService has been successfully installed.
+Creating EventLog source IoTPollService in log Application...
+Committing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Uninstalling assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Removing EventLog source IoTPollService.
+Service IoTPollService is being removed from the system...
+Service IoTPollService was successfully removed from the system.
+Attempt to stop service IoTPollService.
+Installing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Installing service IoTSensorSubscriptionService...
+Service IoTSensorSubscriptionService has been successfully installed.
+Creating EventLog source IoTSensorSubscriptionService in log Application...
+Committing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Uninstalling assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Removing EventLog source IoTSensorSubscriptionService.
+Service IoTSensorSubscriptionService is being removed from the system...
+Service IoTSensorSubscriptionService was successfully removed from the system.
+Attempt to stop service IoTSensorSubscriptionService.
+Installing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Installing service IoTPollService...
+Service IoTPollService has been successfully installed.
+Creating EventLog source IoTPollService in log Application...
+Committing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Uninstalling assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Removing EventLog source IoTPollService.
+Service IoTPollService is being removed from the system...
+Service IoTPollService was successfully removed from the system.
+Attempt to stop service IoTPollService.
+Installing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Installing service IoTPollService...
+Service IoTPollService has been successfully installed.
+Creating EventLog source IoTPollService in log Application...
+Committing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Uninstalling assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Removing EventLog source IoTPollService.
+Service IoTPollService is being removed from the system...
+Service IoTPollService was successfully removed from the system.
+Attempt to stop service IoTPollService.
+Installing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Installing service IoTPollService...
+Service IoTPollService has been successfully installed.
+Creating EventLog source IoTPollService in log Application...
+Committing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Uninstalling assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Removing EventLog source IoTPollService.
+Service IoTPollService is being removed from the system...
+Service IoTPollService was successfully removed from the system.
+Attempt to stop service IoTPollService.
+Installing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Installing service IoTPollService...
+Service IoTPollService has been successfully installed.
+Creating EventLog source IoTPollService in log Application...
+Committing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Uninstalling assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Removing EventLog source IoTPollService.
+Service IoTPollService is being removed from the system...
+Service IoTPollService was successfully removed from the system.
+Attempt to stop service IoTPollService.
+Installing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Installing service IoTPollService...
+Creating EventLog source IoTPollService in log Application...
+Rolling back assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Restoring event log to previous state for source IoTPollService.
+Installing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe
+Installing service IoTPollService...
+Service IoTPollService has been successfully installed.
+Creating EventLog source IoTPollService in log Application...
+Committing assembly 'C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.InstallLog
+   assemblypath = C:\Users\ajayk\Source\Repos\IOTApi\IoTSensorPolling\bin\Debug\IoTSensorPolling.exe

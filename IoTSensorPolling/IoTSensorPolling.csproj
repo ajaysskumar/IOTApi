@@ -67,6 +67,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IoTSensorSubscriptionService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IoTSensorSubscriptionService.Designer.cs">
+      <DependentUpon>IoTSensorSubscriptionService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mqtt\MqttClient.cs" />
     <Compile Include="PollModel\EmailMappingModel.cs" />
     <Compile Include="ProjectInstaller.cs">

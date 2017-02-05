@@ -1,0 +1,8 @@
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Debug\IoT.Core.Email.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Debug\IoT.Core.Email.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Debug\MailChimp.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Debug\ServiceStack.Text.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Debug\ServiceStack.Text.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Debug\IoT.Core.Email.csprojResolveAssemblyReference.cache
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Debug\IoT.Core.Email.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Debug\IoT.Core.Email.pdb

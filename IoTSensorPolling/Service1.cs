@@ -36,7 +36,7 @@ namespace IoTSensorPolling
                 IoT.Core.AppManager.Helpers.SystemConfiguration.MqttServerUserName,
                 IoT.Core.AppManager.Helpers.SystemConfiguration.MqttServerPassword);
 
-        
+
 
         static List<MotionSensor> temperatureData = new List<MotionSensor>();
 
@@ -46,11 +46,18 @@ namespace IoTSensorPolling
 
         static DateTime currenteDate = DateTime.UtcNow.AddSeconds(-MeasureInterval);
         static Status currentRelayStatus = null;
-        static string relayGroupMac = "18:FE:34:D4:7F:85";
+        static string _relayGroupMac = "18:FE:34:D4:7F:85";
+        static string _sensorIdMac = "18:FE:34:D4:7F:85";
+        static decimal _minThreshold = 24;
+        static decimal _maxThreshold = 26;
 
         private static int PollInterval { get { return _pollInterval * 1000; } }
         private static int MeasureInterval { get { return _measureInterval; } }
-        //private ApplicationDbContext _context;
+        private static string CurrentActiveRelayGroupMac { get { return _relayGroupMac; } }
+
+        private static string CurrentActiveSensorIdMac { get { return _sensorIdMac; } }
+        private static decimal MinThreshold { get { return _minThreshold; } }
+        private static decimal MaxThreshold { get { return _maxThreshold; } }
         public IoTPollService()
         {
             InitializeComponent();
@@ -78,16 +85,22 @@ namespace IoTSensorPolling
 
             try
             {
-                IoT.Common.Logging.IoTEventSourceManager.Log.Debug("inside On Start - Before Db context","WindowsServiceLog");
+                IoT.Common.Logging.IoTEventSourceManager.Log.Debug("inside On Start - Before Db context", "WindowsServiceLog");
 
                 using (ApplicationDbContext context = new ApplicationDbContext())
                 {
-                    _pollInterval = int.Parse(context.SystemConfiguration.Where(x => x.Key == "PollInterval").FirstOrDefault().Value);
-                    _measureInterval = int.Parse(context.SystemConfiguration.Where(x => x.Key == "MeasureInterval").FirstOrDefault().Value);
+                    _pollInterval = int.Parse(context.SystemConfiguration.Where(x => x.Key == "PollInterval").FirstOrDefault()?.Value);
+                    _measureInterval = int.Parse(context.SystemConfiguration.Where(x => x.Key == "MeasureInterval").FirstOrDefault()?.Value);
+
+                    //_relayGroupMac = context.SystemConfiguration.Where(x => x.Key == "CurrentActiveRelayGroupMac").FirstOrDefault()?.Value;
+                    //_sensorIdMac = context.SystemConfiguration.Where(x => x.Key == "CurrentActiveSensorIdMac").FirstOrDefault()?.Value;
+                    //_minThreshold = decimal.Parse(context.SystemConfiguration.Where(x => x.Key == "MinThreshold").FirstOrDefault()?.Value);
+                    //_maxThreshold = decimal.Parse(context.SystemConfiguration.Where(x => x.Key == "MaxThreshold").FirstOrDefault()?.Value);
+
 
                     if (_pollInterval == 0)
                     {
-                        IoT.Common.Logging.IoTEventSourceManager.Log.Debug("pollinterval : value not defined for the configuration or it is 0.","WindowsServiceLog");
+                        IoT.Common.Logging.IoTEventSourceManager.Log.Debug("pollinterval : value not defined for the configuration or it is 0.", "WindowsServiceLog");
                         throw new Exception("Value not defined for the configuration or it is 0.");
                     }
                 }
@@ -116,129 +129,94 @@ namespace IoTSensorPolling
 
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            IoTEventSourceManager.Log.Debug("Inside On timed Interval","WindowsServiceLog");
+            IoTEventSourceManager.Log.Debug("Inside On timed Interval", "WindowsServiceLog");
 
-            //temperatureData = new List<MotionSensor>();
+            temperatureData = new List<MotionSensor>();
 
-            //emailRecipientList = new List<EmailMappingModel>();
+            emailRecipientList = new List<EmailMappingModel>();
 
-            //recipientList = new List<Admin>();
+            recipientList = new List<Admin>();
 
-            //currenteDate = DateTime.UtcNow.AddSeconds(-MeasureInterval);
-
-            //try
-            //{
-            //    using (ApplicationDbContext context = new ApplicationDbContext())
-            //    {
-            //        recipientList = context.Admin.Where(x => x.ShouldRecieve).ToList();
-
-            //        foreach (var recipient in recipientList)
-            //        {
-            //            var tempPoints = context.MotionsSensor.Where(x => x.DeviceId == recipient.SensorId && x.Timestamp >= currenteDate).OrderBy(x => x.Timestamp).ToList();
-
-            //            if (tempPoints.Count > 0)
-            //            {
-            //                int pointsCount = tempPoints.Count;
-
-            //                decimal averageTemp = tempPoints.Sum(x => decimal.Parse(x.MotionValue)) / pointsCount;
-            //                decimal averageHumid = tempPoints.Sum(x => decimal.Parse(x.MotionTime)) / pointsCount;
-
-            //                EmailMappingModel model = new EmailMappingModel
-            //                {
-            //                    Admin = recipient,
-            //                    AverageHumidity = averageHumid,
-            //                    AverageTemperature = averageTemp
-            //                };
-
-            //                emailRecipientList.Add(model);
-            //            }
-
-
-
-            //        }
-            //    }
-
-            //    foreach (var recipient in emailRecipientList)
-            //    {
-            //        if (recipient.AverageTemperature < recipient.Admin.Threshold)
-            //        {
-            //            EmailClient client = new EmailClient();
-            //            client.SendEmail(recipient.AverageTemperature, recipient.AverageHumidity, MeasureInterval, recipient.Admin.Email, recipient.Admin.Name);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    IoTEventSourceManager.Log.Debug(ex.Message,"WindowsServiceLog");
-            //}
-
-
-            //try
-            //{
-            //    IoTEventSourceManager.Log.Debug("Email sending activity started", "WindowsServiceLog");
-
-            //    foreach (var recipient in emailRecipientList)
-            //    {
-            //        if (recipient.AverageTemperature < recipient.Admin.Threshold)
-            //        {
-            //            //Send email
-            //            EmailClient client = new EmailClient();
-            //            client.SendEmail(recipient.AverageTemperature, recipient.AverageHumidity, MeasureInterval, recipient.Admin.Email, recipient.Admin.Name);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    IoTEventSourceManager.Log.Debug(ex.Message, "WindowsServiceLog");
-            //}
-
-            //foreach (var relayGroup in relayGroups)
-            //{
-            //Send switch off request.
+            currenteDate = DateTime.UtcNow.AddSeconds(-MeasureInterval);
 
             try
             {
-                
-
-                if (!_mqttClient.ClientConnected)
+                using (ApplicationDbContext context = new ApplicationDbContext())
                 {
-                    _mqttClient.Start();
-                    _mqttClient.RegisterOurSubscriptions("relayActionConfirmation/18:FE:34:D4:7F:85");
-                }
 
-                
+                    _relayGroupMac = context.SystemConfiguration.Where(x => x.Key == "CurrentActiveRelayGroupMac").FirstOrDefault()?.Value;
+                    _sensorIdMac = context.SystemConfiguration.Where(x => x.Key == "CurrentActiveSensorIdMac").FirstOrDefault()?.Value;
+                    _minThreshold = decimal.Parse(context.SystemConfiguration.Where(x => x.Key == "MinThreshold").FirstOrDefault()?.Value);
+                    _maxThreshold = decimal.Parse(context.SystemConfiguration.Where(x => x.Key == "MaxThreshold").FirstOrDefault()?.Value);
 
-                try
-                {
-                    currentRelayStatus = _mqttClient.GetRelayGroupStatus(relayGroupMac);
-                }
-                catch (Exception ex)
-                {
-                    IoTEventSourceManager.Log.Debug(ex.Message, "WindowsServiceLog");
-                }
+                    IoTEventSourceManager.Log.Debug(string.Format("{0}-{1}-{2}-{3}", _relayGroupMac, _sensorIdMac, _minThreshold, _maxThreshold), "WindowsServiceLog");
 
-                if (currentRelayStatus != null)
-                {
-                    string msgId = Guid.NewGuid().ToString();
+                    //recipientList = context.Admin.Where(x => x.ShouldRecieve).ToList();
 
-                    string statusToSet = IoTAppHelper.AppHelper.GetStatus(currentRelayStatus.Relays.Relay.Where(x => x.RelayName == "1").FirstOrDefault().RelayStatus == "1" ? false : true);
+                    //foreach (var recipient in recipientList)
+                    //{
+                    var tempPoints = context.MotionsSensor.Where(x => x.DeviceId == CurrentActiveSensorIdMac.Replace(":","") && x.Timestamp >= currenteDate).OrderBy(x => x.Timestamp).ToList();
 
-                    IoTEventSourceManager.Log.Debug(string.Format("Request to Relay : {0}; Status to set : {1}; MsgId : {2}", currentRelayStatus.DeviceId, statusToSet, msgId), "WindowsServiceLog");
-
-                    if (currentRelayStatus.Relays.Relay.Where(x => x.RelayName == "1").FirstOrDefault().RelayStatus == IoT.Core.AppManager.Helpers.SystemConfiguration.DeviceConfig.SwitchOff)
+                    if (tempPoints.Count > 0)
                     {
-                        IoTEventSourceManager.Log.Debug(string.Format("Switch On Request to Relay : {0}; Status to set : {1}; MsgId : {2}", currentRelayStatus.DeviceId, IoTAppHelper.SystemConfiguration.DeviceConfig.SwitchOn, msgId), "WindowsServiceLog");
+                        int pointsCount = tempPoints.Count;
 
-                        _mqttClient.PublishSomething(IoTAppHelper.AppHelper.GetNodeMCUPin(1).ToString(), IoTAppHelper.SystemConfiguration.DeviceConfig.SwitchOn, msgId, string.Format("relayActionRequest/{0}", currentRelayStatus.DeviceId));
+                        decimal averageTemp = tempPoints.Sum(x => decimal.Parse(x.MotionValue)) / pointsCount;
+                        decimal averageHumid = tempPoints.Sum(x => decimal.Parse(x.MotionTime)) / pointsCount;
+
+                        try
+                        {
+                            if (!_mqttClient.ClientConnected)
+                            {
+                                _mqttClient.Start();
+                                _mqttClient.RegisterOurSubscriptions(string.Format("relayActionConfirmation/{0}", CurrentActiveRelayGroupMac));
+                            }
+
+                            try
+                            {
+                                currentRelayStatus = _mqttClient.GetRelayGroupStatus(CurrentActiveRelayGroupMac);
+                            }
+                            catch (Exception ex)
+                            {
+                                IoTEventSourceManager.Log.Debug(ex.Message, "WindowsServiceLog");
+                            }
+
+                            if (currentRelayStatus != null)
+                            {
+                                string msgId = Guid.NewGuid().ToString();
+
+                                string statusToSet = IoTAppHelper.AppHelper.GetStatus(currentRelayStatus.Relays.Relay.Where(x => x.RelayName == "1").FirstOrDefault().RelayStatus == "1" ? false : true);
+
+                                IoTEventSourceManager.Log.Debug(string.Format("Request to Relay : {0}; Status to set : {1}; MsgId : {2}", currentRelayStatus.DeviceId, statusToSet, msgId), "WindowsServiceLog");
+
+                                if (
+                                    (averageTemp > MinThreshold && averageTemp < MaxThreshold)
+                                    && currentRelayStatus.Relays.Relay.Where(x => x.RelayName == "1").FirstOrDefault().RelayStatus == IoTAppHelper.SystemConfiguration.DeviceConfig.SwitchOn
+                                    )
+                                {
+                                    IoTEventSourceManager.Log.Debug(string.Format("Switch On Request to Relay : {0}; Status to set : {1}; MsgId : {2}", currentRelayStatus.DeviceId, IoTAppHelper.SystemConfiguration.DeviceConfig.SwitchOff, msgId), "WindowsServiceLog");
+
+                                    _mqttClient.PublishSomething(IoTAppHelper.AppHelper.GetNodeMCUPin(1).ToString(), IoTAppHelper.SystemConfiguration.DeviceConfig.SwitchOff, msgId, string.Format("relayActionRequest/{0}", currentRelayStatus.DeviceId));
+                                }
+                                if (
+                                    (averageTemp < MinThreshold || averageTemp > MaxThreshold)
+                                    && currentRelayStatus.Relays.Relay.Where(x => x.RelayName == "1").FirstOrDefault().RelayStatus == IoTAppHelper.SystemConfiguration.DeviceConfig.SwitchOff
+                                    )
+                                {
+                                    IoTEventSourceManager.Log.Debug(string.Format("Switch Off Request to Relay : {0}; Status to set : {1}; MsgId : {2}", currentRelayStatus.DeviceId, IoTAppHelper.SystemConfiguration.DeviceConfig.SwitchOn, msgId), "WindowsServiceLog");
+
+                                    _mqttClient.PublishSomething(IoTAppHelper.AppHelper.GetNodeMCUPin(1).ToString(), IoTAppHelper.SystemConfiguration.DeviceConfig.SwitchOn, msgId, string.Format("relayActionRequest/{0}", currentRelayStatus.DeviceId));
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            IoTEventSourceManager.Log.Debug(ex.Message, "WindowsServiceLog");
+                        }
                     }
-                    else
-                    {
-                        IoTEventSourceManager.Log.Debug(string.Format("Switch Off Request to Relay : {0}; Status to set : {1}; MsgId : {2}", currentRelayStatus.DeviceId, IoTAppHelper.SystemConfiguration.DeviceConfig.SwitchOff, msgId), "WindowsServiceLog");
-
-                        _mqttClient.PublishSomething(IoTAppHelper.AppHelper.GetNodeMCUPin(1).ToString(), IoTAppHelper.SystemConfiguration.DeviceConfig.SwitchOff, msgId,string.Format("relayActionRequest/{0}",currentRelayStatus.DeviceId));
-                    }
-
                 }
+
+
             }
             catch (Exception ex)
             {
