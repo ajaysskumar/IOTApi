@@ -86,7 +86,7 @@
 55	            if (this.IsEnabled()) this.WriteEvent(3, msgId, message, DateTime.UtcNow);
 </Source>
       </BreakPoint>
-      <BreakPoint Index="5" Name="MotionSensorController.cs, line 225 character 17" Id="e2d9027a-7711-4b62-b2e5-53ea9fe840cc" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\iotdemowebapp\controllers\motionsensorcontroller.cs" FileLine="225" FileColumn="17" FunctionName="IotDemoWebApp.Controllers.MotionSensorController.PostMotionSensorModel([FromUri]MotionSensor motionSensorModel)" FunctionLineOffset="30" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C#" LocationType="3" Tag="&lt;vmbp Id='e2d9027a-7711-4b62-b2e5-53ea9fe840cc'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+      <BreakPoint Index="5" Name="motionsensorcontroller.cs, line 225 character 17" Id="e2d9027a-7711-4b62-b2e5-53ea9fe840cc" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\iotdemowebapp\controllers\motionsensorcontroller.cs" FileLine="225" FileColumn="17" FunctionName="IotDemoWebApp.Controllers.MotionSensorController.PostMotionSensorModel([FromUri]MotionSensor motionSensorModel)" FunctionLineOffset="30" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C#" LocationType="3" Tag="&lt;vmbp Id='e2d9027a-7711-4b62-b2e5-53ea9fe840cc'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
         <Source>218	            motionSensorModel.DeviceId = motionSensorModel.DeviceId.Replace(":", "");
 219	
 220	            motionSensorModel.Timestamp = DateTime.UtcNow;
@@ -206,44 +206,160 @@
 116				// but actually the LED is on; this is because
 </Source>
       </BreakPoint>
-      <BreakPoint Index="11" Name="AzureIoTMqttPublisher.ino, line 99" Id="5e2bfb63-e2dd-4648-b9fd-e3aac153279f" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\azureiotmqttpublisher\azureiotmqttpublisher.ino" FileLine="99" FileColumn="1" FunctionName="reconnect()" FunctionLineOffset="3" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='5e2bfb63-e2dd-4648-b9fd-e3aac153279f'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
-        <Source>92	  client.publish(publishTopic.c_str(), "Hello World from NodeMCU...");
-93	  delay(5000);
-94	
-95	}
-96	
-97	void reconnect() {
-98	  // Loop until we're reconnected
---&gt;99	  while (!client.connected()) {
-100	    Serial.print("Attempting MQTT connection...");
-101	    // Create a random client ID
-102	
-103	    // Attempt to connect
-104	    if (client.connect("NodeMCUPublisher001", "iot-hub-oa.azure-devices.net/NodeMCUPublisher001", "SharedAccessSignature sr=iot-hub-oa.azure-devices.net%2Fdevices%2FNodeMCUPublisher001&amp;sig=K1vBITMU0%2BYIzh5FbXxgJwETnJWoZ2gwZMcxXOXSL5U%3D&amp;se=1514370385")) {
-105	      Serial.println("connected");
-106	    
-107	      // ... and resubscribe
-108	      //client.subscribe(subscriptionTopic.c_str());
+      <BreakPoint Index="11" Name="AzureIoTMqttPublisher.ino, line 119" Id="5e2bfb63-e2dd-4648-b9fd-e3aac153279f" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\azureiotmqttpublisher\azureiotmqttpublisher.ino" FileLine="119" FileColumn="1" FunctionName="reconnect()" FunctionLineOffset="3" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='5e2bfb63-e2dd-4648-b9fd-e3aac153279f'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>112	  strcpy(password, str1); // copy to result array 
+113	  strcat(password, clientId.c_str()); // concat to result array
+114	  strcat(password, str2); // concat to result array
+115	
+116	  Serial.print(password);
+117	
+118	  // Loop until we're reconnected
+--&gt;119	  while (!client.connected()) {
+120	    Serial.print("Attempting MQTT connection...");
+121	    // Create a random client ID
+122	    Serial.println("Credentials User : " + String(clientId.c_str()));
+123	    // Attempt to connect
+124	    if (client.connect(clientId.c_str(), username, "SharedAccessSignature sr=oa-iothub-dev.azure-devices.net%2Fdevices%2F18FE34DE278F&amp;sig=hnQcfXNeQEAZBXL8NYEQd6zObzYbJsEF0RmmxODDqbQ%3D&amp;se=1512156962")) {
+125	      Serial.println("connected");
+126	    
+127	      // ... and resubscribe
+128	      //client.subscribe(subscriptionTopic.c_str());
 </Source>
       </BreakPoint>
-      <BreakPoint Index="12" Name="AzureIoTMqttPublisher.ino, line 68" Id="6b205daa-6f71-4d80-a0e8-57022813b1da" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\azureiotmqttpublisher\azureiotmqttpublisher.ino" FileLine="68" FileColumn="1" FunctionName="setup_wifi()" FunctionLineOffset="9" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='6b205daa-6f71-4d80-a0e8-57022813b1da'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
-        <Source>61	
-62	  delay(10);
-63	  // We start by connecting to a WiFi network
-64	  Serial.println();
-65	  Serial.print("Connecting to ");
-66	  Serial.println(ssid);
-67	
---&gt;68	  wifiSetup();
-69	  dht.begin();
+      <BreakPoint Index="12" Name="AzureIoTMqttPublisher.ino, line 71" Id="6b205daa-6f71-4d80-a0e8-57022813b1da" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\azureiotmqttpublisher\azureiotmqttpublisher.ino" FileLine="71" FileColumn="1" FunctionName="setup_wifi()" FunctionLineOffset="9" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='6b205daa-6f71-4d80-a0e8-57022813b1da'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>64	
+65	  delay(10);
+66	  // We start by connecting to a WiFi network
+67	  Serial.println();
+68	  Serial.print("Connecting to ");
+69	  Serial.println(ssid);
 70	
-71	  while (WiFi.status() != WL_CONNECTED) {
-72	    delay(500);
-73	    Serial.print(".");
-74	  }
-75	
-76	  randomSeed(micros());
-77	
+--&gt;71	  wifiSetup();
+72	  dht.begin();
+73	
+74	  while (WiFi.status() != WL_CONNECTED) {
+75	    delay(500);
+76	    Serial.print(".");
+77	  }
+78	
+79	  randomSeed(micros());
+80	
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="13" Name="Functions.cs, line 16 character 9" Id="1dd45fcc-ed0e-4604-8953-4f6d35ee1651" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\databasewriterjob\functions.cs" FileLine="16" FileColumn="9" FunctionName="DatabaseWriterJob.Functions.ProcessQueueMessage([QueueTrigger(&quot;sensor-input-queue&quot;)] string message, TextWriter log)" FunctionLineOffset="2" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C#" LocationType="3" Tag="&lt;vmbp Id='1dd45fcc-ed0e-4604-8953-4f6d35ee1651'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>9	namespace DatabaseWriterJob
+10	{
+11	    public class Functions
+12	    {
+13	        // This function will get triggered/executed when a new message is written 
+14	        // on an Azure Queue called queue.
+15	        public static void ProcessQueueMessage([QueueTrigger("sensor-input-queue")] string message, TextWriter log)
+--&gt;16	        {
+17	            log.WriteLine(message);
+18	            Console.WriteLine(message);
+19	        }
+20	    }
+21	}
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="14" Name="MotionSensorController.cs, line 89 character 13" Id="301e4840-a977-49d2-908b-c1ed68391fde" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\iotdemowebapp\controllers\motionsensorcontroller.cs" FileLine="89" FileColumn="13" FunctionName="IotDemoWebApp.Controllers.MotionSensorController.GetTopDatapoints(int top,string sensorId)" FunctionLineOffset="5" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C#" LocationType="3" Tag="&lt;vmbp Id='301e4840-a977-49d2-908b-c1ed68391fde'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>82	            return dataPoints;
+83	        }
+84	
+85	        [HttpGet]
+86	        [Route("api/gettopdatapoints")]
+87	        public IEnumerable&lt;MotionSensor&gt; GetTopDatapoints(int top,string sensorId)
+88	        {
+--&gt;89	            int timeframe = top * 60 * 60;
+90	            int numberOfPoints = top * 60 / 12;
+91	
+92	            DateTime currenteDate = DateTime.UtcNow.AddHours(-top);
+93	
+94	            List&lt;MotionSensor&gt; data = new List&lt;MotionSensor&gt;();
+95	
+96	            List&lt;MotionSensor&gt; dataPoints = new List&lt;MotionSensor&gt;();
+97	
+98	            List&lt;List&lt;MotionSensor&gt;&gt; dataPointGroups = new List&lt;List&lt;MotionSensor&gt;&gt;();
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="15" Name="MotionSensorController.cs, line 119 character 13" Id="5d5d28bd-15e7-4642-8878-7c3b0eef3765" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\iotdemowebapp\controllers\motionsensorcontroller.cs" FileLine="119" FileColumn="13" FunctionName="IotDemoWebApp.Controllers.MotionSensorController.GetTopDatapoints(int top,int lastRecord, string sensorId)" FunctionLineOffset="5" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C#" LocationType="3" Tag="&lt;vmbp Id='5d5d28bd-15e7-4642-8878-7c3b0eef3765'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>112	            return data;
+113	        }
+114	
+115	        [HttpGet]
+116	        [Route("api/getdatapointspartial")]
+117	        public IEnumerable&lt;MotionSensor&gt; GetTopDatapoints(int top,int lastRecord, string sensorId)
+118	        {
+--&gt;119	            int timeframe = top * 60 * 60;
+120	            int numberOfPoints = top * 60 / 12;
+121	
+122	            DateTime currenteDate = DateTime.UtcNow.AddHours(-top);
+123	
+124	            List&lt;MotionSensor&gt; data = new List&lt;MotionSensor&gt;();
+125	
+126	            List&lt;MotionSensor&gt; dataPoints = new List&lt;MotionSensor&gt;();
+127	
+128	            List&lt;List&lt;MotionSensor&gt;&gt; dataPointGroups = new List&lt;List&lt;MotionSensor&gt;&gt;();
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="16" Name="MotionSensorController.cs, line 198 character 13" Id="2f26c5da-88fb-4b87-a9e7-e54d03deaab2" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\iotdemowebapp\controllers\motionsensorcontroller.cs" FileLine="198" FileColumn="13" FunctionName="IotDemoWebApp.Controllers.MotionSensorController.PostMotionSensorModel([FromUri]MotionSensor motionSensorModel)" FunctionLineOffset="3" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C#" LocationType="3" Tag="&lt;vmbp Id='2f26c5da-88fb-4b87-a9e7-e54d03deaab2'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>191	            return StatusCode(HttpStatusCode.NoContent);
+192	        }
+193	
+194	        // POST: api/MotionSensor
+195	        //[ResponseType(typeof(MotionSensor))]
+196	        public async Task&lt;IHttpActionResult&gt; PostMotionSensorModel([FromUri]MotionSensor motionSensorModel)
+197	        {
+--&gt;198	            decimal temperature = 0.00m;
+199	            decimal humidity = 0.00m;
+200	
+201	            if (!decimal.TryParse(motionSensorModel.MotionValue,out temperature) &amp;&amp; !decimal.TryParse(motionSensorModel.MotionValue, out humidity))
+202	            {
+203	                string method = Helper.GetCurrentMethod();
+204	                string objectString = Helper.ConvertObjectToXML(motionSensorModel);
+205	
+206	                //db.Trace.Add(new Trace {
+207	                //    Error = "invalid model",
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="17" Name="MotionSensorController.cs, line 259 character 13" Id="c4025f94-1f6e-4d31-a07b-fbcb046ef673" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\iotdemowebapp\controllers\motionsensorcontroller.cs" FileLine="259" FileColumn="13" FunctionName="IotDemoWebApp.Controllers.MotionSensorController.FlushDb(int startId,int stopId)" FunctionLineOffset="5" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C#" LocationType="3" Tag="&lt;vmbp Id='c4025f94-1f6e-4d31-a07b-fbcb046ef673'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>252	
+253	        // DELETE: api/MotionSensor
+254	        //[ResponseType(typeof(MotionSensorModel))]
+255	        [HttpPost]
+256	        [Route("api/flushdb")]
+257	        public async Task&lt;IHttpActionResult&gt; FlushDb(int startId,int stopId)
+258	        {
+--&gt;259	            var dbSet = db.MotionsSensor.Where(x =&gt; x.Id &gt;= startId &amp;&amp; x.Id &lt;= stopId);
+260	            foreach (var item in dbSet)
+261	            {
+262	                db.MotionsSensor.Remove(item);
+263	            }
+264	            await db.SaveChangesAsync();
+265	
+266	            return Ok();
+267	        }
+268	
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="18" Name="DeviceSettingsController.cs, line 30 character 9" Id="6f522173-8652-4c6e-8be9-0ef485adf83b" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="c:\users\ajayk\source\repos\iotapi\iotdemowebapp\controllers\devicesettingscontroller.cs" FileLine="30" FileColumn="9" FunctionName="IotDemoWebApp.Controllers.DeviceSettingsController.Get([FromUri]string deviceId)" FunctionLineOffset="4" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C#" LocationType="3" Tag="&lt;vmbp Id='6f522173-8652-4c6e-8be9-0ef485adf83b'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>23	            iotHubConnectionString = ConfigurationManager.AppSettings["iotHubConnectionString"];
+24	            this.registryManager = RegistryManager.CreateFromConnectionString(iotHubConnectionString);
+25	        }
+26	
+27	        [HttpGet]
+28	        //[Route("device")]
+29	        public async Task&lt;IHttpActionResult&gt; Get([FromUri]string deviceId)
+--&gt;30	        {
+31	
+32	                Device device = await registryManager.GetDeviceAsync(deviceId);
+33	
+34	                string[] connectionString = CreateDeviceConnectionString(device).Split(';');
+35	
+36	                string sasKey = connectionString[1].TrimStart("SharedAccessSignature=".ToCharArray());
+37	                string hostName = connectionString[0].Split('=')[1];
+38	
+39	                return Ok(new {
 </Source>
       </BreakPoint>
     </BreakPoints>

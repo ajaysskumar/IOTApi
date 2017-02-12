@@ -1,0 +1,109 @@
+﻿@using Newtonsoft.Json;
+@model IEnumerable<IoT.Common.Model.Models.DeviceEntity>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@*<link rel="stylesheet" href="/resources/demos/style.css">*@
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script>
+    $(function () {
+        $("#accordion").accordion({
+            //header: 'header'
+        });
+    });
+    //$(".selector").accordion("option", "header", "h3");
+</script>
+
+
+<div id="accordion">
+    @foreach (var device in Model)
+    {
+        <h3>
+            @device.Id
+        </h3>
+        <div>
+            <div class="row">
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-6">Primary Key</div>
+                        <div class="col-md-6">@device.PrimaryKey</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">Secondary Key</div>
+                        <div class="col-md-6">@device.SecondaryKey</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">Primary thumbprint</div>
+                        <div class="col-md-6">@device.PrimaryThumbPrint</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">Secondary Thumbprint</div>
+                        <div class="col-md-6">@device.SecondaryThumbPrint</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">Connection String</div>
+                        <div class="col-md-6">@device.ConnectionString</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">ConnectionState</div>
+                        <div class="col-md-6">@device.ConnectionState=="Connected"</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">Last Activity Time</div>
+                        <div class="col-md-6">@device.LastActivityTime</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">Last Connection Time </div>
+                        <div class="col-md-6">@device.LastConnectionStateUpdatedTime</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">Last State Updated Time</div>
+                        <div class="col-md-6">@device.LastStateUpdatedTime</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">Message Count</div>
+                        <div class="col-md-6">@device.MessageCount</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">State</div>
+                        <div class="col-md-6">@device.State</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">Suspension Reason</div>
+                        <div class="col-md-6">@device.SuspensionReason</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form method="post" action="Delete">
+                                <input type="hidden" name="Id" id="deviceId" value="@device.Id" />
+                                
+                            </form>
+                        </div>
+                        @*<div class="col-md-6">
+                            <
+                        </div>*@
+                    </div>
+                </div>
+                <div class="col-md-1">
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

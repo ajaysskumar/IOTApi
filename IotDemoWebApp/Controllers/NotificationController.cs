@@ -47,8 +47,8 @@ namespace IotDemoWebApp.Controllers
                         {
                             int pointsCount = tempPoints.Count;
 
-                            decimal averageTemp = tempPoints.Sum(x => decimal.Parse(x.MotionValue)) / pointsCount;
-                            decimal averageHumid = tempPoints.Sum(x => decimal.Parse(x.MotionTime)) / pointsCount;
+                            decimal averageTemp = tempPoints.Sum(x => x.MotionValue) / pointsCount;
+                            decimal averageHumid = tempPoints.Sum(x => x.MotionTime) / pointsCount;
 
                             EmailMappingModel model = new EmailMappingModel
                             {
@@ -58,8 +58,8 @@ namespace IotDemoWebApp.Controllers
                                 IntervalTime = MeasureInterval,
                                 AverageHumidity = averageHumid,
                                 AverageTemperature = averageTemp,
-                                UpperThreshold = recipient.UpperThreshold,
-                                LowerThreshold = recipient.LowerThreshold
+                                UpperThreshold = recipient.UpperTemperatureThreshold,
+                                LowerThreshold = recipient.LowerTemperatureThreshold
                             };
 
                             emailRecipientList.Add(model);

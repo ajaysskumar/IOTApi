@@ -1,0 +1,10 @@
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Sms\bin\Release\IoT.Core.Sms.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Sms\bin\Release\IoT.Core.Sms.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Sms\bin\Release\RestSharp.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Sms\bin\Release\Twilio.Api.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Sms\bin\Release\RestSharp.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Sms\bin\Release\Twilio.Api.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Sms\bin\Release\Twilio.Api.xml
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Sms\obj\Release\IoT.Core.Sms.csprojResolveAssemblyReference.cache
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Sms\obj\Release\IoT.Core.Sms.dll
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Sms\obj\Release\IoT.Core.Sms.pdb

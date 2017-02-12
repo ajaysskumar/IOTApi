@@ -13,15 +13,15 @@ namespace IoT.Common.Model.Models
         public int Id { get; set; }
 
 
-        public string MotionValue { get; set; }
+        public decimal MotionValue { get; set; }
 
-        public string MotionTime { get; set; }
+        public decimal MotionTime { get; set; }
 
         public string DeviceId { get; set; }
 
         public DateTime Timestamp { get; set; }
 
-        public virtual WifiSensor Device { get; set; }
+        //public virtual WifiSensor Device { get; set; }
     }
 
     public class WifiSensor
@@ -59,12 +59,14 @@ namespace IoT.Common.Model.Models
         public int Id { get; set; }
         public String Name { get; set; }
         public String Mobile { get; set; }
-
-        [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public bool ShouldRecieve { get; set; }
-        public decimal UpperThreshold { get; set; }
-        public decimal LowerThreshold { get; set; }
+        public decimal UpperTemperatureThreshold { get; set; }
+        public decimal LowerTemperatureThreshold { get; set; }
+        public decimal UpperHumidityThreshold { get; set; }
+        public decimal LowerHumidityThreshold { get; set; }
+        
         public String SensorId { get; set; }
         //public DateTime LastSmsRecievedTime { get; set; }
 
@@ -149,5 +151,32 @@ namespace IoT.Common.Model.Models
         public string Key { get; set; }
         [Required]
         public string Value { get; set; }
+    }
+
+    public class DeviceEntity {
+
+        public string Id { get; set; }
+        public string PrimaryKey { get; set; }
+        public string SecondaryKey { get; set; }
+        public string PrimaryThumbPrint { get; set; }
+        public string SecondaryThumbPrint { get; set; }
+        public string ConnectionString { get; set; }
+        public string ConnectionState { get; set; }
+        public DateTime LastActivityTime { get; set; }
+        public DateTime LastConnectionStateUpdatedTime { get; set; }
+        public DateTime LastStateUpdatedTime { get; set; }
+        public int MessageCount { get; set; }
+        public string State { get; set; }
+        public string SuspensionReason { get; set; }
+
+        public int CompareTo(DeviceEntity other)
+        {
+            return string.Compare(this.Id, other.Id, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public override string ToString()
+        {
+            return $"Device ID = {this.Id}, Primary Key = {this.PrimaryKey}, Secondary Key = {this.SecondaryKey}, Primary Thumbprint = {this.PrimaryThumbPrint}, Secondary Thumbprint = {this.SecondaryThumbPrint}, ConnectionString = {this.ConnectionString}, ConnState = {this.ConnectionState}, ActivityTime = {this.LastActivityTime}, LastConnState = {this.LastConnectionStateUpdatedTime}, LastStateUpdatedTime = {this.LastStateUpdatedTime}, MessageCount = {this.MessageCount}, State = {this.State}, SuspensionReason = {this.SuspensionReason}\r\n";
+        }
     }
 }

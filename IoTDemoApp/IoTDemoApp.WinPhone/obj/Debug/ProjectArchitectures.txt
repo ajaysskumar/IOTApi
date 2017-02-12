@@ -1,0 +1,1 @@
+C:\Users\ajayk\Source\Repos\IOTApi\IoTDemoApp\IoTDemoApp.WinPhone\IoTDemoApp.WinPhone.csproj;neutral

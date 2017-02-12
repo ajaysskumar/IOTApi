@@ -17,6 +17,8 @@ using MongoDB.Driver;
 using OnActuate.Iot.Core.Logging;
 using System.Text.RegularExpressions;
 using IoT.Common.Model.Models;
+using System.Threading;
+using IoT.Common.Logging;
 
 namespace IotDemoWebApp.Controllers
 {
@@ -36,10 +38,10 @@ namespace IotDemoWebApp.Controllers
 
         [HttpGet]
         [Route("api/gettop")]
-        public IEnumerable<MotionSensor> GetTop(int top,string sensorId)
+        public IEnumerable<MotionSensor> GetTop(int top, string sensorId)
         {
             int timeframe = top * 60 * 60;
-            int numberOfPoints = top*60 / 12;
+            int numberOfPoints = top * 60 / 12;
 
             DateTime currenteDate = DateTime.UtcNow.AddSeconds(-top);
 
@@ -49,11 +51,12 @@ namespace IotDemoWebApp.Controllers
 
             List<List<MotionSensor>> dataPointGroups = new List<List<MotionSensor>>();
 
-            var queryData = db.MotionsSensor.Where(x => x.Timestamp>=currenteDate && x.DeviceId==sensorId).OrderByDescending(x => x.Timestamp);
+            var queryData = db.MotionsSensor.Where(x => x.Timestamp >= currenteDate && x.DeviceId == sensorId).OrderByDescending(x => x.Timestamp);
 
             foreach (var item in queryData)
             {
-                data.Add(new MotionSensor {
+                data.Add(new MotionSensor
+                {
                     Id = item.Id,
                     MotionTime = item.MotionTime,
                     MotionValue = item.MotionValue,
@@ -71,8 +74,8 @@ namespace IotDemoWebApp.Controllers
             {
                 int listCount = list.Count;
                 MotionSensor model = new MotionSensor();
-                model.MotionValue =(list.Sum(x => Convert.ToDecimal(x.MotionValue))/ listCount).ToString();
-                model.MotionTime = (list.Sum(x => Convert.ToDecimal(x.MotionTime)) / listCount).ToString();
+                model.MotionValue = (list.Sum(x => x.MotionValue) / listCount);
+                model.MotionTime = (list.Sum(x => x.MotionTime) / listCount);
                 double numOfElements = list.Count / 2;
                 model.Timestamp = list[Convert.ToInt32(Math.Floor(numOfElements))].Timestamp;
 
@@ -84,7 +87,7 @@ namespace IotDemoWebApp.Controllers
 
         [HttpGet]
         [Route("api/gettopdatapoints")]
-        public IEnumerable<MotionSensor> GetTopDatapoints(int top,string sensorId)
+        public IEnumerable<MotionSensor> GetTopDatapoints(int top, string sensorId)
         {
             int timeframe = top * 60 * 60;
             int numberOfPoints = top * 60 / 12;
@@ -97,7 +100,7 @@ namespace IotDemoWebApp.Controllers
 
             List<List<MotionSensor>> dataPointGroups = new List<List<MotionSensor>>();
 
-            var queryData = db.MotionsSensor.Where(x => x.DeviceId==sensorId && x.Timestamp >= currenteDate).OrderByDescending(x => x.Timestamp);
+            var queryData = db.MotionsSensor.Where(x => x.DeviceId == sensorId && x.Timestamp >= currenteDate).OrderByDescending(x => x.Timestamp);
 
             foreach (var item in queryData)
             {
@@ -114,7 +117,7 @@ namespace IotDemoWebApp.Controllers
 
         [HttpGet]
         [Route("api/getdatapointspartial")]
-        public IEnumerable<MotionSensor> GetTopDatapoints(int top,int lastRecord, string sensorId)
+        public IEnumerable<MotionSensor> GetTopDatapoints(int top, int lastRecord, string sensorId)
         {
             int timeframe = top * 60 * 60;
             int numberOfPoints = top * 60 / 12;
@@ -127,19 +130,53 @@ namespace IotDemoWebApp.Controllers
 
             List<List<MotionSensor>> dataPointGroups = new List<List<MotionSensor>>();
 
-            var queryData = db.MotionsSensor.Where(x => x.DeviceId == sensorId && x.Timestamp >= currenteDate && x.Id>lastRecord).OrderBy(x => x.Timestamp);
+            var queryData = db.MotionsSensor.Where(x => x.DeviceId == sensorId && x.Timestamp >= currenteDate && x.Id > lastRecord).OrderBy(x => x.Timestamp).ToArray();
 
-            foreach (var item in queryData)
+            int recordCount = queryData.Count();
+
+            var counter = 20;
+
+            while(counter >= 20 && recordCount>counter)
             {
-                data.Add(new MotionSensor
-                {
+                var item = queryData[counter];
+                data.Add(new MotionSensor() {
                     Id = item.Id,
                     MotionTime = item.MotionTime,
                     MotionValue = item.MotionValue,
                     Timestamp = item.Timestamp
                 });
+
+                if (recordCount - counter>=20)
+                {
+                    counter += 20;
+                }
+                else
+                {
+                    data.Add(new MotionSensor()
+                    {
+                        Id = queryData[recordCount-1].Id,
+                        MotionTime = queryData[recordCount - 1].MotionTime,
+                        MotionValue = queryData[recordCount - 1].MotionValue,
+                        Timestamp = queryData[recordCount - 1].Timestamp
+                    });
+
+                    break;
+                }
             }
 
+            if (recordCount<24)
+            {
+                foreach (var item in queryData)
+                {
+                    data.Add(new MotionSensor
+                    {
+                        Id = item.Id,
+                        MotionTime = item.MotionTime,
+                        MotionValue = item.MotionValue,
+                        Timestamp = item.Timestamp
+                    });
+                }
+            }
             return data;
         }
 
@@ -195,23 +232,9 @@ namespace IotDemoWebApp.Controllers
         //[ResponseType(typeof(MotionSensor))]
         public async Task<IHttpActionResult> PostMotionSensorModel([FromUri]MotionSensor motionSensorModel)
         {
-            decimal temperature = 0.00m;
-            decimal humidity = 0.00m;
-
-            if (!decimal.TryParse(motionSensorModel.MotionValue,out temperature) && !decimal.TryParse(motionSensorModel.MotionValue, out humidity))
+            if (motionSensorModel.MotionValue == 0.00m && motionSensorModel.MotionValue==0.00m)
             {
-                string method = Helper.GetCurrentMethod();
-                string objectString = Helper.ConvertObjectToXML(motionSensorModel);
-
-                //db.Trace.Add(new Trace {
-                //    Error = "invalid model",
-                //    Input = objectString,
-                //    MethodName = method,
-                //    Timestamp = DateTime.UtcNow
-                //});
-                //await db.SaveChangesAsync();
-
-                return Ok(db.WifiSensor.Where(x => x.Id == motionSensorModel.DeviceId).FirstOrDefault().OperationFrequecy);
+                return Ok("Failed in creation");
             }
 
             //string colons : from mac id
@@ -220,7 +243,7 @@ namespace IotDemoWebApp.Controllers
             motionSensorModel.Timestamp = DateTime.UtcNow;
             try
             {
-                
+
 
                 db.MotionsSensor.Add(motionSensorModel);
                 await db.SaveChangesAsync();
@@ -231,7 +254,7 @@ namespace IotDemoWebApp.Controllers
                 return Ok(db.WifiSensor.Where(x => x.Id == motionSensorModel.DeviceId).FirstOrDefault().OperationFrequecy);
             }
 
-            return Ok(db.WifiSensor.Where(x=>x.Id == motionSensorModel.DeviceId).FirstOrDefault().OperationFrequecy);
+            return Ok(db.WifiSensor.Where(x => x.Id == motionSensorModel.DeviceId).FirstOrDefault().OperationFrequecy);
         }
 
         // DELETE: api/MotionSensor/5
@@ -254,14 +277,29 @@ namespace IotDemoWebApp.Controllers
         //[ResponseType(typeof(MotionSensorModel))]
         [HttpPost]
         [Route("api/flushdb")]
-        public async Task<IHttpActionResult> FlushDb(int startId,int stopId)
+        public async Task<IHttpActionResult> FlushDb(int startId, int stopId)
         {
-            var dbSet = db.MotionsSensor.Where(x => x.Id >= startId && x.Id <= stopId);
-            foreach (var item in dbSet)
+            while (startId<stopId)
             {
-                db.MotionsSensor.Remove(item);
+                var dbSet = db.MotionsSensor.Where(x => x.Id >= startId && x.Id <= (startId + 499));
+                db.MotionsSensor.RemoveRange(dbSet);
+                db.SaveChanges();
+
+                if (startId-stopId>499)
+                {
+                    startId += 499;
+                }
+                else
+                {
+                    startId += stopId - startId;
+                }
             }
-            await db.SaveChangesAsync();
+            //var dbSet = db.MotionsSensor.Where(x => x.Id >= startId && x.Id <= (startId+499));
+            //foreach (var item in dbSet)
+            //{
+            //    db.MotionsSensor.Remove(item);
+            //}
+            //await db.SaveChangesAsync();
 
             return Ok();
         }
@@ -292,10 +330,10 @@ namespace IotDemoWebApp.Controllers
 
             _database = _client.GetDatabase("iot");
 
-            var document  = model.ToBsonDocument<MotionSensor>();
+            var document = model.ToBsonDocument<MotionSensor>();
 
             var collection = _database.GetCollection<BsonDocument>("datapoints");
-            
+
             await collection.InsertOneAsync(document);
 
             return Ok(document);
@@ -311,6 +349,26 @@ namespace IotDemoWebApp.Controllers
             }
 
             return list;
+        }
+
+        [HttpPost]
+        [Route("api/syncdatapoints")]
+        public IHttpActionResult PostMany(IEnumerable<MotionSensor> datapoints)
+        {
+            try
+            {
+                using (ApplicationDbContext context = new ApplicationDbContext())
+                {
+                    context.MotionsSensor.AddRange(datapoints);
+                    context.SaveChanges();
+                    IoTEventSourceManager.Log.Info(string.Format("{0} Records Synched.", datapoints.Count()), "datapoints-bulk-insert");
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

@@ -9,6 +9,9 @@ using Microsoft.ServiceBus.Messaging;
 using System.IO;
 using IoT.Common.Model.Models;
 using Newtonsoft.Json.Linq;
+using System.Configuration;
+using System.Threading;
+using System.Net.Http;
 
 namespace DatabaseWriterJob
 {
@@ -27,44 +30,67 @@ namespace DatabaseWriterJob
             //host.RunAndBlock();
 
             Console.WriteLine("Receive critical messages. Ctrl-C to exit.\n");
-            var connectionString = "Endpoint=sb://sb-homeautomation-dev.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=kuxMpAEfg7EBdRK6l5Pv4/afc1lhIhY4j82NGOmBERA=";
-            var queueName = "sensor-input-queue";
+            var connectionString = ConfigurationManager.AppSettings["Microsoft.ServiceBus.ConnectionString"];
+            var queueName = ConfigurationManager.AppSettings["QueueName"];
 
             var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
 
-            try
+            int syncFrequency = Convert.ToInt32(ConfigurationManager.AppSettings["SyncFrequency"]);
+            int syncBatchSize = Convert.ToInt32(ConfigurationManager.AppSettings["SyncBatchSize"]);
+
+            while (true)
             {
-                client.OnMessage(message =>
-                   {
-                       Stream stream = message.GetBody<Stream>();
-                       StreamReader reader = new StreamReader(stream, Encoding.ASCII);
-                       string s = reader.ReadToEnd();
-                       IoTEventSourceManager.Log.Debug(s, "iot-web-job-queue");
+                try
+                {
+                    IEnumerable<BrokeredMessage> queueMessages = client.ReceiveBatch(syncBatchSize);
 
-                       using (ApplicationDbContext context = new ApplicationDbContext())
-                       {
-                           var obj = JObject.Parse(s);
-                           //var url = (string)obj["data"]["img_url"];
+                    List<MotionSensor> datapoints = new List<MotionSensor>();
 
-                           MotionSensor datapoint = new MotionSensor()
-                           {
-                               DeviceId = (string)obj["deviceId"],
-                               MotionTime = (string)obj["humidity"],
-                               MotionValue = (string)obj["temperature"],
-                               Timestamp = DateTime.UtcNow
-                           };
-                           context.MotionsSensor.Add(datapoint);
-                           context.SaveChanges();
-                       }
-                   });
+                    if (queueMessages != null)
+                    {
+                        foreach (var message in queueMessages)
+                        {
+                            Stream stream = message.GetBody<Stream>();
+                            StreamReader reader = new StreamReader(stream, Encoding.ASCII);
+                            string s = reader.ReadToEnd();
+                            IoTEventSourceManager.Log.Debug(s, "iot-web-job-queue");
 
+                            var obj = JObject.Parse(s);
+                            //var url = (string)obj["data"]["img_url"];
+
+                            MotionSensor datapoint = new MotionSensor()
+                            {
+                                DeviceId = (string)obj["deviceId"],
+                                MotionTime = (decimal)obj["humidity"],
+                                MotionValue = (decimal)obj["temperature"],
+                                Timestamp = DateTime.UtcNow
+                            };
+
+                            datapoints.Add(datapoint);
+                            message.Complete();
+                        }
+                        HttpClient httpClient = new HttpClient();
+
+                        string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(datapoints);
+                        var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                        HttpResponseMessage response = httpClient.PostAsync(ConfigurationManager.AppSettings["RecordsSyncPostUrl"], content).GetAwaiter().GetResult();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            Console.WriteLine(string.Format("{0} Records Synched. Thread Sleep for {1} Seconds", datapoints.Count, syncFrequency));
+                        }
+                        else
+                        {
+                            Console.WriteLine(response.Content.ReadAsStringAsync());
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    IoTEventSourceManager.Log.Error(ex.Message, "iot-web-job-queue");
+                    Console.WriteLine(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                IoTEventSourceManager.Log.Error(ex.Message, "iot-web-job-queue");
-            }
-
-            Console.ReadLine();
         }
     }
 }

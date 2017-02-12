@@ -38,7 +38,7 @@ namespace IoT.Common.Model.Models
         public virtual DbSet<RelayGroup> RelayGroup { get; set; }
         public virtual DbSet<Relay> Relay { get; set; }
         public virtual DbSet<RequestLog> RequestLog { get; set; }
-
+        public virtual DbSet<DeviceEntity> DeviceEntity { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

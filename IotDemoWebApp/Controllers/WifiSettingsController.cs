@@ -8,17 +8,43 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IoT.Common.Model.Models;
+using IotDemoWebApp.Models;
+using IotDemoWebApp.Utility;
+using System.Configuration;
 
 namespace IotDemoWebApp.Controllers
 {
     public class WifiSettingsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private string iotHubConnectionString;
+
+        public WifiSettingsController()
+        {
+            iotHubConnectionString = ConfigurationManager.AppSettings["iotHubConnectionString"];
+        }
 
         // GET: WifiSettings
         public async Task<ActionResult> Index()
         {
-            return View(await db.WifiSensor.ToListAsync());
+            DevicesProcessor devicesProcessor = new DevicesProcessor(iotHubConnectionString, 1000, "");
+
+            List<DeviceEntity> registeredDevices = await devicesProcessor.GetDevices();
+
+            List<DeviceViewModel> devices = await db.WifiSensor.Select(x=>new DeviceViewModel() {
+                Id = x.Id,
+                DeviceName = x.DeviceName,
+                IsActive = x.IsActive,
+                OperationFrequecy = x.OperationFrequecy
+            }).ToListAsync();
+
+            registeredDevices.Where(x => devices.Select(y => y.Id).Contains(x.Id)).ToList();
+
+            devices.Where(x => registeredDevices.Select(y => y.Id).Contains(x.Id)).ToList().ForEach(x=> {
+                x.IsLinkedToIoTHub = true;
+            });
+
+            return View(devices);
         }
 
         // GET: WifiSettings/Details/5

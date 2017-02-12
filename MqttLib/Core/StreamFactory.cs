@@ -7,8 +7,8 @@ using System.Net.Sockets;
 using System.Security;
 
 #if WITH_BLUETOOTH
-using InTheHand.Net.Sockets;
-using InTheHand.Net;
+//using InTheHand.Net.Sockets;
+//using InTheHand.Net;
 #endif // WITH_BLUETOOTH
 
 #if WINDOWS_PHONE
@@ -88,8 +88,8 @@ namespace MqttLib.Core
                 case "TCP":
                     return CreateTcpStreams( parameters );
 #if WITH_BLUETOOTH
-                case "BT":
-                    return CreateBluetoothStreams(parameters);
+                //case "BT":
+                //    return CreateBluetoothStreams(parameters);
 #endif // WITH_BLUETOOTH
                   default:
                     throw new UnsupportedProtocolException(scheme + " is not supported at this time.");
@@ -118,22 +118,22 @@ namespace MqttLib.Core
         }
 
 #if WITH_BLUETOOTH
-        private static NetworkStream CreateBluetoothStreams(Hashtable parms)
-        {
-          string hostaddr = (string)parms[PARAM_HOST];
-          MqttLib.Logger.Log.Write(MqttLib.Logger.LogLevel.INFO, "StreamFactory: Creating Bluetooth Stream to " + hostaddr );
+        //private static NetworkStream CreateBluetoothStreams(Hashtable parms)
+        //{
+        //  string hostaddr = (string)parms[PARAM_HOST];
+        //  MqttLib.Logger.Log.Write(MqttLib.Logger.LogLevel.INFO, "StreamFactory: Creating Bluetooth Stream to " + hostaddr );
 
-          //BluetoothClient bc = new BluetoothClient();
-          FixedBluetoothClient bc = new FixedBluetoothClient();
-          BluetoothAddress bta = BluetoothAddress.Parse( hostaddr );
-          MqttLib.Logger.Log.Write(MqttLib.Logger.LogLevel.INFO, "StreamFactory: Parsed BT address as " + bta.ToString());
-          MqttLib.Logger.Log.Write(MqttLib.Logger.LogLevel.INFO, "StreamFactory: BT connecting " );
-          bc.Connect(new BluetoothEndPoint(bta, BROKER_SERVICE));
-          MqttLib.Logger.Log.Write(MqttLib.Logger.LogLevel.INFO, "StreamFactory: BT connected ");
-          NetworkStream ns = bc.GetStream();
-          bc.Close();
-          return ns;
-        }
+        //  //BluetoothClient bc = new BluetoothClient();
+        //  FixedBluetoothClient bc = new FixedBluetoothClient();
+        //  BluetoothAddress bta = BluetoothAddress.Parse( hostaddr );
+        //  MqttLib.Logger.Log.Write(MqttLib.Logger.LogLevel.INFO, "StreamFactory: Parsed BT address as " + bta.ToString());
+        //  MqttLib.Logger.Log.Write(MqttLib.Logger.LogLevel.INFO, "StreamFactory: BT connecting " );
+        //  bc.Connect(new BluetoothEndPoint(bta, BROKER_SERVICE));
+        //  MqttLib.Logger.Log.Write(MqttLib.Logger.LogLevel.INFO, "StreamFactory: BT connected ");
+        //  NetworkStream ns = bc.GetStream();
+        //  bc.Close();
+        //  return ns;
+        //}
 #endif //WITH_BLUETOOTH
 
         private static Hashtable GetParameters(string paramList)
@@ -164,17 +164,17 @@ namespace MqttLib.Core
     }
 
 #if WITH_BLUETOOTH
-  class FixedBluetoothClient : BluetoothClient
-  {
-    public FixedBluetoothClient()
-      :base() { }
+  //class FixedBluetoothClient : BluetoothClient
+  //{
+  //  public FixedBluetoothClient()
+  //    :base() { }
 
-    protected override void Dispose(bool disposing)
-    {
-      // Steven Lovegrove: Compensation for the bad logic in original src
-      base.Dispose(false);
-    }
-  }
+  //  protected override void Dispose(bool disposing)
+  //  {
+  //    // Steven Lovegrove: Compensation for the bad logic in original src
+  //    base.Dispose(false);
+  //  }
+  //}
 #endif // WITH_BLUETOOTH
 
 }

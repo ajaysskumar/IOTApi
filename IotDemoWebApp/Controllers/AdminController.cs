@@ -49,7 +49,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Mobile,Email,ShouldRecieve,UpperThreshold,LowerThreshold,SensorId")] Admin admin)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Mobile,Email,ShouldRecieve,UpperTemperatureThreshold,LowerTemperatureThreshold,UpperHumidityThreshold,LowerHumidityThreshold,SensorId")] Admin admin)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace IotDemoWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Mobile,Email,ShouldRecieve,UpperThreshold,LowerThreshold,SensorId")] Admin admin)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Mobile,Email,ShouldRecieve,UpperTemperatureThreshold,LowerTemperatureThreshold,UpperHumidityThreshold,LowerHumidityThreshold,SensorId")] Admin admin)
         {
             if (ModelState.IsValid)
             {

@@ -161,8 +161,8 @@ namespace IoTSensorPolling
                     {
                         int pointsCount = tempPoints.Count;
 
-                        decimal averageTemp = tempPoints.Sum(x => decimal.Parse(x.MotionValue)) / pointsCount;
-                        decimal averageHumid = tempPoints.Sum(x => decimal.Parse(x.MotionTime)) / pointsCount;
+                        decimal averageTemp = tempPoints.Sum(x => x.MotionValue) / pointsCount;
+                        decimal averageHumid = tempPoints.Sum(x => x.MotionTime) / pointsCount;
 
                         try
                         {

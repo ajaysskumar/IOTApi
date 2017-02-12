@@ -61,7 +61,63 @@
       <HintPath>..\packages\DelegateDecompiler.EntityFramework.0.18.1\lib\net45\DelegateDecompiler.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DotNetty.Buffers, Version=0.3.2.0, Culture=neutral, PublicKeyToken=e7a0210a354f294a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetty.Buffers-signed.0.3.2\lib\net45\DotNetty.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetty.Codecs, Version=0.3.2.0, Culture=neutral, PublicKeyToken=e7a0210a354f294a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetty.Codecs-signed.0.3.2\lib\net45\DotNetty.Codecs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetty.Codecs.Mqtt, Version=0.3.2.0, Culture=neutral, PublicKeyToken=e7a0210a354f294a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetty.Codecs.Mqtt-signed.0.3.2\lib\net45\DotNetty.Codecs.Mqtt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetty.Common, Version=0.3.2.0, Culture=neutral, PublicKeyToken=e7a0210a354f294a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetty.Common-signed.0.3.2\lib\net45\DotNetty.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetty.Handlers, Version=0.3.2.0, Culture=neutral, PublicKeyToken=e7a0210a354f294a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetty.Handlers-signed.0.3.2\lib\net45\DotNetty.Handlers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetty.Transport, Version=0.3.2.0, Culture=neutral, PublicKeyToken=e7a0210a354f294a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetty.Transport-signed.0.3.2\lib\net45\DotNetty.Transport.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Amqp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Amqp.2.0.3\lib\net45\Microsoft.Azure.Amqp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Devices, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Devices.1.2.2\lib\net451\Microsoft.Azure.Devices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Devices.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Devices.Client.1.2.2\lib\net45\Microsoft.Azure.Devices.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Devices.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Devices.Shared.1.0.6\lib\net45\Microsoft.Azure.Devices.Shared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.6.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.6.4\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.6.4\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
       <Private>True</Private>
@@ -86,6 +142,14 @@
       <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ServiceBus, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.ServiceBus.3.4.5\lib\net45-full\Microsoft.ServiceBus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.7.0.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MongoDB.Bson, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MongoDB.Bson.2.2.4\lib\net45\MongoDB.Bson.dll</HintPath>
       <Private>True</Private>
@@ -106,10 +170,36 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">
+      <HintPath>..\packages\PCLCrypto.2.0.147\lib\net45\PCLCrypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.BCrypt, Version=0.3.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.BCrypt.0.3.2\lib\net40\PInvoke.BCrypt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.Kernel32, Version=0.3.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Kernel32.0.3.2\lib\net40\PInvoke.Kernel32.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.NCrypt, Version=0.3.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.NCrypt.0.3.2\lib\net40\PInvoke.NCrypt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.Windows.Core, Version=0.3.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Windows.Core.0.3.2\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.Windows.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Spatial, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
       <Private>True</Private>
@@ -166,6 +256,10 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Validation, Version=2.2.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Validation.2.2.8\lib\dotnet\Validation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -245,8 +339,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ChartController.cs" />
+    <Compile Include="Controllers\DeviceSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManageDevicesController.cs" />
     <Compile Include="Controllers\MotionSensorController.cs" />
     <Compile Include="Controllers\MotionSensorModelsController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
@@ -277,6 +373,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utility\DeviceProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Arduino\Device_Version1\RestClient.cpp" />
@@ -303,9 +400,13 @@
     <None Include="Properties\PublishProfiles\iotdemodev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\iotdemodev - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\IoTdemoDev.apexsoftworks.in - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ipowersaver-dev - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ipowersaver-dev - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Local-publish-profile.pubxml" />
     <None Include="Properties\PublishProfiles\oa-iotdemo - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\oa-iotdemo - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\oa-th-dev - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\oa-th-dev - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\onactuateiot - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\onactuateiot - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\publishLocal.pubxml" />
@@ -426,6 +527,8 @@
     <Content Include="Views\SysConfig\Details.cshtml" />
     <Content Include="Views\SysConfig\Edit.cshtml" />
     <Content Include="Views\SysConfig\Index.cshtml" />
+    <Content Include="Views\ManageDevices\Index.cshtml" />
+    <Content Include="Views\ManageDevices\Create.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Admin\Details.cshtml" />
@@ -459,6 +562,10 @@
     <ProjectReference Include="..\IoT.Core.Email\IoT.Core.Email.csproj">
       <Project>{0F84CC1F-BF4D-424C-9B20-3AD948E69FDA}</Project>
       <Name>IoT.Core.Email</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IoT.Core.Sms\IoT.Core.Sms.csproj">
+      <Project>{6549c097-3316-424b-a639-533ae8ffb668}</Project>
+      <Name>IoT.Core.Sms</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

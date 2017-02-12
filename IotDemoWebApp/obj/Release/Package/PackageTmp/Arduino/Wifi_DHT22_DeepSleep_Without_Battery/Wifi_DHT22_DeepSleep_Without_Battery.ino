@@ -1,3 +1,13 @@
+#include <WiFiUdp.h>
+#include <WiFiServer.h>
+#include <WiFiClientSecure.h>
+#include <WiFiClient.h>
+#include <ESP8266WiFiType.h>
+#include <ESP8266WiFiSTA.h>
+#include <ESP8266WiFiScan.h>
+#include <ESP8266WiFiMulti.h>
+#include <ESP8266WiFiGeneric.h>
+#include <ESP8266WiFiAP.h>
 #include <Arduino.h>
 #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
 //needed for library
@@ -10,6 +20,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <EEPROM.h>
 
 #define DHTPIN 13     // what pin we're connected to
 #define DHTTYPE DHT22   // DHT 22  (AM2302)
@@ -34,7 +45,7 @@ int maxTryCountToConnectWifi = 60;
 int wifiConnectingCountStart = 20;
 int operationMode = 1;
 // Host
-const char* host = "iotdemo.apexsoftworks.in";
+const char* host = "oa-iotdemo.azurewebsites.net";
 
 int redLed = 14;                // the pin that the LED is atteched to
 int greenLed = 12;                // the pin that the LED is atteched to
@@ -61,11 +72,12 @@ void setup()
   pinMode(buttonPin, INPUT);
   pinMode(wifiLedDisconnectPin, OUTPUT);
 
+  EEPROM.begin(512);
   dht.begin();
-  Log("dht initialized...",1);
+  Log("dht initialized...", 1);
 
   deviceMac = WiFi.macAddress();
-  Log("Device MAC "+deviceMac,1);
+  Log("Device MAC " + deviceMac, 1);
   // Serial
   Serial.begin(115200);
 }
@@ -73,7 +85,7 @@ void setup()
 void postData(RestClient restClient) {
 
   restClient.setConnectionTimeout(20);
-  
+
   Serial.println("Create START URL to post...");
   String url = "/api/motionsensor?MotionValue=" + String(temperature) + "&MotionTime=" + String(humidity) + "&DeviceId=" + String(deviceMac);
   Serial.println("Creat FINISH URL to post...\nURL = " + url);
@@ -85,11 +97,12 @@ void postData(RestClient restClient) {
 
   Serial.println("Status recieved... Going to set frequency...");
 
-  if (statusCode == 200 && !isnan(statusCode) )
+  if (statusCode == 200 && !isnan(statusCode))
   {
     Serial.println("response recieved : " + response + "\n Converting to int type");
     dataPostFrequency = response.toInt();
-  } else
+  }
+  else
   {
     dataPostFrequency = sensorOutputNotAvailbaleTimeout;
   }
@@ -102,6 +115,7 @@ void postData(RestClient restClient) {
 
 void wifiSetup()
 {
+
   //WiFi.begin(ssid, password);
   digitalWrite(wifiLedDisconnectPin, HIGH); // indication of esp going into config mode
   Serial.println("Config button pressed... going to auto connect ");
@@ -118,13 +132,22 @@ void wifiSetup()
   //and goes into a blocking loop awaiting configuration
   //wifiManager.autoConnect(String(deviceMac, "123456");
   //or use this for auto generated name ESP + ChipID
+  //wifiManager.autoConnect();
+  wifiManager.resetSettings();
   wifiManager.autoConnect();
+
+  Serial.println("please switch off the config button else you will need to configure again.");
+  delay(5000000);
 
 
   //if you get here you have connected to the WiFi
   Serial.println("connected...yeey :)");
   digitalWrite(wifiLedDisconnectPin, LOW);
 
+  //if (WiFi.status() != WL_CONNECTED)
+  //{
+  //  ESP.restart();
+  //}
 }
 
 void loop()
@@ -143,7 +166,7 @@ void loop()
       {
         Serial.println("ESP8266 will retry connecting after 60 seconds");
         //ESP.deepSleep(sleepTimeHotspotUnavailable * 1000000, RF_DEFAULT);
-        delay(5* 1000);
+        delay(5 * 1000);
       }
       if (digitalRead(wifiLedDisconnectPin) != HIGH && count > wifiConnectingCountStart) {
         Serial.println("Wifi Disconnect LED should blink");
@@ -162,7 +185,7 @@ void loop()
         wifiSetup();
       }
 
-      Serial.print("TRY : " + String(count) + "\n" );
+      Serial.print("TRY : " + String(count) + "\n");
       delay(1000);
     }
     Serial.println("");
@@ -235,7 +258,7 @@ void loop()
     Serial.println("going to sleep");
 
     //ESP.deepSleep(dataPostFrequency * 1000000, RF_DEFAULT);
-    delay(1000 *dataPostFrequency);
+    delay(1000 * dataPostFrequency);
     //delay(dataPostFrequency*1000);
     // Read all the lines of the reply from server and print them to Serial
     //  while (client.available()) {
@@ -253,3 +276,7 @@ void Log(String message, int executionMode)
   if (executionMode == 1)
     Serial.println(message);
 }
+
+
+
+
