@@ -1,0 +1,14 @@
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\bin\Debug\Common.DataAccess.Mongo.dll
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\bin\Debug\Common.DataAccess.Mongo.pdb
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\bin\Debug\MongoDB.Bson.dll
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\bin\Debug\MongoDB.Driver.Core.dll
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\bin\Debug\MongoDB.Driver.dll
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\bin\Debug\PagedList.dll
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\bin\Debug\MongoDB.Bson.xml
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\bin\Debug\MongoDB.Driver.xml
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\bin\Debug\MongoDB.Driver.Core.xml
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\bin\Debug\PagedList.xml
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\obj\Debug\Common.DataAccess.Mongo.csprojResolveAssemblyReference.cache
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\obj\Debug\Common.DataAccess.Mongo.dll
+D:\OnActuate Labs\WebRTCSignalR\Common.DataAccess.Mongo\obj\Debug\Common.DataAccess.Mongo.pdb

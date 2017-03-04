@@ -6,10 +6,10 @@
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.js" type="text/javascript"></script>
 <style>
-    .avg_data{
-        color:blue;
-        font-size:x-large;
-        font-family:Consolas;
+    .avg_data {
+        color: blue;
+        font-size: x-large;
+        font-family: Consolas;
     }
 </style>
 
@@ -33,7 +33,7 @@
         <label>Select Device</label>
     </div>
     <div class="col-md-3">
-        <select class="form-control"  id="ddlDevice"></select>
+        <select class="form-control" id="ddlDevice"></select>
     </div>
 </div>
 <br />
@@ -82,7 +82,7 @@
 
     var average_t = 0;
     var average_h = 0;
-    
+
 
     var last_record = 0;
 
@@ -94,24 +94,24 @@
     $(document).ready(function () {
 
         $("#ddlDevice").change(function () {
-           labelset = [];
-           t_dataset = [];
-           h_dataset = [];
+            labelset = [];
+            t_dataset = [];
+            h_dataset = [];
 
-           myChartTemp.data.labels = [];
-           myChartTemp.data.datasets[0].data = [];
+            myChartTemp.data.labels = [];
+            myChartTemp.data.datasets[0].data = [];
 
-           myChartHumid.data.labels = [];
-           myChartHumid.data.datasets[0].data = [];
+            myChartHumid.data.labels = [];
+            myChartHumid.data.datasets[0].data = [];
 
-           last_record = 0;
-           chartState = 1;
+            last_record = 0;
+            chartState = 1;
 
-           switch ($('#txtMode').val()) {
-               case '1': url = '/api/gettop'; break;
-               case '2': url = '/api/getdatapointspartial'; break;
-               default: url = '/api/gettopdatapoints'; break;
-           }
+            switch ($('#txtMode').val()) {
+                case '1': url = '/api/gettop'; break;
+                case '2': url = '/api/getdatapointspartial'; break;
+                default: url = '/api/gettopdatapoints'; break;
+            }
         });
         $('#txtMode').change(function () {
             switch ($('#txtMode').val()) {
@@ -122,9 +122,11 @@
         });
         $('#btnChangeDatasetTime').click(function () {
             updateCharts();
+            console.log('Charts updated');
         });
         $('#btnRefresh').click(function () {
             updateCharts();
+            console.log('Charts updated');
         });
 
         function createChartTemperature() {
@@ -136,139 +138,147 @@
             }
 
             var currentDeviceSelected = $('#ddlDevice :selected').val();
-            
-                $.ajax({
-                    url: '/api/sensors',
-                    type: 'GET',
 
-                    async: true,
-                    success: function (response) {
-                        var ddl = $('#ddlDevice');
-                        $.each(response,
-                            function (i, e) {
-                                ddl.append('<option id="' + e.Id + '" >' + e.DeviceName + '</option>');
-                            });
-                        isPageLoaded = true;
-                        $.ajax({
-                            url: url,
-                            type: 'GET',
-                            data: { top: $('#txtNumber').val(),lastRecord: last_record, sensorId: $('#ddlDevice :selected').attr('id') },
-                            async: true,
-                            success: function (response) {
-                                var temperatureData = [];
-                                var humidityData = [];
-                                var labelsData = [];
-                                $.each(response,
-                                    function (i, e) {
-                                        t_dataset.push(e.MotionValue);
-                                        h_dataset.push(e.MotionTime);
-                                        var date = new Date(e.Timestamp);
-                                        labelset.push(date.toLocaleString());
-                                        last_record = e.Id;
-                                    });
+            $.ajax({
+                url: '/api/sensors',
+                type: 'GET',
 
-                                var ctxTemp = $("#temperature");
-                                myChartTemp = new Chart(ctxTemp, {
-                                    type: 'line',
-                                    data: {
-                                        labels: labelset,
-                                        datasets: [
-                                            {
-                                                label: "Temperature in  Celcius",
-                                                fill: true,
-                                                //lineTension: 0.1,
-                                                backgroundColor: "rgba(249, 1, 1, 0.4)",
-                                                borderColor: "rgba(249, 1, 1, 1)",
-                                                //borderCapStyle: 'butt',
-                                                //borderDash: [],
-                                                //borderDashOffset: 0.0,
-                                                borderJoinStyle: 'miter',
-                                                pointBorderColor: "rgba(249, 1, 1, 1)",
-                                                pointBackgroundColor: "#fff",
-                                                //pointBorderWidth: 1,
-                                                //pointHoverRadius: 5,
-                                                pointHoverBackgroundColor: "rgba(249, 1, 1, 1)",
-                                                pointHoverBorderColor: "rgba(220,220,220,1)",
-                                                //pointHoverBorderWidth: 2,
-                                                //pointRadius: 1,
-                                                //pointHitRadius: 10,
-                                                fillColor: "rgba(172,194,132,0.4)",
-                                                strokeColor: "#ACC26D",
-                                                pointColor: "#fff",
-                                                pointStrokeColor: "#9DB86D",
-                                                data: t_dataset
-                                                //spanGaps: false,
-                                            }
-                                        ]
-                                    },
-                                    options: {
-                                        scales: {
-                                            yAxes: [{
-                                                ticks: {
-                                                    beginAtZero: true
-                                                }
-                                            }]
-                                        }
-                                    }
-                                });
-
-                                var ctxHumid = $("#humidity");
-                                myChartHumid = new Chart(ctxHumid, {
-                                    type: 'line',
-                                    data: {
-                                        labels: labelset,
-                                        datasets: [
-                                            {
-                                                label: "Humidity in percentage",
-                                                fill: true,
-                                                //lineTension: 0.1,
-                                                backgroundColor: "rgba(75,192,192,0.4)",
-                                                borderColor: "rgba(75,192,192,1)",
-                                                //borderCapStyle: 'butt',
-                                                //borderDash: [],
-                                                //borderDashOffset: 0.0,
-                                                borderJoinStyle: 'miter',
-                                                pointBorderColor: "rgba(75,192,192,1)",
-                                                pointBackgroundColor: "#fff",
-                                                //pointBorderWidth: 1,
-                                                //pointHoverRadius: 5,
-                                                pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                                                pointHoverBorderColor: "rgba(220,220,220,1)",
-                                                //pointHoverBorderWidth: 2,
-                                                //pointRadius: 1,
-                                                //pointHitRadius: 10,
-                                                fillColor: "rgba(172,194,132,0.4)",
-                                                strokeColor: "#ACC26D",
-                                                pointColor: "#fff",
-                                                pointStrokeColor: "#9DB86D",
-                                                data: h_dataset
-                                                //spanGaps: false,
-                                            }
-                                        ]
-                                    },
-                                    options: {
-                                        scales: {
-                                            yAxes: [{
-                                                ticks: {
-                                                    beginAtZero: true
-                                                }
-                                            }]
-                                        }
-                                    }
-                                });
-
-                                $('#lbl_t').text(set_average(myChartTemp.data.datasets[0].data) + "℃");
-                                $('#lbl_h').text(set_average(myChartHumid.data.datasets[0].data) + "%");
-                            }
+                async: true,
+                success: function (response) {
+                    var ddl = $('#ddlDevice');
+                    $.each(response,
+                        function (i, e) {
+                            ddl.append('<option id="' + e.Id + '" >' + e.DeviceName + '</option>');
                         });
-                    }
-                });
-           
+                    isPageLoaded = true;
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        data: { top: $('#txtNumber').val(), lastRecord: last_record, sensorId: $('#ddlDevice :selected').attr('id') },
+                        async: true,
+                        success: function (response) {
+                            var temperatureData = [];
+                            var humidityData = [];
+                            var labelsData = [];
+                            $.each(response,
+                                function (i, e) {
+                                    t_dataset.push(e.MotionValue);
+                                    h_dataset.push(e.MotionTime);
+                                    var date = new Date(e.Timestamp);
+                                    labelset.push(date.toLocaleString());
+                                    last_record = e.Id;
+                                });
+
+                            var ctxTemp = $("#temperature");
+                            myChartTemp = new Chart(ctxTemp, {
+                                type: 'line',
+                                data: {
+                                    labels: labelset,
+                                    datasets: [
+                                        {
+                                            label: "Temperature in  Celcius",
+                                            fill: true,
+                                            //lineTension: 0.1,
+                                            backgroundColor: "rgba(249, 1, 1, 0.4)",
+                                            borderColor: "rgba(249, 1, 1, 1)",
+                                            //borderCapStyle: 'butt',
+                                            //borderDash: [],
+                                            //borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgba(249, 1, 1, 1)",
+                                            pointBackgroundColor: "#fff",
+                                            //pointBorderWidth: 1,
+                                            //pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgba(249, 1, 1, 1)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            //pointHoverBorderWidth: 2,
+                                            //pointRadius: 1,
+                                            //pointHitRadius: 10,
+                                            fillColor: "rgba(172,194,132,0.4)",
+                                            strokeColor: "#ACC26D",
+                                            pointColor: "#fff",
+                                            pointStrokeColor: "#9DB86D",
+                                            data: t_dataset
+                                            //spanGaps: false,
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+
+                            var ctxHumid = $("#humidity");
+                            myChartHumid = new Chart(ctxHumid, {
+                                type: 'line',
+                                data: {
+                                    labels: labelset,
+                                    datasets: [
+                                        {
+                                            label: "Humidity in percentage",
+                                            fill: true,
+                                            //lineTension: 0.1,
+                                            backgroundColor: "rgba(75,192,192,0.4)",
+                                            borderColor: "rgba(75,192,192,1)",
+                                            //borderCapStyle: 'butt',
+                                            //borderDash: [],
+                                            //borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgba(75,192,192,1)",
+                                            pointBackgroundColor: "#fff",
+                                            //pointBorderWidth: 1,
+                                            //pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            //pointHoverBorderWidth: 2,
+                                            //pointRadius: 1,
+                                            //pointHitRadius: 10,
+                                            fillColor: "rgba(172,194,132,0.4)",
+                                            strokeColor: "#ACC26D",
+                                            pointColor: "#fff",
+                                            pointStrokeColor: "#9DB86D",
+                                            data: h_dataset
+                                            //spanGaps: false,
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+
+                            $('#lbl_t').text(set_average(myChartTemp.data.datasets[0].data) + "℃");
+                            $('#lbl_h').text(set_average(myChartHumid.data.datasets[0].data) + "%");
+                        }
+                    });
+                }
+            });
+
         }
 
         createChartTemperature();
 
         function updateCharts() {
+
+            //TESTING
+
+            myChartTemp.data.labels = [];
+            myChartTemp.data.datasets[0].data = [];
+
+            myChartHumid.data.labels = [];
+            myChartHumid.data.datasets[0].data = [];
 
             $.ajax({
                 url: url,
@@ -285,14 +295,15 @@
                                 //h_dataset.push(e.MotionTime);
                                 var date = new Date(e.Timestamp);
                                 //labelset.push(date.toLocaleString());
-                                last_record = e.Id;
+                                //last_record = e.Id;
+                                last_record = 0;
 
                                 myChartTemp.data.labels.push(date.toLocaleString());
                                 myChartTemp.data.datasets[0].data.push(e.MotionValue);
 
                                 myChartHumid.data.labels.push(date.toLocaleString());
                                 myChartHumid.data.datasets[0].data.push(e.MotionTime);
-                                
+
                                 myChartTemp.update();
                                 myChartHumid.update();
                             }
@@ -300,11 +311,11 @@
                                 var date = new Date(e.Timestamp);
                                 labelset.push(date.toLocaleString());
 
-                                myChartTemp.data.labels.splice(0, 1);
-                                myChartTemp.data.datasets[0].data.splice(0, 1);
+                                //myChartTemp.data.labels.splice(0, 1);
+                                //myChartTemp.data.datasets[0].data.splice(0, 1);
 
-                                myChartHumid.data.labels.splice(0, 1);
-                                myChartHumid.data.datasets[0].data.splice(0, 1);
+                                //myChartHumid.data.labels.splice(0, 1);
+                                //myChartHumid.data.datasets[0].data.splice(0, 1);
 
                                 myChartTemp.data.labels.push(date.toLocaleString());
                                 myChartTemp.data.datasets[0].data.push(e.MotionValue);
@@ -315,14 +326,17 @@
                                 myChartTemp.update();
                                 myChartHumid.update();
 
-                                last_record = e.Id;
+                                //last_record = e.Id;
+                                last_record = 0;
+
                             }
-                            
+
                         });
+
                     chartState = 2;
-                    
+
                     $('#lbl_t').text(set_average(myChartTemp.data.datasets[0].data) + "℃");
-                    $('#lbl_h').text(set_average(myChartHumid.data.datasets[0].data)+"%");
+                    $('#lbl_h').text(set_average(myChartHumid.data.datasets[0].data) + "%");
                 }
             });
         };
@@ -340,6 +354,7 @@
         setInterval(updateCharts, 10 * 1000);
     });
 </script>
+@*<script src="~/Scripts/custom.js"></script>*@
 
 
 

@@ -12,7 +12,6 @@ namespace IoT.Common.Model.Models
     {
         public int Id { get; set; }
 
-
         public decimal MotionValue { get; set; }
 
         public decimal MotionTime { get; set; }
@@ -58,17 +57,36 @@ namespace IoT.Common.Model.Models
     {
         public int Id { get; set; }
         public String Name { get; set; }
+
+        [Required]
+        [MaxLength(10),MinLength(10)]
+        [Display( Name="Mobile Phone *")]
         public String Mobile { get; set; }
+
+        [Required]
+        [Display(Name = "Email *")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
         public bool ShouldRecieve { get; set; }
+
+        [Required]
+        [Display(Name = "(T) Upper Threshold")]
         public decimal UpperTemperatureThreshold { get; set; }
+
+        [Required]
+        [Display(Name = "(T) Lower Threshold")]
         public decimal LowerTemperatureThreshold { get; set; }
+
+        [Required]
+        [Display(Name = "(H) Upper Threshold")]
         public decimal UpperHumidityThreshold { get; set; }
+
+        [Required]
+        [Display(Name = "(H) Lower Threshold")]
         public decimal LowerHumidityThreshold { get; set; }
         
         public String SensorId { get; set; }
-        //public DateTime LastSmsRecievedTime { get; set; }
 
         public virtual WifiSensor Sensor { get; set; }
 

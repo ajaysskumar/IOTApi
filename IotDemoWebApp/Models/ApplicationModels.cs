@@ -33,10 +33,19 @@ namespace IotDemoWebApp.Models
 
     public class SmsContact
     {
+        [Required]
         public string message { get; set; }
+
+        [Required]
         public string phone { get; set; }
+        [Required]
+        public string email { get; set; }
+
+        [Required]
         public string adminName { get; set; }
+        [Required]
         public string deviceName { get; set; }
+        [Required]
         public string contactId { get; set; }
     }
 }

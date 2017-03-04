@@ -1,0 +1,9 @@
+C:\Users\ajayk\Source\Repos\IOTApi\MqttClient\bin\Release\MqttClient.exe.config
+C:\Users\ajayk\Source\Repos\IOTApi\MqttClient\bin\Release\MqttClient.exe
+C:\Users\ajayk\Source\Repos\IOTApi\MqttClient\bin\Release\MqttClient.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\MqttClient\bin\Release\MqttLib.dll
+C:\Users\ajayk\Source\Repos\IOTApi\MqttClient\bin\Release\MqttLib.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\MqttClient\bin\Release\MqttLib.dll.config
+C:\Users\ajayk\Source\Repos\IOTApi\MqttClient\obj\Release\MqttClient.csprojResolveAssemblyReference.cache
+C:\Users\ajayk\Source\Repos\IOTApi\MqttClient\obj\Release\MqttClient.exe
+C:\Users\ajayk\Source\Repos\IOTApi\MqttClient\obj\Release\MqttClient.pdb

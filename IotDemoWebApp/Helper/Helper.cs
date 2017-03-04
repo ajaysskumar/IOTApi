@@ -14,15 +14,6 @@ namespace IotDemoWebApp
 {
     public static class Helper
     {
-        //public static IList<IList<T>> Split<T>(IList<T> source)
-        //{
-        //    return source
-        //        .Select((x, i) => new { Index = i, Value = x })
-        //        .GroupBy(x => x.Index / 3)
-        //        .Select(x => x.Select(v => v.Value).ToList())
-        //        .ToList();
-        //}
-
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static string GetCurrentMethod()
         {
@@ -68,6 +59,13 @@ namespace IotDemoWebApp
             int ResultCode = System.Convert.ToInt32(Result.Substring(0, 4));
 
             return ResultCode;
+        }
+
+        enum PhoneFormat
+        {
+            TenDigitNumber,
+            WithCountryCode,
+            WithCountryCodePlus
         }
     }
 }

@@ -1,0 +1,7 @@
+C:\Users\ajayk\Source\Repos\IOTApi\ReadDeviceToCloudMessages\bin\Release\ReadDeviceToCloudMessages.exe.config
+C:\Users\ajayk\Source\Repos\IOTApi\ReadDeviceToCloudMessages\bin\Release\ReadDeviceToCloudMessages.exe
+C:\Users\ajayk\Source\Repos\IOTApi\ReadDeviceToCloudMessages\bin\Release\ReadDeviceToCloudMessages.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\ReadDeviceToCloudMessages\bin\Release\Microsoft.ServiceBus.dll
+C:\Users\ajayk\Source\Repos\IOTApi\ReadDeviceToCloudMessages\bin\Release\Microsoft.ServiceBus.xml
+C:\Users\ajayk\Source\Repos\IOTApi\ReadDeviceToCloudMessages\obj\Release\ReadDeviceToCloudMessages.exe
+C:\Users\ajayk\Source\Repos\IOTApi\ReadDeviceToCloudMessages\obj\Release\ReadDeviceToCloudMessages.pdb

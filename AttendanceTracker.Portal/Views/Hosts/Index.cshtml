@@ -1,0 +1,85 @@
+﻿@model IEnumerable<AttendanceTracker.Portal.Models.HostViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+    function formatDate(utcDate) {
+        var date = new Date(utcDate);
+        return date.toLocaleString();
+    }
+</script>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HostName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastAccessedIP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastStatusChecked)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentDayLoginTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalConnectedHoursToday)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HostName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastAccessedIP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastStatusChecked)
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentDayLoginTime)
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalConnectedHoursToday)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+

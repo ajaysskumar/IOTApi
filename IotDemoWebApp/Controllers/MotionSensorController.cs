@@ -19,6 +19,11 @@ using System.Text.RegularExpressions;
 using IoT.Common.Model.Models;
 using System.Threading;
 using IoT.Common.Logging;
+using IotDemoWebApp.Utility;
+using System.IO;
+using System.Text;
+using Newtonsoft.Json.Linq;
+using Microsoft.ServiceBus.Messaging;
 
 namespace IotDemoWebApp.Controllers
 {
@@ -119,65 +124,23 @@ namespace IotDemoWebApp.Controllers
         [Route("api/getdatapointspartial")]
         public IEnumerable<MotionSensor> GetTopDatapoints(int top, int lastRecord, string sensorId)
         {
-            int timeframe = top * 60 * 60;
-            int numberOfPoints = top * 60 / 12;
-
-            DateTime currenteDate = DateTime.UtcNow.AddHours(-top);
-
-            List<MotionSensor> data = new List<MotionSensor>();
-
-            List<MotionSensor> dataPoints = new List<MotionSensor>();
-
-            List<List<MotionSensor>> dataPointGroups = new List<List<MotionSensor>>();
-
-            var queryData = db.MotionsSensor.Where(x => x.DeviceId == sensorId && x.Timestamp >= currenteDate && x.Id > lastRecord).OrderBy(x => x.Timestamp).ToArray();
-
-            int recordCount = queryData.Count();
-
-            var counter = 20;
-
-            while(counter >= 20 && recordCount>counter)
+            IEnumerable<MotionSensor> chartData = new List<MotionSensor>();
+            using (ApplicationDbContext context = new ApplicationDbContext())
             {
-                var item = queryData[counter];
-                data.Add(new MotionSensor() {
-                    Id = item.Id,
-                    MotionTime = item.MotionTime,
-                    MotionValue = item.MotionValue,
-                    Timestamp = item.Timestamp
-                });
-
-                if (recordCount - counter>=20)
-                {
-                    counter += 20;
-                }
-                else
-                {
-                    data.Add(new MotionSensor()
-                    {
-                        Id = queryData[recordCount-1].Id,
-                        MotionTime = queryData[recordCount - 1].MotionTime,
-                        MotionValue = queryData[recordCount - 1].MotionValue,
-                        Timestamp = queryData[recordCount - 1].Timestamp
-                    });
-
-                    break;
-                }
+                ChartHelper chartHelper = new ChartHelper();
+                chartData = chartHelper.GetChartData(top, lastRecord, sensorId, context);
             }
+            return chartData;
+        }
 
-            if (recordCount<24)
-            {
-                foreach (var item in queryData)
-                {
-                    data.Add(new MotionSensor
-                    {
-                        Id = item.Id,
-                        MotionTime = item.MotionTime,
-                        MotionValue = item.MotionValue,
-                        Timestamp = item.Timestamp
-                    });
-                }
-            }
-            return data;
+        [HttpGet]
+        [Route("api/getalldatapoints")]
+        public IEnumerable<MotionSensor> GetAllDatapoints(int top, int lastRecord, string sensorId)
+        {
+            var currentDate = DateTime.UtcNow.AddHours(-top); 
+            IEnumerable<MotionSensor> chartData = new List<MotionSensor>();
+            chartData = db.MotionsSensor.Where(x => x.DeviceId == sensorId && x.Timestamp >= currentDate && x.Id > lastRecord).OrderBy(x => x.Timestamp);
+            return chartData;
         }
 
         // GET: api/MotionSensor/5
@@ -232,7 +195,7 @@ namespace IotDemoWebApp.Controllers
         //[ResponseType(typeof(MotionSensor))]
         public async Task<IHttpActionResult> PostMotionSensorModel([FromUri]MotionSensor motionSensorModel)
         {
-            if (motionSensorModel.MotionValue == 0.00m && motionSensorModel.MotionValue==0.00m)
+            if (motionSensorModel.MotionValue == 0.00m && motionSensorModel.MotionValue == 0.00m)
             {
                 return Ok("Failed in creation");
             }
@@ -279,13 +242,13 @@ namespace IotDemoWebApp.Controllers
         [Route("api/flushdb")]
         public async Task<IHttpActionResult> FlushDb(int startId, int stopId)
         {
-            while (startId<stopId)
+            while (startId < stopId)
             {
                 var dbSet = db.MotionsSensor.Where(x => x.Id >= startId && x.Id <= (startId + 499));
                 db.MotionsSensor.RemoveRange(dbSet);
                 db.SaveChanges();
 
-                if (startId-stopId>499)
+                if (startId - stopId > 499)
                 {
                     startId += 499;
                 }
@@ -370,5 +333,70 @@ namespace IotDemoWebApp.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("api/readdatapoints")]
+        public IHttpActionResult GetDataPoint(string sensorId)
+        {
+            Console.WriteLine("Receive critical messages. Ctrl-C to exit.\n");
+            var connectionString = ConfigurationManager.AppSettings["Microsoft.ServiceBus.ConnectionString"];
+            var queueName = ConfigurationManager.AppSettings["QueueName"];
+
+            var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
+
+            int syncFrequency = Convert.ToInt32(ConfigurationManager.AppSettings["SyncFrequency"]);
+            int syncBatchSize = Convert.ToInt32(ConfigurationManager.AppSettings["SyncBatchSize"]);
+
+
+            try
+            {
+                IEnumerable<BrokeredMessage> queueMessages = client.ReceiveBatch(syncBatchSize);
+
+                List<MotionSensor> datapoints = new List<MotionSensor>();
+
+                if (queueMessages != null)
+                {
+                    foreach (var message in queueMessages)
+                    {
+                        Stream stream = message.GetBody<Stream>();
+                        StreamReader reader = new StreamReader(stream, Encoding.ASCII);
+                        string s = reader.ReadToEnd();
+
+                        string valueAfterFormatting = s.Substring(s.IndexOf('{'));
+
+                        IoTEventSourceManager.Log.Debug(s, "iot-web-job-queue");
+
+                        var obj = JObject.Parse(valueAfterFormatting);
+                        //var url = (string)obj["data"]["img_url"];
+
+                        MotionSensor datapoint = new MotionSensor()
+                        {
+                            DeviceId = (string)obj["deviceid"],
+                            MotionTime = (decimal)obj["humidity"],
+                            MotionValue = (decimal)obj["temperature"],
+                            Timestamp = (DateTime)obj["timestamp"]
+                        };
+
+                        if (datapoint.DeviceId.ToLower() == sensorId.ToLower())
+                        {
+                            datapoints.Add(datapoint);
+                        }
+                        //message.Complete();
+                    }
+                }
+
+                return Ok(datapoints);
+            }
+            catch (Exception ex)
+            {
+                IoTEventSourceManager.Log.Error(ex.Message, "iot-web-job-queue");
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        #region private helper methods
+
+        #endregion
     }
 }

@@ -1,12 +1,18 @@
 ﻿using IoT.Common.Logging;
 using IoT.Common.Model.Models;
 using IoT.Core.Email;
+using IoT.Core.Sms;
 using IotDemoWebApp.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using static IoT.Core.AppManager.Helpers.SystemConfiguration;
 
@@ -97,6 +103,114 @@ namespace IotDemoWebApp.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [Route("api/sms/contacts")]
+        [HttpGet]
+        public IHttpActionResult GetContacts()
+        {
+            List<Admin> admins = new List<Admin>();
+
+            List<SmsContact> contacts = new List<SmsContact>();
+
+            try
+            {
+                int notificationTimeInterval = Convert.ToInt32(ConfigurationManager.AppSettings["NotificationTimeInterval"]);
+
+                using (ApplicationDbContext context = new ApplicationDbContext())
+                {
+                    admins = context.Admin.Where(x => x.ShouldRecieve).ToList();
+
+
+                    foreach (var admin in admins)
+                    {
+                        var readings = context.MotionsSensor.Where(x => x.DeviceId == admin.SensorId && x.Timestamp > System.Data.Entity.DbFunctions.AddMinutes(DateTime.UtcNow, -notificationTimeInterval));
+
+                        if (readings != null)
+                        {
+                            int count = readings.Count();
+
+                            if (count != 0)
+                            {
+                                decimal averageTemp = readings.Sum(x => x.MotionValue) / count;
+                                decimal averageHumidity = readings.Sum(x => x.MotionTime) / count;
+
+                                if (averageTemp < admin.LowerTemperatureThreshold - 0.5m || averageTemp > admin.UpperTemperatureThreshold + 0.5m || averageHumidity < admin.LowerHumidityThreshold - 0.5m || averageHumidity > admin.UpperHumidityThreshold + 0.5m)
+                                {
+                                    contacts.Add(new SmsContact()
+                                    {
+                                        adminName = admin.Name,
+                                        contactId = admin.Id.ToString(),
+                                        deviceName = admin.Sensor.DeviceName,
+                                        message = string.Format("Hi {0}, this is alert to your AC device, Temperature: {1}, Humidity: {2}", admin.Name, Math.Round(Convert.ToDecimal(averageTemp), 2), Math.Round(Convert.ToDecimal(averageHumidity), 2)),
+                                        phone = admin.Mobile,
+                                        email = admin.Email
+                                    });
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(contacts);
+        }
+
+        [Route("api/sms/send")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SendSms(SmsContact contact)
+        {
+
+            try
+            {
+                HttpClient smsSender = new HttpClient();
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("model state not valid");
+                }
+                var data = new
+                {
+                    url= ConfigurationManager.AppSettings["SmsGatewayRequestUrl"],
+                    username = HttpUtility.UrlEncode(ConfigurationManager.AppSettings["SmsGatewayUser"]),
+                    password = HttpUtility.UrlEncode(ConfigurationManager.AppSettings["SmsGatewayPassword"]),
+                    type = HttpUtility.UrlEncode(ConfigurationManager.AppSettings["SmsGatewayRequestType"]),
+                    dlr = HttpUtility.UrlEncode(ConfigurationManager.AppSettings["SmsGatewayRequestDelivery"]),
+                    source = HttpUtility.UrlEncode(ConfigurationManager.AppSettings["SmsGatewayRequestSource"]),
+                    destination = HttpUtility.UrlEncode(String.Format("91{0}",contact.phone)),
+                    message = HttpUtility.UrlEncode(contact.message)
+                };
+
+                string encodedPostUrl = string.Format("{0}?username={1}&password={2}&type={3}&dlr={4}&destination={5}&source={6}&message={7}", data.url, data.username, data.password, data.type, data.dlr, data.destination, data.source, data.message);
+
+                HttpResponseMessage responseMessage = await smsSender.PostAsync(encodedPostUrl, new StringContent(""));
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    string messageResponseString = await responseMessage.Content.ReadAsStringAsync();
+
+                    if (messageResponseString.Split('|')[0]=="1701")
+                    {
+                        return Ok(messageResponseString);
+                    }
+                    else
+                    {
+                        return BadRequest("Someting wrong happened. Response returned : " +messageResponseString );
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                BadRequest(ex.Message);
+            }
+
+            return Ok();
         }
     }
 }

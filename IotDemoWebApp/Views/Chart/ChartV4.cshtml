@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "ChartV4";
+}
+
+<h2>ChartV4</h2>
+
+<iframe id="powerBiChart" height="600" width="900" src="https://app.powerbi.com/view?r=eyJrIjoiM2E4ZmU0YmYtM2Y1ZS00NDgxLWEwNzQtOTQ0ZDk2MDM4MDkzIiwidCI6ImYzNTUxM2ZkLTQwZTEtNDliOS04NjFlLTU5YWY5YWYwOTE0YiIsImMiOjZ9">
+
+</iframe>
+
+<script>
+    setInterval(function () {
+        document.getElementById('powerBiChart').contentWindow.location.reload(true);
+    },10000);
+</script>
+

@@ -324,7 +324,6 @@ C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\System.Web.WebPages.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\System.Web.WebPages.Razor.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Validation.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\WebGrease.dll
-C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Windows.winmd
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\Twilio.Api.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Common.Model.pdb
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Common.SemanticLogging.pdb
@@ -432,3 +431,4 @@ C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\zh-Hans\System.Spatial.reso
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\obj\Release\IotDemoWebApp.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\obj\Release\IotDemoWebApp.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IotDemoWebApp\bin\IoT.Common.Model.dll.config

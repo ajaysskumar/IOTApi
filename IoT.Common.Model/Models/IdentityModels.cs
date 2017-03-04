@@ -45,5 +45,10 @@ namespace IoT.Common.Model.Models
         }
 
         public System.Data.Entity.DbSet<IoT.Common.Model.Models.SystemConfiguration> SystemConfiguration { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

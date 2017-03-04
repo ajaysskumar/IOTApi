@@ -7,7 +7,7 @@
 #include <PubSubClient.h>
 #include <ESP8266WiFi.h>
 #include "EEPROM.h"
-#include <WiFiClientSecure.h> 
+#include <WiFiClientSecure.h>
 
 // Update these with values suitable for your network.
 
@@ -23,9 +23,11 @@ String subscriptionTopic;
 String relayGroupStatusTopic;
 String statusXML;
 int maxSensorReadRetryCount = 10;
+int loadStatus = 0;
 
-int redLed = 12;                // the pin that the LED is atteched to
-int greenLed = 14;
+int LED1 = 12;  //RED               // the pin that the LED is atteched to
+int LED2 = 14;  //GREEN
+int LED3 = 4; //ORANGE
 
 int configButtonPin = 5;
 
@@ -45,44 +47,46 @@ String clientId;
 
 void setup() {
 
-  pinMode(greenLed, OUTPUT);      // initalize LED as an output
-  pinMode(redLed, OUTPUT);      // initalize LED as an output
+  pinMode(LED1, OUTPUT);      // initalize LED as an output
+  pinMode(LED2, OUTPUT);      // initalize LED as an output
+  pinMode(LED3, OUTPUT);      // initalize LED as an output
 
   Serial.begin(115200);
   EEPROM.begin(512);
   dht.begin();
   Serial.println("DHT initialized");
-  
+
   //check wifi connectivity
 
   String ssid = wifiManager.readSavedAP();
   String password = wifiManager.readSavedPassword();
 
-  Serial.println("After EEPROM : "+ssid);
-  Serial.println("After EEPROM : " + password);
+  Serial.println("After EEPROM : " + ssid);
+  //Serial.println("After EEPROM : " + password);
 
-  wifiManager.connectWifi(ssid, password);
-
-  if (WiFi.status()!=WL_CONNECTED)
-  {
-    wifiSetup();
-  }
-
-  clientId = WiFi.macAddress();
+   clientId = WiFi.macAddress();
 
   clientId.replace(":", "");
 
   Serial.println("Device Id is : " + clientId);
+
+  wifiManager.connectWifi(ssid, password);
+
+  if (WiFi.status() != WL_CONNECTED)
+  {
+    wifiSetup();
+  }
+  Serial.println(WiFi.localIP());
 
   publishTopic = "devices/" + clientId + "/messages/events/";
   subscriptionTopic = "relayActionRequest/" + clientId;
   relayGroupStatusTopic = "currentStatusCheck/" + clientId;
   if (digitalRead(configButtonPin) == LOW)
   {
-   
-  Serial.println("Config Button Pressed LOW. Going to Configuration Mode...");
-  WiFi.disconnect();
-  setup_wifi();
+
+    Serial.println("Config Button Pressed LOW. Going to Configuration Mode...");
+    WiFi.disconnect();
+  wifiSetup();
   }
   else
   {
@@ -90,6 +94,20 @@ void setup() {
   }
 
   loadConfiguration();
+
+  Serial.print("Configuration Load Complete");
+
+  digitalWrite(LED1,HIGH);
+  delay(2000);
+  digitalWrite(LED1,LOW);
+
+  digitalWrite(LED2,HIGH);
+  delay(2000);
+  digitalWrite(LED2,LOW);
+
+  digitalWrite(LED3,HIGH);
+  delay(2000);
+  digitalWrite(LED3,LOW);
 
   Serial.print("printing mqtt_server on setup");
   Serial.print(mqtt_server);
@@ -108,7 +126,7 @@ void loop() {
   Serial.println("Publishing on topic : " + String(publishTopic.c_str()));
 
   String publishString = getPublishString();
-  if (publishString=="")
+  if (publishString == "")
   {
     Serial.println("Invalid inputs. Device will retry after sometime.");
     delay(datapointFrequency);
@@ -117,6 +135,13 @@ void loop() {
   client.publish(publishTopic.c_str(), publishString.c_str());
 
   Serial.println("Published on topic : " + String(publishTopic.c_str()));
+
+#pragma region Success post indication
+  digitalWrite(LED2, HIGH);
+  delay(2000);
+  digitalWrite(LED2, LOW);
+#pragma endregion
+
 
   Serial.println("Next Reading will be sent after : " + String(datapointFrequency));
 
@@ -132,7 +157,7 @@ void loadConfiguration() {
   String settingsGetInterval = "/api/getdatapointfrequency?deviceId=" + clientId;
   String settingsGetHostName = "/api/gethubservername?deviceId=" + clientId;
   String settingsResponse;
-  
+
   int statusCode = restClient.get(settingsGetHostName.c_str(), &settingsResponse);
 
   if (statusCode == 200)
@@ -140,9 +165,10 @@ void loadConfiguration() {
     Serial.println("success");
     String response = settingsResponse;
     Serial.println(response);
-  mqtt_server = rectify( response);
-  Serial.println("IotHubUsername\n");
-  Serial.println(iotHubUsername);
+    mqtt_server = rectify( response);
+    Serial.println("IotHubUsername\n");
+    Serial.println(iotHubUsername);
+  loadStatus = 1;
   }
   else
   {
@@ -161,6 +187,7 @@ void loadConfiguration() {
     iotHubPassword = rectify(response);
     Serial.println("IotHubPassword\n");
     Serial.println(iotHubPassword);
+  loadStatus = 2;
   }
   else
   {
@@ -168,7 +195,7 @@ void loadConfiguration() {
     return;
   }
 
-  //For datapoint frequency 
+  //For datapoint frequency
   String frequencyResponse;
   statusCode = restClient.get(settingsGetInterval.c_str(), &frequencyResponse);
 
@@ -180,6 +207,7 @@ void loadConfiguration() {
     datapointFrequency = response.toInt();
     Serial.println("Frequency\n");
     Serial.println(iotHubPassword);
+  loadStatus = 3;
     return;
   }
   else
@@ -189,29 +217,29 @@ void loadConfiguration() {
   }
 }
 
-void setup_wifi() {
-
-  delay(10);
-  // We start by connecting to a WiFi network
-  Serial.println();
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-
-  wifiSetup();
-
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-
-  randomSeed(micros());
-
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
-  Serial.println(clientId);
-}
+//void setup_wifi() {
+//
+//  delay(10);
+//  // We start by connecting to a WiFi network
+//  Serial.println();
+//  Serial.print("Connecting to ");
+//  Serial.println(ssid);
+//
+//  wifiSetup();
+//
+//  while (WiFi.status() != WL_CONNECTED) {
+//    delay(500);
+//    Serial.print(".");
+//  }
+//
+//  randomSeed(micros());
+//
+//  Serial.println("");
+//  Serial.println("WiFi connected");
+//  Serial.println("IP address: ");
+//  Serial.println(WiFi.localIP());
+//  Serial.println(clientId);
+//}
 
 void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print("Message arrived [");
@@ -231,18 +259,9 @@ void reconnect() {
   Serial.print("printing mqtt_server \n");
   Serial.print(mqtt_server);
 
-  strcpy(iotUsername, mqtt_server.c_str()); // copy to result array 
+  strcpy(iotUsername, mqtt_server.c_str()); // copy to result array
   strcat(iotUsername, "/"); // concat to result array
   strcat(iotUsername, clientId.c_str()); // concat to result array
-
-  //char iotPassword[200];
-
-  //char * str1 = "SharedAccessSignature sr=oa-iothub-dev.azure-devices.net%2Fdevices%2F";
-  //char * str2 = "&sig=oz1uAyWxf%2FfNoxdOOCzqI1FmGObB1qHSwgBTn70XZsM%3D&se=1518103567";
-
-  //strcpy(iotPassword, str1); // copy to result array 
-  //strcat(iotPassword, clientId.c_str()); // concat to result array
-  //strcat(iotPassword, str2); // concat to result array
 
   Serial.print(iotUsername);
   Serial.println();
@@ -252,7 +271,7 @@ void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...\n");
-        
+
     // Attempt to connect
     if (client.connect(clientId.c_str(), iotUsername, iotHubPassword.c_str())) {
       Serial.println("connected");
@@ -273,14 +292,14 @@ void reconnect() {
 void wifiSetup()
 {
   //WiFi.begin(ssid, password);
-  Serial.println("Config button pressed... going to auto connect \n");
-  digitalWrite(LED_BUILTIN, HIGH);
+  Serial.println("going to configuration Mode \n");
+  digitalWrite(LED1, HIGH);
 
   wifiManager.startConfigPortal(clientId.c_str(), "nodemcuv2");
 
   //if you get here you have connected to the WiFi
   Serial.println("connected...yeey :)");
-  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(LED1, HIGH);
 }
 
 String getPublishString()
@@ -307,16 +326,16 @@ String getPublishString()
   }
   else
   {
-  Serial.print("Humidity: ");
-  Serial.print(humidity);
-  Serial.print(" %\t");
-  Serial.print("Temperature: ");
-  Serial.print(temperature);
-  Serial.println(" *C ");
+    Serial.print("Humidity: ");
+    Serial.print(humidity);
+    Serial.print(" %\t");
+    Serial.print("Temperature: ");
+    Serial.print(temperature);
+    Serial.println(" *C ");
 
-  jsonString = jsonPublishString(temperature, humidity);
+    jsonString = jsonPublishString(temperature, humidity);
 
-  Serial.println(jsonString);
+    Serial.println(jsonString);
   }
   return jsonString;
 }
@@ -343,11 +362,9 @@ String jsonPublishString(float temperature, float humidity)
 }
 
 String rectify(String mString) {
-  //int indexFirst = mString.indexOf('"');
   mString.replace("\"", "");
   return mString;
 }
-
 
 
 

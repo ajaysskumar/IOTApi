@@ -1,0 +1,10 @@
+C:\Users\ajayk\Source\Repos\IOTApi\AttendanceTracker\bin\Debug\AttendanceTracker.exe.config
+C:\Users\ajayk\Source\Repos\IOTApi\AttendanceTracker\bin\Debug\AttendanceTracker.exe
+C:\Users\ajayk\Source\Repos\IOTApi\AttendanceTracker\bin\Debug\AttendanceTracker.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\AttendanceTracker\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ajayk\Source\Repos\IOTApi\AttendanceTracker\bin\Debug\System.Configuration.dll
+C:\Users\ajayk\Source\Repos\IOTApi\AttendanceTracker\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ajayk\Source\Repos\IOTApi\AttendanceTracker\bin\Debug\System.Configuration.xml
+C:\Users\ajayk\Source\Repos\IOTApi\AttendanceTracker\obj\Debug\AttendanceTracker.csprojResolveAssemblyReference.cache
+C:\Users\ajayk\Source\Repos\IOTApi\AttendanceTracker\obj\Debug\AttendanceTracker.exe
+C:\Users\ajayk\Source\Repos\IOTApi\AttendanceTracker\obj\Debug\AttendanceTracker.pdb

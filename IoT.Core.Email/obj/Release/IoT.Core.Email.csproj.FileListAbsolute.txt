@@ -13,3 +13,4 @@ C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Release\ServiceStack.Text.
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Release\ServiceStack.Text.xml
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.pdb
+C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.csprojResolveAssemblyReference.cache
