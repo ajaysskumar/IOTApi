@@ -1,3 +1,4 @@
-node_modules/
-Debug/
-Bin/
+**/node_modules/
+**/Debug/
+**/Bin/
+**/public/lib/
