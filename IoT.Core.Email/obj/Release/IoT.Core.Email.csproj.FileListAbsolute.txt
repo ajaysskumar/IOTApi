@@ -14,3 +14,11 @@ C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\bin\Release\ServiceStack.Text.
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.pdb
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.csprojResolveAssemblyReference.cache
+D:\OnActuate Labs\IOTApi\IoT.Core.Email\bin\Release\IoT.Core.Email.dll
+D:\OnActuate Labs\IOTApi\IoT.Core.Email\bin\Release\IoT.Core.Email.pdb
+D:\OnActuate Labs\IOTApi\IoT.Core.Email\bin\Release\MailChimp.dll
+D:\OnActuate Labs\IOTApi\IoT.Core.Email\bin\Release\ServiceStack.Text.dll
+D:\OnActuate Labs\IOTApi\IoT.Core.Email\bin\Release\ServiceStack.Text.xml
+D:\OnActuate Labs\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.csprojResolveAssemblyReference.cache
+D:\OnActuate Labs\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.dll
+D:\OnActuate Labs\IOTApi\IoT.Core.Email\obj\Release\IoT.Core.Email.pdb

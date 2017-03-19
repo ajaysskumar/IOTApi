@@ -15,3 +15,20 @@ C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\bin\Release\Newton
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\obj\Release\IoT.Common.SemanticLogging.csprojResolveAssemblyReference.cache
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\obj\Release\IoT.Common.SemanticLogging.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.SemanticLogging\obj\Release\IoT.Common.SemanticLogging.pdb
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\IoT.Common.SemanticLogging.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\IoT.Common.SemanticLogging.pdb
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Database.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.TextFile.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Newtonsoft.Json.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.xml
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Database.xml
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.TextFile.xml
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.xml
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.xml
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\bin\Release\Newtonsoft.Json.xml
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\obj\Release\IoT.Common.SemanticLogging.csprojResolveAssemblyReference.cache
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\obj\Release\IoT.Common.SemanticLogging.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.SemanticLogging\obj\Release\IoT.Common.SemanticLogging.pdb

@@ -20,3 +20,20 @@ C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\bin\Release\Microsoft.AspNet
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.csprojResolveAssemblyReference.cache
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.dll
 C:\Users\ajayk\Source\Repos\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.pdb
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\IoT.Common.Model.dll.config
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\IoT.Common.Model.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\IoT.Common.Model.pdb
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\DelegateDecompiler.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\DelegateDecompiler.EntityFramework.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\EntityFramework.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\EntityFramework.SqlServer.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\Microsoft.AspNet.Identity.Core.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\Mono.Reflection.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\EntityFramework.xml
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\EntityFramework.SqlServer.xml
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\Microsoft.AspNet.Identity.Core.xml
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\bin\Release\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.csprojResolveAssemblyReference.cache
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.dll
+D:\OnActuate Labs\IOTApi\IoT.Common.Model\obj\Release\IoT.Common.Model.pdb

@@ -31,6 +31,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -977,6 +981,7 @@
     <Content Include="public\lib\jquery\src\var\ObjectFunctionString.js" />
     <Content Include="public\lib\jquery\src\var\pnum.js" />
     <Content Include="public\lib\jquery\src\var\push.js" />
+    <Content Include="public\lib\jquery\src\var\rcheckableType.js" />
     <Content Include="public\lib\jquery\src\var\rcssNum.js" />
     <Content Include="public\lib\jquery\src\var\rnothtmlwhite.js" />
     <Content Include="public\lib\jquery\src\var\slice.js" />
