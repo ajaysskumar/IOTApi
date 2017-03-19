@@ -14,7 +14,7 @@ namespace IotDemoWebApp.Controllers
         // GET: Chart
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("ChartV1");
         }
 
         [Route("chart2")]
