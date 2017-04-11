@@ -1,7 +1,7 @@
 #include <TimeLib.h>
 #include <Time.h>
-#include <AzureIoTHubClient.h>
-#include <AzureIoTHub.h>
+//#include <AzureIoTHubClient.h>
+//#include <AzureIoTHub.h>
 #include <WiFiManager.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
@@ -14,7 +14,7 @@
 // Update these with values suitable for your network.
 
 const char* ssid = "APEX";
-const char* password = "apex-wifi";
+const char* password = "Apex-Wifi2017";
 const char* mqtt_server = "m13.cloudmqtt.com";
 String publishTopic;
 String subscriptionTopic;
@@ -182,12 +182,12 @@ void setup() {
 
 void loop() {
 
-	if (digitalRead(15)== LOW)
-	{
-    Serial.print("Entering Setup : " + String(digitalRead(15)));
-		wifiSetup();
-    Serial.print("Exit Setup");
-	}
+//	if (digitalRead(15)== LOW)
+//	{
+//    Serial.print("Entering Setup : " + String(digitalRead(15)));
+//		wifiSetup();
+//    Serial.print("Exit Setup");
+//	}
 
 	if (!client.connected()) {
 		reconnect();

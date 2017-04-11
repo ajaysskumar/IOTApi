@@ -71,7 +71,7 @@ namespace IoTDemoApp.Droid.Activities
             {
                 try
                 {
-                    var response = await client.GetAsync(new Uri("http://iotdemo.apexsoftworks.in/api/RelayApi/" + relayGroupId));
+                    var response = await client.GetAsync(new Uri("http://ipowersaver-dev.azurewebsites.net/api/RelayApi/" + relayGroupId));
                     if (response.IsSuccessStatusCode)
                     {
                         var content = await response.Content.ReadAsStringAsync();

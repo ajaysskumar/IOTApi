@@ -1,1 +1,0 @@
-C:\Users\ajayk\Source\Repos\IOTApi\IoTDemoApp\IoTDemoApp.Droid\obj\Debug\IoTDemoApp.Droid.csprojResolveAssemblyReference.cache

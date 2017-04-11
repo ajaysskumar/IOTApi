@@ -2,7 +2,8 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <AndroidDesignerPreferredDevice>Nexus 4</AndroidDesignerPreferredDevice>
-    <SelectedDevice>5" KitKat %284.4%29 XXHDPI Phone</SelectedDevice>
+    <SelectedDevice>VisualStudio_android-23_x86_phone</SelectedDevice>
     <AndroidDesignerPreferredTheme>Theme.DeviceDefault.Light</AndroidDesignerPreferredTheme>
+    <DefaultDevice>VisualStudio_android-23_x86_phone</DefaultDevice>
   </PropertyGroup>
 </Project>

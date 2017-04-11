@@ -1,3 +1,5 @@
-node_modules/
-Debug/
-Bin/
+/**/bin
+/**/debug
+/**/obj
+/**/*.dll
+/IoT.Common.Model/bin/Debug
